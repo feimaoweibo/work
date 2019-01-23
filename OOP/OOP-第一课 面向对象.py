@@ -134,17 +134,71 @@ print("* "*20)
 
 
 '''
+# 案例1-对1、2点说明
 class Student():
     name = "dana"
     age =18
 
+    # 注意say的写法，参数由一个self
     def say(self):
         self.name ="aaaa"
         self.age =200
         print("my name is {0}".format(self.name))
         print("my age is {0}".format(self.age))
+
+    def sayAgain(s):
+        print("My name is {0}".format(s.name))
+        print("My age is {0}".format(s.age))
 yueyue = Student()
 yueyue.say()
+yueyue.sayAgain()
+print("-----------5.1----------"*4)
+# 案例2-对3、4点说明
+class Teacher():
+    name = "dana"
+    age = 19
+
+    def say(self):
+        self.name ="yaona"
+        self.age = 17
+        print("my name is{0}".format(self.name))
+        # 调用类的成员变量需要用 __class__
+        print("ma age is {0}".format(__class__.age))
+    def sayAgain():
+        print(__class__.name)
+        print(__class__.age)
+        print("hello,nice to see you again")
+t = Teacher()
+t.say()
+Teacher.sayAgain()
+print("-----------5.2---------"*3)
+# 案例3-self函数
+class A():
+    name = "liuying"
+    age  = 18
+
+    def __init__(self):
+        self.name = "aaaa"
+        self.age = 200
+    def say(self):
+        print(self.name)
+        print(self.age)
+class B():
+    name = "bbbb"
+    age = 90
+a = A()
+# 此时，系统会默认把a作为第一个参数传入函数
+a.say()
+# 此时，self被a替换
+A.say(a)
+# 同样可以把A作为参数传入
+A.say(A)
+# 此时，传入的是类实例B，因为B具有name和age属性，所以不会报错
+A.say(B)
+# 以上代码，利用了鸭子模型
+print("----------5.3-------------"*3)
+
+
 
 # 6. 面向对象的三大特性
 '''
@@ -198,17 +252,6 @@ yueyue.say()
     - 优先查找自己变量
     - 没有查找父类
     - 构造函数查找如果本类中没有定义，则自动查找调用父类构造函数
-    
-- 构造函数
-    - 是一类特殊的函数在类进行实例化之前进行调用
-    - 如果定义构造函数，则实例化时使用构造函数，不查找父类构造函数
-    -  如果没定义，则自动查找父类构造函数
-    - 如果子类没定义，父类的构造函数带参数，则构造对象时的参数应该按父类参数构造
-- super
-    - super 不是关键字，而是一个类
-    - super的作用是获取MRO列表中的第一个类
-    - super与父类直接没有任何实质关系，但通过super 可以调用到父类
-    - super使用两个方法
 '''
 # 6.2 继承案例
 class Person():
@@ -222,6 +265,135 @@ class Teacher(Person):
 t = Teacher()
 print(t.name)
 print(Teacher.name)
+print("----------6.2-------------"*3)
+# 6.2.1 多继承例子
+class Fish():
+    def __init__(self,name):
+        self.name = name
+    def swin(self):
+        print("i am swimming......")
+class Brid():
+    def __init__(self,name):
+        self.name = name
+
+    def fly(self):
+        print("i am flyying.......")
+class Person():
+    def __init__(self,name):
+        self.name = name
+
+    def work(self):
+        pirnt("working......")
+class Student(Person):
+    def __init__(self,name):
+        self.name = name
+stu =Student("yueyue")
+stu.work()
+class SuperMan(Person,Brid,Fish):
+    def __init__(self,name):
+        self.name = name
+class SwimMan(Person,Fish):
+    def __init__(self,name):
+        self.name = name
+s = SuperMan()
+s.fly()
+s.swin()
+print("----------6.2.1-------------"*3)
+'''
+- 构造函数
+    - 是一类特殊的函数在类进行实例化之前进行调用
+    - 如果定义构造函数，则实例化时使用构造函数，不查找父类构造函数
+    -  如果没定义，则自动查找父类构造函数
+    - 如果子类没定义，父类的构造函数带参数，则构造对象时的参数应该按父类参数构造
+'''
+# 构造函数例子
+# 构造函数的调用顺序
+# 如果子类没有写构造函数，则自动向上查找，直到找到位置
+class Person():
+    # 对 person类进行实例化的时候
+    # 姓名要确定
+    # 年龄得确定
+    # 地址得肯定
+    def __init__(self):
+        self.name = "noname"
+        self.age = 18
+        self.address = "studenthouse"
+        print("in init func")
+# 实例化一个人
+p = Person()
+
+class A():
+    def __init__(self):
+        print("A")
+class B():
+    def __init__(self):
+        print("B")
+class C(B):
+    pass
+# 此时，首先查找C的构造函数
+# 如果没有，则向上按照MRO顺序查找父类的构造函数，直到找到为止
+c = C()
+'''
+- super
+    - super 不是关键字，而是一个类
+    - super的作用是获取MRO列表中的第一个类
+    - super与父类直接没有任何实质关系，但通过super 可以调用到父类
+    - super使用两个方法,参见在构造函数中调用父类的构造函数
+- 单继承和多继承
+    - 单继承：每个类只能继承一个类
+    - 多继承：每个类允许继承多个类
+- 单继承与多继承的优缺点
+    - 单继承：
+        - 传承有序逻辑清晰语法简单隐患少
+        - 功能不能无限扩展，只能在当前唯一的继承链中扩展
+    - 多继承：
+        - 优点：类的功能扩展方便
+        - 缺点：继承关系混乱
+- 菱形继承/砖石继承问题
+    - 多个子类继承自同一个父类，这些子类由被同一个类继承，于是继承关系图形成一个菱形
+    - MRO
+    - 关于多继承的MRO
+        - MRO就是多继承中，用于保存继承顺序的一个列表
+        - python本身采用C3算法来承接多继承的菱形继承进行计算结果
+        - MRO列表的计算原则
+            - 子类永远在父类前面
+            - 如果多个父类，则根据继承语法中括号内的书写顺序存放
+            - 如果多个类继承了同一个父类，孙子类张只会选取继承语法括号中第一个父类的父类
+- 构造函数
+    - 在对象进行实例化的时候，系统自动调用的一个函数叫构造函数，通常此函数用来对实例
+        对象进行初始化，顾名。
+    - 构造函数一定要有，如果没有，则自动向上查找，按照MRO顺序，直到找到为止
+    
+# 6.3.多态
+- 多态就是同一个对象在不同情况下有不同的状态出现
+- 多态不是语法，是一种设计思想
+- 多态性：一种调用方式，不同的执行效果
+- 多态：同一事物的多种形态，如动物分为人类，狗类，猪类
+- 多态与多态性：说明文档 https://www.cnblogs.com/luchuangao/p/6739557.html
+- Mixin设计模式
+    - 主要采用多继承方式对类的功能进行扩展
+    - Mixin 概念 说明文档 https://www.zhihu.com/question/20778853
+    - Mixin and Mro 说明文档  http://blog.csdn.net/robinjwong/article/details/48375833
+    - Mixin 模式 说明文档 https://www.cnblogs.com/xybaby/p/6484262.html
+    - Mixin Mro 说明文档 http://runforever.github.io/2014-07-19/2014-07-19-python-mixin%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/
+    - MRO 说明文档 http://xiaocong.github.io/blog/2012/06/13/python-mixin-and-mro/
+    - 我们使用多继承语法来实现Mixin
+    - 使用Mixin实现多继承的时候非常小心
+        - 首先他必须表示某一单一功能，而不是某个物品
+        - 职责必须单一，如果有多个功能，则写多个Mixin
+        - Mixin 不能依赖于子类的实现
+        - 子类即使没有继承这个Mixin类，也能照样工作，只是缺少了某个功能
+# 6.4 类相关函数
+- issubclass:检测一个类是否是另一个类的子类
+- isinstance:检测一个对象是否是一个类的实例
+- hasattr:检测一个对象是否由成员xxx
+- getattr: get attribute
+- setattr: set attribute
+- delattr: delete attribute
+- dir: 获取对象的成员列表
+'''
+
+
 
 # 6.2 构造函数
 class Dog():
