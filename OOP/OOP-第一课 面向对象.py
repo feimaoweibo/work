@@ -73,10 +73,159 @@ class PythonStuent():
         obj.__dict__
     -类所有的成员
         # dict 前后各有2个下划线
-        obj.__dict__
+        class_name.__dict__
+'''
 '''
 yueyue = PythonStuent()
 print(yueyue.age)
 print(yueyue.name)
 yueyue.DoHomework()
 PythonStuent.__dict__
+
+'''
+
+# 4. 类和对象的成员分析
+'''
+- 类和对象都可以存储成员，成员可以归类所有，也可以归对象所有
+- 类存储成员时使用的是与类关联的一个对象
+- 独享存储成员时存储在当前对象中
+- 对象访问一个成员时，如果对象中的没有该成员，尝试访问类中的同名成员
+  如果对象中有此成员时，
+- 创建对象的时候，类中的成员不会放入对象当中，而是得到一个空对象，没有成员
+- 通过对象对类中的成员重新赋值或者通过对象添加成员时，对应成员会保存在对象中，而不会修改类成员
+
+'''
+class Student():
+    name = "danan"
+    age = 18
+Student.__dict__
+
+# 实例化
+yueyue = Student()
+yueyue.__dict__
+print(yueyue.name)
+
+
+class A():
+    name = "dana"
+    age =18
+
+    def say(self):
+        self.name ="aaaa"
+        self.age =200
+# 类实例
+print(A.name)
+print(A.age)
+
+print("* "*20)
+
+print(id(A.name))
+print(id(A.age))
+print("* "*20)
+
+
+
+# 5. 关于self
+'''
+- self 在对象的方法中，表示当前对象本身,如果通过对象调用一个方法，那么该对象会自动传到当前方法的的第一个参数中
+- self 不是关键字，只是用于接受对象的普通参数，理论上可以用任何普通变量代替
+- 方法中self形参的方法成为非绑定类的方法，可以通过对象访问，没有self的是绑定类的方法，只能通过类访问
+- 使用类访问绑定类的时，如果类方法中需要访问当前类的成员，可以通过__class__成员名来访问
+
+
+'''
+class Student():
+    name = "dana"
+    age =18
+
+    def say(self):
+        self.name ="aaaa"
+        self.age =200
+        print("my name is {0}".format(self.name))
+        print("my age is {0}".format(self.age))
+yueyue = Student()
+yueyue.say()
+
+# 6. 面向对象的三大特性
+'''
+- 封装
+- 继承
+- 多态
+
+'''
+'''
+# 6.1 封装
+- 封装就是对对象的成员进行访问限制
+- 封装的三个级别：
+    - 公开 public
+    - 受保护的 protected
+    - 私有的 private
+    -以上三个不是关键字
+- 判别对象的位置
+    - 对象内部
+    - 对象外部
+    - 子类中
+- 私有 private
+    - 私有成员时最高级别的封装，只能在当前类或对象中访问
+    - 在成员前面添加两个下划线即可
+        class Person():
+            name = "liuying"
+            #__age 就是私有成员
+            __age = 18
+    - Python 的私有不是真私有，是一种称为name mangling的改名策略
+        可以使用对象._classname_attributename访问
+- 受保护的 protected
+    - 受保护的封装是蒋对象成员进行一定级别的封装，然后，在类中或者子类都可以进行访问，再是在外出都不可以
+    - 封装方法：在成员名称添加一个下划线即可
+- 公开的 public
+    -公共的封装实际对成员没有任何操作，任何地方都可以访问
+# 6.2 继承
+- 继承就是一个类可以获得另外一个类中的成员属性或成员方法
+- 作用：减少代码，增加代码的复用功能，同时可以设置类与类直接的关系
+- 继承与被继承的概念
+    - 被继承的类叫父类，也叫基类，也叫超类
+    - 用于继承的类，交子类，也叫派生类
+    - 继承与被继承的关系，is->A
+- 继承的特征
+    - 所有的类都继承自object类，即所有的类都是object类的子类
+    - 子类一旦继承父类，则可以使用父类中除私有成员外的所有内容
+    -子类继承父类后并没有将父类成员完全赋值到子类中，而是通过饮用关系访问调用
+    - 子类中可以定义独有的成员属性
+    - 子类中定义的成员和父类成员如果相同，则优先使用子类成员
+    - 子类如果想扩充父类的方法，可以在定义新方法的同时访问父类成员来进行代码重用，
+        可以使用 父类名.父类成员 的格式调用父类成员，也可使用super（）.父类成员的格式来调用
+- 继承变量函数的查找顺序
+    - 优先查找自己变量
+    - 没有查找父类
+    - 构造函数查找如果本类中没有定义，则自动查找调用父类构造函数
+    
+- 构造函数
+    - 是一类特殊的函数在类进行实例化之前进行调用
+    - 如果定义构造函数，则实例化时使用构造函数，不查找父类构造函数
+    -  如果没定义，则自动查找父类构造函数
+    - 如果子类没定义，父类的构造函数带参数，则构造对象时的参数应该按父类参数构造
+- super
+    - super 不是关键字，而是一个类
+    - super的作用是获取MRO列表中的第一个类
+    - super与父类直接没有任何实质关系，但通过super 可以调用到父类
+    - super使用两个方法
+'''
+# 6.2 继承案例
+class Person():
+    name ="noname"
+    age =0
+    def sleep(self):
+        print("sleeping")
+# 父类写在括号里
+class Teacher(Person):
+    pass
+t = Teacher()
+print(t.name)
+print(Teacher.name)
+
+# 6.2 构造函数
+class Dog():
+    #__init__是构造函数
+    # 每次实例化的时候，第一个被自动调用
+    def __init__(self):
+        print("i an init in dog")
