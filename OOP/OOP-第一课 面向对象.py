@@ -23,7 +23,7 @@
     -OOA->OOD->OOI:面向对象的实现过程
 - 类和对象的概念
     - 类：抽象名词，代表一个集合，共性的事务
-    -对象：具象的食物，单个个体
+    - 对象：具象的食物，单个个体
     - 类与对象的关系
         - 一个具体，代表一类事务的某一个个体
         - 一个是抽象，代表的是一大类事物
@@ -38,28 +38,41 @@
     - 大驼峰（由一个或者多个单词构成，每个单词首字母大写，单词与单词直接相连）
     - 尽量避开系统命名相似的命名
 - 如何声明一个类
-    -必须用class关键字
-    -类由属性和方法构成，其他不允许出现
-    -成员属性定义可以直接使用变量赋值，如果没有，允许使用None
-    -函数末尾推荐使用return语句
+    - 必须用class关键字
+    - 类由属性和方法构成，其他不允许出现
+    - 成员属性定义可以直接使用变量赋值，如果没有，允许使用None
+    - 函数末尾推荐使用return语句
     
 '''
-# 例子
+# 例子1
+'''
+定义一个学生类，用来形容学生
+'''
 class Student():
     #一个空类，pass代表直接跳过
-    #pass必须由
+    #pass必须有
     pass
 #实例化一个对象
 mingyue = Student()
-
+# 定义一个类，用来描述听python的学生
+# 注意缩进层级
+# 系统默认一个self 参数
 class PythonStuent():
+    #None 给不确定的值赋值
     name = None
     age =18
     course ="Python"
     def DoHomework(self):
-        print("I 在做作业")
+        print("I 正在看视频学习呢")
         #推荐在函数末尾使用return语句
         return None
+# 实例化一个学生
+yueyue = PythonStuent()
+print(yueyue.name)
+print(yueyue.age)
+# 注意成员函数的调用没有传递参数
+yueyue.DoHomework()
+print("--------2.1---------"*3)
 '''
  -实例化一个对象
  -与类齐平
@@ -75,14 +88,6 @@ class PythonStuent():
         # dict 前后各有2个下划线
         class_name.__dict__
 '''
-'''
-yueyue = PythonStuent()
-print(yueyue.age)
-print(yueyue.name)
-yueyue.DoHomework()
-PythonStuent.__dict__
-
-'''
 
 # 4. 类和对象的成员分析
 '''
@@ -95,6 +100,18 @@ PythonStuent.__dict__
 - 通过对象对类中的成员重新赋值或者通过对象添加成员时，对应成员会保存在对象中，而不会修改类成员
 
 '''
+# 例子2
+class Student():
+    name = "dana11"
+    age = 181
+print(Student.__dict__)
+# 实例化
+yueyue = Student()
+print(yueyue.__dict__)
+print(yueyue.name)
+
+
+print("--------4.1---------"*3)
 class Student():
     name = "danan"
     age = 18
@@ -104,40 +121,58 @@ Student.__dict__
 yueyue = Student()
 yueyue.__dict__
 print(yueyue.name)
-
+print("--------4.2---------"*3)
 
 class A():
-    name = "dana"
+    name = "dana4.2"
     age =18
-
+    # 注意say的写法，参数有一个self
     def say(self):
-        self.name ="aaaa"
+        self.name ="aaaa11"
         self.age =200
-# 类实例
+# 此案例说明
+# 类实例的属性和其对象的实例的属性，在不同对象的实例属性赋值前提下，指向同一个变量
+# 此时，A成为类实例
 print(A.name)
 print(A.age)
 
-print("* "*20)
-
+print("* "*5)
+# id 可以鉴别
 print(id(A.name))
 print(id(A.age))
-print("* "*20)
+print("* "*10)
 
+a = A()
+print(a.name)
+print(a.age)
+print(id(a.name))
+print(id(a.age))
+print("*  "*15)
+# 通过对象对类中的成员重新赋值或者通过对象添加成员时，对应成员会保存在对象中，而不会修改类成员
+a = A()
+a.name = "danna4.3333"
+a.age = 133
+print(a.name)
+print(a.age)
+print(id(a.name))
+print(id(a.age))
+print("---------4.3---------"*3)
 
 
 # 5. 关于self
 '''
-- self 在对象的方法中，表示当前对象本身,如果通过对象调用一个方法，那么该对象会自动传到当前方法的的第一个参数中
+- self 在对象的方法中，表示当前对象本身,如果通过对象调用一个方法，
+  那么该对象会自动传到当前方法的的第一个参数中
 - self 不是关键字，只是用于接受对象的普通参数，理论上可以用任何普通变量代替
 - 方法中self形参的方法成为非绑定类的方法，可以通过对象访问，没有self的是绑定类的方法，只能通过类访问
 - 使用类访问绑定类的时，如果类方法中需要访问当前类的成员，可以通过__class__成员名来访问
 
 
 '''
-# 案例1-对1、2点说明
+# 案例3-对1、2点说明
 class Student():
-    name = "dana"
-    age =18
+    name = "dana2222"
+    age =183
 
     # 注意say的写法，参数由一个self
     def say(self):
@@ -153,24 +188,26 @@ yueyue = Student()
 yueyue.say()
 yueyue.sayAgain()
 print("-----------5.1----------"*4)
-# 案例2-对3、4点说明
+# 案例4 -对3、4点说明
 class Teacher():
-    name = "dana"
+    name = "dana111"
     age = 19
 
     def say(self):
-        self.name ="yaona"
-        self.age = 17
-        print("my name is{0}".format(self.name))
+        self.name ="yaona1111"
+        self.age = 1711
+        print("my name is {0}".format(self.name))
         # 调用类的成员变量需要用 __class__
         print("ma age is {0}".format(__class__.age))
     def sayAgain():
+        # 调用类的成员变量需要用 __class__
         print(__class__.name)
         print(__class__.age)
         print("hello,nice to see you again")
 t = Teacher()
 t.say()
 Teacher.sayAgain()
+
 print("-----------5.2---------"*3)
 # 案例3-self函数
 class A():
@@ -223,7 +260,7 @@ print("----------5.3-------------"*3)
     - 私有成员时最高级别的封装，只能在当前类或对象中访问
     - 在成员前面添加两个下划线即可
         class Person():
-            name = "liuying"
+            name = "liuying" #共有成员 
             #__age 就是私有成员
             __age = 18
     - Python 的私有不是真私有，是一种称为name mangling的改名策略
@@ -253,6 +290,24 @@ print("----------5.3-------------"*3)
     - 没有查找父类
     - 构造函数查找如果本类中没有定义，则自动查找调用父类构造函数
 '''
+# 6.1 公、私有案例说明
+class PersonEnjoy():
+    # 共有成员
+    name = "liuying"
+    # __age 就是私有成员
+    __age = 18
+
+t = PersonEnjoy()
+print(t.name)
+# __age 就是私有成员
+# print(t.__age)
+# 真要访问，使用_class类名形式来访问
+t._PersonEnjoy__age = 190
+print(t._PersonEnjoy__age)
+
+
+print("----------6.1-------------"*3)
+
 # 6.2 继承案例
 class Person():
     name ="noname"
@@ -295,9 +350,11 @@ class SuperMan(Person,Brid,Fish):
 class SwimMan(Person,Fish):
     def __init__(self,name):
         self.name = name
-s = SuperMan()
+'''
+s = SuperMan(name)
 s.fly()
 s.swin()
+'''
 print("----------6.2.1-------------"*3)
 '''
 - 构造函数
