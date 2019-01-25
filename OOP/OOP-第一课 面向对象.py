@@ -284,7 +284,7 @@ print("----------5.3-------------"*3)
     - 子类中可以定义独有的成员属性
     - 子类中定义的成员和父类成员如果相同，则优先使用子类成员
     - 子类如果想扩充父类的方法，可以在定义新方法的同时访问父类成员来进行代码重用，
-        可以使用 父类名.父类成员 的格式调用父类成员，也可使用super（）.父类成员的格式来调用
+        可以使用 [父类名.父类]成员 的格式调用父类成员，也可使用super（）.父类成员的格式来调用
 - 继承变量函数的查找顺序
     - 优先查找自己变量
     - 没有查找父类
@@ -308,7 +308,7 @@ print(t._PersonEnjoy__age)
 
 print("----------6.1-------------"*3)
 
-# 6.2 继承案例
+# 6.2 继承案例 1----子类一旦继承父类，则可以使用父类中除私有成员外的所有内容
 class Person():
     name ="noname"
     age =0
@@ -321,6 +321,57 @@ t = Teacher()
 print(t.name)
 print(Teacher.name)
 print("----------6.2-------------"*3)
+# 继承案例 2----子类中可以定义独有的成员属性
+class Person():
+    name ="noName1111"
+    age = 0
+    # __socre 分数是私密，不能外部访问，只能自己知道
+    __socre = 61
+    # _petname 小名是受保护的，子类可以用，但不能公用
+    _petname = "小名，受保护的，应该不能公用"
+    def sleep(self):
+        print("sleeping")
+# 父类写在括号里
+class Teacher(Person):
+    # 子类中可以定义独有的成员属性
+    teacherid = "003452"
+    def work(self):
+        print("我出试题考你们")
+t = Teacher()
+print(t.name)
+# _petname 小名是受保护的，不能公用，！！！！
+# print(t._petname)
+t.sleep()
+print(t.teacherid)
+t.work()
+print("---*****---6.2---****----" * 3)
+
+# 继承案例 3---子类如果想扩充父类的方法，可以在定义新方法的同时访问父类成员来进行代码重用，-
+class Person():
+    name ="noName1111"
+    age = 0
+
+    def sleep(self):
+        print("sleeping")
+    def work(self):
+        print("挣钱买东西吃撒")
+    def work1(self):
+        print("存钱取婆娘")
+# 父类写在括号里
+class Teacher(Person):
+    # 子类中可以定义独有的成员属性
+    teacherid = "003452"
+    def work_mark(self):
+        print("我出试题考你们")
+    def work(self):
+        # 扩充父类的功能可以使用【父类名.对应函数】格式或者使用 super().对应函数的方式
+        Person.work(self)
+        super().work1()
+        self.work_mark()
+t = Teacher()
+t.work()
+print("*****---6.2---****" * 3)
+
 # 6.2.1 多继承例子
 class Fish():
     def __init__(self,name):
@@ -357,7 +408,7 @@ s.swin()
 '''
 print("----------6.2.1-------------"*3)
 '''
-- 构造函数
+- 6.2.2 构造函数
     - 是一类特殊的函数在类进行实例化之前进行调用
     - 如果定义构造函数，则实例化时使用构造函数，不查找父类构造函数
     -  如果没定义，则自动查找父类构造函数
@@ -366,6 +417,33 @@ print("----------6.2.1-------------"*3)
 # 构造函数例子
 # 构造函数的调用顺序
 # 如果子类没有写构造函数，则自动向上查找，直到找到位置
+
+# 6.2.2 继承类中的构造函数例子 1、
+class Dog():
+    #__init__是构造函数
+    # 每次实例化的时候，第一个被自动调用
+    def __init__(self):
+        print("i an init in dog")
+kakkkk = Dog()
+print("----6.2.2-----    "*5)
+
+# 6.2.2 继承类中的构造函数例子 1-如果没定义，则自动查找父类构造函数
+class Animel():
+    def __init__(self):
+        print("Animel")
+class PaxingAni():
+    def __init__(self):
+        print("PaxingDongwu")
+class DDog(PaxingAni):
+    def __init__(self):
+        print(" 我是狗类动物")
+class Mat(PaxingAni):
+    def __init__(self):
+
+#dog = DDog()
+#cat = Mat()
+
+print("----6.2.3-----    "*5))
 class Person():
     # 对 person类进行实例化的时候
     # 姓名要确定
