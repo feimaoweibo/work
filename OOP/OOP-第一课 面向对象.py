@@ -602,6 +602,62 @@ print("-----6.6.2----"*5)
         -类的方式： 适合多个类中的多个属性共用用一个描述符
         -property：使用当前类中使用，可以控制一个类中多个属性
         -属性修饰符： 使用于当前类中使用，控制一个类中的一个属性
+'''
+# 7 类的属性案例1
+class Student():
+    def __init__(self,name,age):
+        self.name = name
+        self.age = 18
+    def intro(self):
+        print("Hai,my name is {0}".format(self.name))
+s1 = Student("DA na", 18)
+s2 = Student("wining iang", 24)
+s1.intro()
+s2.intro()
+print("*****7.1***** " *5)
+# 7.1 类的属性案例2--在类中对成员属性进行相关操作
+class Student():
+    def __init__(self,name,age):
+        self.name = name
+        self.age = 18
+        #  如果不想修改代码
+        self.setName(name)
+    # 介绍下自己
+    def intro(self):
+        print("Hai,my name is {0}".format(self.name))
+    # .upper 小写转换成大写格式
+    def setName(self,name):
+        self.name = name.upper()
+s1 = Student("DA na", 18)
+s2 = Student("wining iang", 24)
+s1.intro()
+s2.intro()
+print("*****7.2***** " *5)
+# 7.3 peroperty案例--类的成员描述符介绍
+'''
+定义一个Penson类，具有name，age属性
+对于任意输入的姓名，我们希望都用大写方式保存
+年龄，我们希望内部统一用整数保存
+x = property(Fget,Fset,Fdel,doc)
+'''
+
+class Person():
+    # 函数名称可以任意
+    def Fget(self):
+        return self._name * 2
+    def Fset(self,name):
+        # 所有输入的姓名以大写形式保存
+        self._name = name.upper()
+    def Fdel(self):
+        self._name = "NoName"
+
+    name = property(Fget, Fset, Fdel, "对name进行小写变大写操作")
+p1 = Person()
+p1.name = "TUling"
+print(p1._name)
+print("*****7.3****" *5)
+
+'''
 - 8. 类的内置属性
     __dict__:以字典的方式显示类的成员组成
     __doc__: 获取类的文档信息
@@ -637,6 +693,31 @@ print("-----6.6.2----"*5)
             - 第二个参数是第二个对象
             - 返回值可以是任意值，推荐返回布尔值
         案例
+        
+'''
+
+# 9.1 __call__魔法函数举例
+class A():
+    def __init__(self):
+        print("hello,我被调用了")
+    def __call__(self,):
+        print("YE,我再次被调用了")
+a = A()
+a()
+print("-------9.1------" *4)
+
+# 9.2 __str__魔法函数举例
+class A():
+    def __init__(self):
+        print("hello,我被调用了")
+    def __call__(self,):
+        print("YE,我再次被调用了")
+    def __str__(self):
+        return "tuling学院例子"
+a = A()
+print(a)
+print("-------9.2------" *4)
+'''
 - 10. 类和对象的三种方法
     - 实例方法
         - 需要实例化对象才能使用的方法，使用过程中可能需要截止对象的其他对象的方法完成
