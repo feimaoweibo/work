@@ -372,41 +372,7 @@ t = Teacher()
 t.work()
 print("*****---6.2---****" * 3)
 
-# 6.2.1 多继承例子
-class Fish():
-    def __init__(self,name):
-        self.name = name
-    def swin(self):
-        print("i am swimming......")
-class Brid():
-    def __init__(self,name):
-        self.name = name
 
-    def fly(self):
-        print("i am flyying.......")
-class Person():
-    def __init__(self,name):
-        self.name = name
-
-    def work(self):
-        print("working......")
-class Student(Person):
-    def __init__(self,name):
-        self.name = name
-stu =Student("yueyue")
-stu.work()
-class SuperMan(Person,Brid,Fish):
-    def __init__(self,name):
-        self.name = name
-class SwimMan(Person,Fish):
-    def __init__(self,name):
-        self.name = name
-'''
-s = SuperMan(name)
-s.fly()
-s.swin()
-'''
-print("----------6.2.1-------------"*3)
 '''
 - 6.2.2 构造函数
     - 是一类特殊的函数在类进行实例化之前进行调用
@@ -437,13 +403,85 @@ class PaxingAni():
 class DDog(PaxingAni):
     def __init__(self):
         print(" 我是狗类动物")
+dog = DDog()
 class Mat(PaxingAni):
-    def __init__(self):
+    pass
 
-#dog = DDog()
-#cat = Mat()
+cat = Mat()
+print("----6.2.3-----    "*5)
 
-print("----6.2.3-----    "*5))
+'''
+-6.3 super
+    - super 不是关键字，而是一个类
+    - super的作用是获取MRO列表中的第一个类
+    - super与父类直接没有任何实质关系，但通过super 可以调用到父类
+    - super使用两个方法,参见在构造函数中调用父类的构造函数
+-6.4 单继承和多继承
+    - 单继承：每个类只能继承一个类
+    - 多继承：每个类允许继承多个类
+    - 单继承与多继承的优缺点
+        - 单继承：
+            - 传承有序逻辑清晰语法简单隐患少
+            - 功能不能无限扩展，只能在当前唯一的继承链中扩展
+        - 多继承：
+            - 优点：类的功能扩展方便
+            - 缺点：继承关系混乱
+'''
+# 6.4 多继承例子
+class Fish():
+    def __init__(self,name):
+        self.name = name
+    def swin(self):
+        print("i am swimming......")
+class Brid():
+    def __init__(self,name):
+        self.name = name
+
+    def fly(self):
+        print("i am flyying.......")
+class Person():
+    def __init__(self,name):
+        self.name = name
+
+    def work(self):
+        print("working......")
+# 单继承例子
+class Student(Person):
+    def __init__(self,name):
+        self.name = name
+
+class SuperMan(Person,Brid,Fish):
+    def __init__(self,name):
+        self.name = name
+class SwimMan(Person,Fish):
+    def __init__(self,name):
+        self.name = name
+# 多继承例子
+s = SuperMan("yueyue")
+s.fly()
+s.swin()
+# 单继承例子
+stu =Student("yueyue")
+stu.work()
+print("----------6.4-------------"*3)
+
+'''
+-6.5 菱形继承/砖石继承问题
+    - 多个子类继承自同一个父类，这些子类由被同一个类继承，于是继承关系图形成一个菱形
+    - MRO
+    - 关于多继承的MRO
+        - MRO就是多继承中，用于保存继承顺序的一个列表
+        - python本身采用C3算法来承接多继承的菱形继承进行计算结果
+        - MRO列表的计算原则
+            - 子类永远在父类前面
+            - 如果多个父类，则根据继承语法中括号内的书写顺序存放
+            - 如果多个类继承了同一个父类，孙子类张只会选取继承语法括号中第一个父类的父类
+-6.6 构造函数
+    - 在对象进行实例化的时候，系统自动调用的一个函数叫构造函数，通常此函数用来对实例
+        对象进行初始化，顾名。
+    - 构造函数一定要有，如果没有，则自动向上查找，按照MRO顺序，直到找到为止
+'''
+# 6.6 构造函数例子
 class Person():
     # 对 person类进行实例化的时候
     # 姓名要确定
@@ -453,10 +491,11 @@ class Person():
         self.name = "noname"
         self.age = 18
         self.address = "studenthouse"
-        print("in init func")
+        print("构造函数：初始化实例时第一个自动调用函数")
 # 实例化一个人
 p = Person()
 
+# 1、面例子说明构造函数调用顺序
 class A():
     def __init__(self):
         print("A")
@@ -468,38 +507,54 @@ class C(B):
 # 此时，首先查找C的构造函数
 # 如果没有，则向上按照MRO顺序查找父类的构造函数，直到找到为止
 c = C()
-'''
-- super
-    - super 不是关键字，而是一个类
-    - super的作用是获取MRO列表中的第一个类
-    - super与父类直接没有任何实质关系，但通过super 可以调用到父类
-    - super使用两个方法,参见在构造函数中调用父类的构造函数
-- 单继承和多继承
-    - 单继承：每个类只能继承一个类
-    - 多继承：每个类允许继承多个类
-- 单继承与多继承的优缺点
-    - 单继承：
-        - 传承有序逻辑清晰语法简单隐患少
-        - 功能不能无限扩展，只能在当前唯一的继承链中扩展
-    - 多继承：
-        - 优点：类的功能扩展方便
-        - 缺点：继承关系混乱
-- 菱形继承/砖石继承问题
-    - 多个子类继承自同一个父类，这些子类由被同一个类继承，于是继承关系图形成一个菱形
-    - MRO
-    - 关于多继承的MRO
-        - MRO就是多继承中，用于保存继承顺序的一个列表
-        - python本身采用C3算法来承接多继承的菱形继承进行计算结果
-        - MRO列表的计算原则
-            - 子类永远在父类前面
-            - 如果多个父类，则根据继承语法中括号内的书写顺序存放
-            - 如果多个类继承了同一个父类，孙子类张只会选取继承语法括号中第一个父类的父类
-- 构造函数
-    - 在对象进行实例化的时候，系统自动调用的一个函数叫构造函数，通常此函数用来对实例
-        对象进行初始化，顾名。
-    - 构造函数一定要有，如果没有，则自动向上查找，按照MRO顺序，直到找到为止
-    
-# 6.3.多态
+
+print("----6.6-----    "*5)
+
+# 2、下面例子说明---注意调用父辈构造函数时，对应函数的参数数量
+class A():
+    def __init__(self):
+        print("A")
+class B(A):
+    def __init__(self, name):
+        print("B")
+        print(name)
+class C(B):
+    pass
+# 此时，首先查找C的构造函数
+# 如果没有，则向上按照MRO顺序查找父类的构造函数，直到找到为止
+c = C("注意调用父辈构造函数时，对应函数的参数数量")
+print("-----6.6.1-----"*5)
+
+# 3、在构造函数中调用父类构造函数来扩展自身函数功能，.可以用【类.函数名】和 super() 来实现
+# 下例在C中调用B的函数后，添加一些自身函数功能
+class A():
+    pass
+class B(A):
+    def __init__(self,name):
+        print("父类-B")
+        print(name)
+
+class C(B):
+    def __init__(self,name):
+        # 首选调用父类构造函数
+        B.__init__(self, name)
+        # 其次再增加自己的功能
+        print("打印C中想实现扩展函数的功能---方法1【类名.函数名】形式"),
+
+class D(B):
+    def __init__(self,name):
+        # 首选调用父类构造函数,注意传入参数的写法
+        # 使用 super().__init__ 调用父类函数时，super()接受 新类+self 格式
+        super(D,self).__init__(name)
+        # 其次再增加自己的功能
+        print("打印C中想实现扩展函数的功能---方法2【super()】"),
+c = C("我是调用B中的")
+print("-----方法分隔符--------")
+d = D("我是调用B中的构造函数")
+print("-----6.6.2----"*5)
+
+'''    
+# 6.7.多态
 - 多态就是同一个对象在不同情况下有不同的状态出现
 - 多态不是语法，是一种设计思想
 - 多态性：一种调用方式，不同的执行效果
@@ -518,7 +573,9 @@ c = C()
         - 职责必须单一，如果有多个功能，则写多个Mixin
         - Mixin 不能依赖于子类的实现
         - 子类即使没有继承这个Mixin类，也能照样工作，只是缺少了某个功能
-# 6.4 类相关函数
+        
+
+# 6.8 类相关函数
 - issubclass:检测一个类是否是另一个类的子类
 - isinstance:检测一个对象是否是一个类的实例
 - hasattr:检测一个对象是否由成员xxx
