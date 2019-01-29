@@ -102,14 +102,48 @@ print("----3----    "*5)
 '''
 - 集合元素的添加：add_settinfo()
 - 集合的交集：get_intersettinfo()
-- 
+- 集合的并集：get_union()
+- 集合的差集：get_difference()
 '''
 class SettInfo():
     def __init__(self,my_sett):
         self.sett = my_sett
     def add_settinfo(self,mysett):
+        # 集合添加元素 add()
         self.sett.add(mysett)
         return self.sett
+    def get_intersettinfo(self,jiaoji):
+        # 集合交集 & 符号取值
+        return self.sett & jiaoji
+    def get_union(self,jiaoji):
+        # 集合并集 | 符号取值
+        return self.sett | jiaoji
+    def get_difference(self,jiaoji):
+        # 集合差集 - 符号取值
+        return self.sett - jiaoji
 na_set = {1,2,3,4,5}
+jiao_set = {5,3,7,9}
 mysett = SettInfo(na_set)
+# 集合元素添加
 print(mysett.add_settinfo(6))
+# 取集合交集
+print(mysett.get_intersettinfo(jiao_set))
+# 取集合并集
+print(mysett.get_union(jiao_set))
+# 取集合的差集
+print(mysett.get_difference(jiao_set))
+
+print("-----4-----     "*5)
+
+# 5、练习题- 创建北京和成都两个校区¶
+'''
+创建Linux\Python两个课程
+创建北京校区的Python 3期课程和成都校区的Linux 1期课程
+管理员创建了北京校区的学员小张，并将其分配在了Python 3期
+管理员创建了讲师小周，并将其分配给了Python 3期
+讲师小周创建了一条 Python 3期的上课记录 Day02
+讲师小周为Day02 这节课所有的学院批改了作业， 小张得了A，小王得了B
+学员小张查看了自己所报的课程
+学员小张在 查看了 自己在Python 3 的成绩列表然后退出了
+学院小张给了讲师小周好评
+'''
