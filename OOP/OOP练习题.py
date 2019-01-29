@@ -135,15 +135,25 @@ print(mysett.get_difference(jiao_set))
 
 print("-----4-----     "*5)
 
-# 5、练习题- 创建北京和成都两个校区¶
+# 5、练习题- 创建北京和成都两个校区
 '''
 创建Linux\Python两个课程
 创建北京校区的Python 3期课程和成都校区的Linux 1期课程
 管理员创建了北京校区的学员小张，并将其分配在了Python 3期
 管理员创建了讲师小周，并将其分配给了Python 3期
 讲师小周创建了一条 Python 3期的上课记录 Day02
-讲师小周为Day02 这节课所有的学院批改了作业， 小张得了A，小王得了B
+讲师小周为Day02 这节课所有的学员批改了作业， 小张得了A，小王得了B
 学员小张查看了自己所报的课程
 学员小张在 查看了 自己在Python 3 的成绩列表然后退出了
-学院小张给了讲师小周好评
+学员小张给了讲师小周好评
 '''
+class School():
+    def __init__(self, school_xiaoqu, school_text, school_stu, school_teach):
+        self.school_xiaoqu = school_xiaoqu
+        self.school_text = school_text
+        self.school_teach = school_teach
+        self.school_stu = school_stu
+
+    def creatzone(self,shcool_xiaoqu):
+        self.school_xiaoqu.append(xiaoqu.name)
+        print("我们开设有北京校区")
