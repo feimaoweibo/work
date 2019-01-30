@@ -147,13 +147,78 @@ print("-----4-----     "*5)
 学员小张在 查看了 自己在Python 3 的成绩列表然后退出了
 学员小张给了讲师小周好评
 '''
+Course_list = []
 class School():
-    def __init__(self, school_xiaoqu, school_text, school_stu, school_teach):
+    def __init__(self, school_xiaoqu,):
         self.school_xiaoqu = school_xiaoqu
-        self.school_text = school_text
-        self.school_teach = school_teach
-        self.school_stu = school_stu
+        self.school_teach = []
+        self.school_stu = []
+    global Course_list
+    def creatteach(self,obj):
+        self.school_teach.append(obj.name)
+        print("我们聘请了一个新老师{}".format(obj.name))
+    def creatstu(self,obj):
+        self.school_stu.append(obj.name)
+        print("我们新招了一个学员{}".format(obj.name))
 
-    def creatzone(self,shcool_xiaoqu):
-        self.school_xiaoqu.append(xiaoqu.name)
-        print("我们开设有北京校区")
+class SchoolWork(School):
+    def __init__(self, school_xiaoqu, peixun_date, peixun_kecheng):
+        super(SchoolWork,self).__init__(school_xiaoqu)
+        self.kecheng = peixun_kecheng
+        self.date =peixun_date
+        self.menbers = []
+        Course_list.append(self.kecheng)
+        print("我们现在{}校区开设了{}年级的{} 课程".format(self.school_xiaoqu,self.date,self.kecheng))
+
+    def info_dagang(self):
+        print("课程大纲{}day01, day02, day03".format(self.kecheng))
+
+Python = SchoolWork("北京", 3, 'Python')
+Linux = SchoolWork("成都", 1, "Linux")
+class SchoolMenber():
+    def __init__(self,name,age,sex,role):
+        self.name = name
+        self.age =age
+        self.sex =sex
+        self.role =role
+        self.Course_list = []
+        print("我叫{}，我是一个{}".format(self.name,self.role))
+stu_num_id = 00
+class Students(SchoolMenber):
+    def __init__(self,name,age,sex,role,course):
+        super(Students, self).__init__(name,age,sex,role)
+        global stu_num_id
+        stu_num_id +=1
+        stu_id =course.school_xiaoqu + "S" + str(course.date) + str(stu_num_id).zfill(2)
+        self.id =stu_id
+        self.mark_list = {}
+    def study(self, course):
+        print("我来这里学习{}课，我的学号是{}".format(self.kecheng, self.id))
+    def pay(self, kecheng):
+        print("我交5800元学费给{}".format(self.kecheng))
+
+    def praise(self,obj):
+        print("{}觉得{}课很值得学习".format(self.name, obj.name))
+    def mark_check(self):
+        for i in self.mark_list.items():
+            print(i)
+
+    def out(self):
+        print("我离开了")
+
+teach_num_id = 00
+class Teachers(SchoolMenber):
+    def __init__(self,name,age,sex,role,course):
+        super(Teachers.self).__init__(name.age.sex.role)
+        global teach_num_id
+        teach_num_id += 1
+        teach_num_id = course.school_xiaoqu + "T" + str(course.date) + str(teach_num_id)
+        self.id = teach_num_id
+    def teach(self,kecheng):
+        print("我来这里讲{}课程，我的ID是{}".format(self.kecheng, self.id))
+    def record_mark(self,date,kecheng,obj,level):
+        obj.mark_list["Day" + date] = level
+
+a = Students("小张",18,"M",'student',Python)
+Python.creatstu(a)
+a.study(Python)
