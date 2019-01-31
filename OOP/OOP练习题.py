@@ -147,35 +147,46 @@ print("-----4-----     "*5)
 学员小张在 查看了 自己在Python 3 的成绩列表然后退出了
 学员小张给了讲师小周好评
 '''
+# 定义一个课程列表
 Course_list = []
+# 创建一个学校类
 class School():
     def __init__(self, school_xiaoqu,):
+        # 构造函数，包含学校，教师，学生
         self.school_xiaoqu = school_xiaoqu
         self.school_teach = []
         self.school_stu = []
+    # 声明课程列表是全局变量
     global Course_list
+    # 创建学校的教师
     def creatteach(self,obj):
         self.school_teach.append(obj.name)
         print("我们聘请了一个新老师{}".format(obj.name))
-    def creatstu(self,obj):
+    # 创建学校的学生
+    def creatstu(self, obj):
         self.school_stu.append(obj.name)
         print("我们新招了一个学员{}".format(obj.name))
-
+# 定义学校校区的类
 class SchoolWork(School):
+    # 构造函数，包括校区、培训期数、培训课程
     def __init__(self, school_xiaoqu, peixun_date, peixun_kecheng):
+        # super() 调用父类函数
         super(SchoolWork,self).__init__(school_xiaoqu)
         self.kecheng = peixun_kecheng
         self.date =peixun_date
         self.menbers = []
+        # 新增课程添加到课程列表里，使用.append() 函数
         Course_list.append(self.kecheng)
         print("我们现在{}校区开设了{}年级的{} 课程".format(self.school_xiaoqu,self.date,self.kecheng))
 
     def info_dagang(self):
         print("课程大纲{}day01, day02, day03".format(self.kecheng))
-
+# 实例化一个培训课程，分别是Python、linux,以及分别所属校区、培训期数
 Python = SchoolWork("北京", 3, 'Python')
 Linux = SchoolWork("成都", 1, "Linux")
+# 创建一个学校成员类
 class SchoolMenber():
+    # 构造函数，实例化成员包括姓名、年龄、性别、角色
     def __init__(self,name,age,sex,role):
         self.name = name
         self.age =age
@@ -183,42 +194,93 @@ class SchoolMenber():
         self.role =role
         self.Course_list = []
         print("我叫{}，我是一个{}".format(self.name,self.role))
+# 定义学生ID变量默认为0
 stu_num_id = 00
+# 创建学生类
 class Students(SchoolMenber):
-    def __init__(self,name,age,sex,role,course):
+    # 构造函数，实例化学生的姓名、年龄、性别、角色、课程
+    def __init__(self,name,age,sex,role,kecheng):
+        # super() 调用父类函数
         super(Students, self).__init__(name,age,sex,role)
+        # 声明学生ID为全局变量
         global stu_num_id
         stu_num_id +=1
-        stu_id =course.school_xiaoqu + "S" + str(course.date) + str(stu_num_id).zfill(2)
+        # ID的构成为校区课程+学生角色+培训期数+学生ID， zfill()函数 为填充函数，当只有一位数时前面填充0，只能用在str类型
+        stu_id =kecheng.school_xiaoqu + "S" + str(kecheng.date) + str(stu_num_id).zfill(2)
         self.id =stu_id
+        # 成绩列表
         self.mark_list = {}
-    def study(self, course):
-        print("我来这里学习{}课，我的学号是{}".format(self.kecheng, self.id))
+    # 学习的课程已经学号
+    def study(self, kecheng):
+        print("我来这里学习{}课，我的学号是{}".format(kecheng.kecheng, self.id))
+    # 报名课程的学费
     def pay(self, kecheng):
-        print("我交5800元学费给{}".format(self.kecheng))
-
-    def praise(self,obj):
+        print("我交了5800元的{}课学费".format(kecheng.kecheng))
+        # 添加报名课程到课程列表
+        self.Course_list.append(kecheng.kecheng)
+    # 对所学课程老师的评价
+    def praise(self, obj):
         print("{}觉得{}课很值得学习".format(self.name, obj.name))
+    # 查看自己成绩
     def mark_check(self):
         for i in self.mark_list.items():
             print(i)
 
     def out(self):
         print("我离开了")
-
+# 定义教师默认的ID
 teach_num_id = 00
+# 创建教师类
 class Teachers(SchoolMenber):
-    def __init__(self,name,age,sex,role,course):
-        super(Teachers.self).__init__(name.age.sex.role)
+    # 构造函数实例化教师，包括名字、年龄、性别、角色、教授课程
+    def __init__(self,name,age,sex,role,kecheng):
+        # super()调用父辈函数，包括姓名、年龄、性别、角色
+        super(Teachers,self).__init__(name,age,sex,role)
+        # 声明教师ID为全局变量
         global teach_num_id
         teach_num_id += 1
-        teach_num_id = course.school_xiaoqu + "T" + str(course.date) + str(teach_num_id)
+        # 同学生ID构成
+        teach_num_id = kecheng.school_xiaoqu + "T" + str(kecheng.date) + str(teach_num_id).zfill(2)
         self.id = teach_num_id
+    # 教授课程和教师ID
     def teach(self,kecheng):
-        print("我来这里讲{}课程，我的ID是{}".format(self.kecheng, self.id))
+        print("我来这里讲{}课程，我的ID是{}".format(kecheng.kecheng, self.id))
+    # 给学员课程打分
     def record_mark(self,date,kecheng,obj,level):
         obj.mark_list["Day" + date] = level
-
+print("****----****    "*4)
+# 实例化学生，包括姓名、年龄、性别、角色、课程
 a = Students("小张",18,"M",'student',Python)
+# 注册学员小张
 Python.creatstu(a)
+# 小张学习的课程和他的学号
 a.study(Python)
+# 小张报名学费
+a.pay(Python)
+print("****----****    "*4)
+b = Students("小王",22,"F","student",Python)
+Python.creatstu(b)
+b.study(Python)
+b.pay(Python)
+print("****----****    "*4)
+# 实例化教师，包括姓名、年龄、性别、角色、教授课程
+t = Teachers("小周",30,"M","teacher",Python)
+# 注册教师小周
+Python.creatteach(t)
+# 教授课程和教师ID
+t.teach(Python)
+# 分别创建学员小王和小张的培训课程成绩
+t.record_mark("1",Python,a,"A")
+t.record_mark("1",Python,b,"A")
+print("小王查看了自己的课程")
+# 打印小王的课程
+print(b.Course_list)
+print("小王查看了自己的成绩")
+# 打印小王的培训课程成绩
+b.mark_check()
+print("小王退出了")
+# 打印小王推出培训
+b.out()
+print("给好评")
+# 打印小王对教师小周的评价
+b.praise(t)
