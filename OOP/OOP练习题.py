@@ -284,3 +284,155 @@ b.out()
 print("给好评")
 # 打印小王对教师小周的评价
 b.praise(t)
+print("******-----5-----*****   "*4)
+# 6、定义一个门票系统
+'''
+- 门票的原价100元
+- 当周末时候，门票涨价20%
+- 小孩子半价
+- 计算2个成人和1个孩子的平日票价
+'''
+class Ticket():
+    def __init__(self, weekend=False, child= False):#初始化门票售卖不是周末，不是儿童门票
+        self.exp = 100
+        # 如果周末时间门票上浮20%，否则门票是正常价
+        if weekend:
+            self.inc = 1.2
+        else:
+            self.inc = 1
+        # 如果儿童票价优惠50%，否则是正常票价
+        if child:
+            self.discount = 0.5
+        else:
+            self.discount = 1
+    def cal_price(self, num):
+        # 门票总价为：正常票价X节假日折扣X儿童折扣X数量
+        return self.exp * self.inc * self.discount * num
+adult = Ticket()
+child = Ticket(child=True)
+print("两个成人和一个小孩平日价格是{}".format(adult.cal_price(2)+child.cal_price(1)))
+print("******-----6-----*****   "*4)
+
+# 7、定义一个乌龟类与鱼类并尝试编程
+'''
+- 假设游戏场景范围为（x,y）,0<=x<=10,0<=y<=10
+- 游戏有1只乌龟和10条鱼
+- 乌龟的最大移动能力是2步（乌龟可以随机选择移动1步还是2步），鱼最大移动能力是1步
+- 当移动到场景边缘时，自动向反方向移动
+- 乌龟初始化体力为100（上限）
+- 乌龟每移动一次，体力消耗1
+- 当乌龟与鱼重叠时，乌龟吃钓鱼，乌龟体力增加20
+- 鱼不计算体力
+- 当乌龟体力值为0或者鱼的数量为0时，游戏结束
+'''
+import random as r
+class Turtle():
+    def __init__(self):
+        self.power = 100
+    # 初始化乌龟位置
+        self.x = r.randint(0,10)
+        self.y = r.randint(0,10)
+    def move(self):
+        '''
+        定义乌龟移动后位置= 随机移动（一步或者二步）+ 初始位置
+        '''
+        new_x = r.choice([1,2,-1,-2]) + self.x
+        new_y = r.choice([1,2,-1,-2]) + self.y
+        # 判断乌龟移动是否超出边界
+        if new_x<0:
+            self.x = 0 - (new_x - 0)
+        elif new_x>10:
+            self.x = 10 - (new_x -10)
+        else :
+            self.x = new_x
+
+        if new_y<0:
+            self.y = 0 - (new_y - 0)
+        elif new_y>10:
+            self.y = 10 -(new_y -10)
+        else:
+            self.y = new_y
+        self.power -= 1
+        return (self.x, self.y)
+    # 乌龟吃鱼的函数
+    def eat(self):
+        self.power += 20
+        if self.power >= 100:
+            self.power = 100
+class Fish():
+    def __init__(self):
+        # 初始化鱼的位置
+        self.x = r.randint(0,10)
+        self.y = r.randint(0,10)
+    def move(self):
+        # 定义鱼移动后位置 = 随机移动一步 + 初始化位置
+        new_x = r.choice([1,-1])+self.x
+        new_y = r.choice([1,-1])+self.y
+        if self.x<0:
+            self.x = 0 - (new_x - 0 )
+        elif self.x>10:
+            self.x = 10 - (new_x -10)
+        else:
+            self.x = new_x
+        if self.y<0:
+            self.y = 0 - (new_y - 0)
+        elif self.y>10:
+            self.y = 10 - (new_y - 10)
+        else:
+            self.y = new_y
+        return (self.x, self.y)
+# 实例化一个乌龟
+turtle = Turtle()
+# 实例化一个鱼
+new_fish = Fish()
+# 鱼的数量，使用集合
+fish = []
+for i in range(10):
+    # 实例化鱼数量自增+1，最多为10条
+    fish.append(new_fish)
+while True:
+    if not len(fish): #鱼的集合里，没有数量时，退出while循环
+        print("鱼被吃完了，游戏结束")
+        break
+    if not turtle.power: #乌龟体力为0时，退出while循环
+        print ("乌龟体力为0，游戏结束")
+        break
+    # 乌龟移动的位置赋值给pos(吃鱼点)
+    pos = turtle.move()
+    '''
+    - 在迭代中做列表的删除元素是非常危险的，经常会出现一些意想不到的问题，因为迭代器是直接应用列表的数据来进行操作
+    所以，我们这里把列表拷贝一份传给迭代器，使用[:]形式，然后再对列表进行操作；
+    - 使用for循环，打印鱼被乌龟吃的行为发生；
+    '''
+    for each_fish in fish[:]:
+        # 判断被吃的鱼的移动位置刚好等于乌龟移动的位置，
+        if each_fish.move() == pos:
+            # 调用乌龟的类，吃鱼的函数
+            turtle.eat()
+            # 从鱼的数量里，移除一条被吃的鱼
+            fish.remove(each_fish)
+            print("有一条鱼被吃了")
+print("-----7-----    "*5)
+
+# 8、定义一个点（point）和直线（line）类，使用getLen方法获取两点构成直线的长度
+import math
+class Point(object):
+    def __init__(self,x=0,y=0):
+        self.x = x
+        self.y = y
+    def get_x(self):
+        return self.x
+    def get_y(self):
+        return self.y
+class Line(object):
+    def __init__(self,p1,p2):
+        self.x =p1.get_x() - p2.get_x()
+        self.y =p1.get_y() - p2.get_y()
+        self.len = math.sqrt(self.x*self.x + self.y*self.y)
+    def getLen(self):
+        return self.len
+p1 = Point(3,3)
+p2 = Point(4,7)
+line = Line(p1,p2)
+line.getLen()
+print("-----8-----    "*5)
