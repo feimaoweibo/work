@@ -426,13 +426,13 @@ class Point(object):
         return self.y
 class Line(object):
     def __init__(self,p1,p2):
-        self.x =p1.get_x() - p2.get_x()
-        self.y =p1.get_y() - p2.get_y()
-        self.len = math.sqrt(self.x*self.x + self.y*self.y)
-    def getLen(self):
+        self.x =p1.get_x() - p2.get_x() #获取直线一端的x位置
+        self.y =p1.get_y() - p2.get_y() #获取直线一端的y位置
+        self.len = math.sqrt(self.x*self.x + self.y*self.y) # 直线的长度= 开平方（x的平方+y的平方）
+    def getLen(self): # 获取直线的长度
         return self.len
-p1 = Point(3,3)
-p2 = Point(4,7)
+p1 = Point(1,1)
+p2 = Point(5,7)
 line = Line(p1,p2)
-line.getLen()
+print(line.getLen())
 print("-----8-----    "*5)
