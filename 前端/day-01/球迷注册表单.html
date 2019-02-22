@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>球迷注册表单</title>
+</head>
+<body>
+<form action="" method="post" enctype="multipart/form-data">
+    用户名：<input type="text" name="username" value="" placeholder="请填写您想使用UUID"><br>
+    密码：<input type="password" name="password"><br>
+    性别：<input type="radio" name="sex" value="1" checked> 男
+          <input type="radio" name="sex" value="0"> 女<br>
+    爱好球员：<br>
+            <input type="checkbox" name="love[]" value="8"> 杰拉德<br>
+            <input type="checkbox" name="love[]" value="14"> 阿隆索<br>
+            <input type="checkbox" name="love[]" value="9">托雷斯<br>
+            <input type="checkbox" name="love[]" value="11">萨拉赫<br>
+    热爱球队时长：
+    <select name="his">
+        <option value="his-1">新球迷</option>
+        <option value="his-2">1-5年</option>
+        <option value="his-3">5-10年</option>
+        <option value="his-4">10年以上</option>
+    </select>
+    <br>
+    请上传头像图片：<input type="file" name="file"><br>
+    个人说明：<br>
+            <textarea type="text" id=" " placeholder="请填写个性说明文字"> </textarea><br>
+    <input type="submit" value="提交"> <br>
+</form>
+</body>
+</html>
