@@ -34,7 +34,7 @@ text-align 设置文字水平对齐方式，如text-align:center 设置文字水
 ```angular2html
 border:宽度 样式 颜色;
 border-color;
-border-style; 边框样式：solid实现，dotted点状线，dashed虚线
+border-style; 边框样式：solid实线，dotted点状线，dashed虚线
 border-width:
 border-left-color;
 border-left-style;
