@@ -1,0 +1,83 @@
+*{
+    margin: 0px;
+    padding:0px;
+}
+.nav1{
+    width: 960px;
+    height: 800px;
+    background-color: tan;
+    margin: 0px auto;
+}
+.nav1{
+    width: 960px;
+    height: 800px;
+    background-color: tan;
+    margin: 0px auto;
+}
+.nav2{
+    width: 960px;
+    height: 800px;
+    background-color: saddlebrown;
+    margin: 0px auto;
+}
+.nav3{
+    width: 960px;
+    height: 800px;
+    background-color: wheat;
+    margin: 0px auto;
+}
+.nav4{
+    width: 960px;
+    height: 800px;
+    background-color: blueviolet;
+    margin: 0px auto;
+}
+.nav5{
+    width: 960px;
+    height: 800px;
+    background-color: gold;
+    margin: 0px auto;
+}
+.nav6{
+    width: 960px;
+    height: 800px;
+    background-color: hotpink;
+    margin: 0px auto;
+}
+/*
+position定位元素的绝对位置
+分别使用right值定位距离右边5px距离
+分别使用bottom值定位距离底部30px距离
+*/
+ul{
+    width: 40px;
+    background-color: tomato;
+    list-style: none;
+    text-align: center;
+    position: fixed;
+    right: 5px;
+    bottom: 30px;
+}
+li a{
+
+    text-decoration: none;
+}
+/*隐藏图片显示*/
+li img{
+    display: none;
+}
+/*
+鼠标移动显示隐藏内容且必须是靠近2个元素
+*/
+/*
+position定位元素的绝对位置
+分别使用right值定位距离右边45px距离
+分别使用bottom值定位距离底部20px距离
+*/
+li a:hover + img{
+    display: block;
+    position: fixed;
+    right: 45px;
+    bottom: 20px;
+    width: 200px;
+}

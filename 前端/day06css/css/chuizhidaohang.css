@@ -1,0 +1,19 @@
+ul{
+    list-style:none;
+    margin:0;
+    padding:0;
+    background-color:#336699;
+    height:180px;
+}
+li a{
+    text-decoration:none;
+    line-height:30px;
+    display:block;
+
+}
+li a:hover{
+    background-color:#990099;
+}
+li a:active{
+    background-color: red;
+}
