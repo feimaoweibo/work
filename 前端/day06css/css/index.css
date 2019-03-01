@@ -1,0 +1,101 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+/*顶部区域*/
+.nav-top{
+    width: 960px;
+    height: 60px;
+    margin: 0px auto;
+    background-color: #cccccc;
+}
+.top-menu{
+    float: left;
+    
+}
+.top-menu li{
+    /*list-style: none;*/
+    display: block;
+    float: left;
+    margin: 5px 20px;
+    font-size: 25px;
+}
+.top-menu li a{
+    text-decoration: none;
+}
+.top-menu form{
+    position: relative;
+    right: -200px;
+    top: 16px;
+    display: inline-block;
+}
+/*内容区域*/
+.baby-center{
+    width: 960px;
+    height: 800px;
+    margin: 0px auto;
+    background-color: #EEE9BF;
+}
+.baby-left{
+    width: 70%;
+}
+.baby-left ul{
+    list-style: none;
+    display: block;
+
+    padding-left: 10px;
+    margin-bottom: 3px;
+}
+.baby-right{
+    width: 30%;
+}
+.right-1{
+
+    display: block;
+    padding-right: 10px;
+    float: left;
+    position: absolute;
+    top: 65px;
+    right: 190px;
+}
+.right-2{
+    display: block;
+    padding-right: 10px;
+    float: left;
+    position: absolute;
+    top: 200px;
+    right: 190px;
+}
+.right-3 {
+    display: block;
+    padding-right: 10px;
+    float: left;
+    position: absolute;
+    top: 350px;
+    right: 190px;
+}
+.right-4{
+    display: block;
+    padding-right: 10px;
+    float: left;
+    position: absolute;
+    top: 500px;
+    right: 190px;
+}
+.right-5{
+    display: block;
+    padding-right: 10px;
+    float: left;
+    position: absolute;
+    top: 650px;
+    right: 190px;
+}
+/*底部区域*/
+.nav-bottom{
+    width: 960px;
+    height: 80px;
+    margin: 0px auto;
+    background-color: #8B7D6B;
+    text-align: center;
+    padding-top: 20px;
+}
