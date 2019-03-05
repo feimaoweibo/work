@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS数据类型+类型转换+运算符介绍</title>
+</head>
+<body>
+    一、JS数据类型
+    <script>
+        //一、布尔数据类型，只有两个值true 和 false
+        var B = true;
+        console.log(typeof(B));
+        var C = false;
+        console.log(typeof(C));
+    </script>
+    <script>
+        //二、数值数据类型，包含整数、浮点数、二进制数、八进制数、十六进制数
+        var num1 = 13;
+        console.log(typeof(num1));
+        var num2 =15.34;
+        console.log(typeof(num2));
+        //二进制数 以0b开头
+        var num3 = 0b10;
+        console.log(typeof(num3));
+        //八进制数 以0开头
+        var num4 = 015;
+        console.log(typeof (num4));
+        //十进制数 以0x开头 包含数字0-9，a-f
+        var num5 = 0x22a;
+        console.log(typeof(num5));
+        //NaN 不是数
+        var num6 = NaN;
+        console.log(num6,typeof(num6));
+    </script>
+    <script>
+        //字符串数据类型，只能使用单引号、双引号来表示，同时单双引号可以嵌套同时使用。但是单单与双双引号不能同时使用
+        var str1 = 'wo shi zifuchuan 1';
+        console.log(typeof(str1));
+        var str2 ="wo shi zifuchuan2";
+        console.log(typeof(str2));
+        var str3 ='woshi "zifuchuan3"';
+        console.log(typeof(str3));
+        //var str4 = 'cuowo''jixucuowu';  错误示例
+        //console.log(typeof(str4));
+    </script>
+    <script>
+        //对象数据类型， 包含对象、数组、null
+        var obj1 = {name:'zhangsan',age:18,sex:'nan'}
+        console.log(typeof(obj1));
+        var obj2 =[1,2,3,4];
+        console.log(obj2,typeof(obj2));
+        var obj3 = null;
+        console.log(null,typeof(obj3));
+    </script>
+    <script>
+        //函数数据类型
+        var Func1 = function () {
+            console.log('这是一个函数')
+        }
+        console.log(typeof(Func1));
+        console.log(Func1,typeof(Func1));
+    </script>
+    <script>
+        //undefined 未定义类型，当定义一个变量不给赋值的时候，它就是undefined类型
+        var un
+        console.log(typeof(un));
+    </script>
+    二、JS数据类型转换
+    <script>
+        //数据类型转换， 使用Nunber()、parseInt()、parseFloat() 三种方式
+        /*
+        注意:当字符串当中包含任意一个非数字表示的字符时
+             1、Number()  返回NaN
+             2、parseInt(),parseFloat() 从头往后读,如果碰到非数字表示的字符,后面的内容就舍去
+             3、当字符串一开始就是非数字表示的字符 ,都返回NaN;
+        */
+        var str21 = '13aa33';
+        console.log(str21,typeof(str21));
+        var res1 = Number(str21);//包含非数字的字符，转换成Number时，返回NaN
+        console.log('Number',res1,typeof(res1));
+        var str22 = '1456bang33';
+        var res2 = parseInt(str22);//从头往后读,如果碰到非数字表示的字符,后面的内容就舍去
+        console.log(res2,typeof(res2));
+        var str23 = '1.2abg33';
+        var res3 =parseFloat(str23);//从头往后读,如果碰到非数字表示的字符,后面的内容就舍去
+        console.log(res3,typeof (res3));
+        var str24 = 'n3244';
+        var res4 =Number(str24);//当字符串一开始就是非数字表示的字符 ,都返回NaN;
+        console.log(res4,typeof(res4));
+
+        // 函数isNaN()检测参数是否是一个数字。如果是数 返回false 如果不是数就返回true
+        var num2 = 'la';
+        console.log(num2,isNaN(num2));
+
+        //boolean() 强制转换成布尔值数据，包含字符串数据转布尔型、数字数据转布尔型、对象数据转布尔型。
+        var str25 = 'liangi233';
+        console.log(Boolean(str25));//非空字符串，转为布尔值为true
+        var str26 = '';
+        console.log(Boolean(str26));//空字符串，转为布尔值为false
+        var num21 =1234;
+        console.log(Boolean(num21));//数字非0时，转为布尔值为true
+        var num22 = 0.0;
+        console.log(Boolean(num22));//数字为0,0.0，NaN时，转为布尔值为false
+        var obj21 = {name:"zan4",age:34};
+        console.log(Boolean(obj21));//任意对象转为布尔值为true
+        var obj22 ={};
+        console.log(Boolean(obj22));
+        var obj23 =null;
+        console.log(Boolean(obj23));//对象为null时，转为布尔值为false
+    </script>
+    三、JS运算符
+    <script>
+        //算术运算符 + - == ++ -- * /
+        // ++ 每次自增1，把结果赋值给自己
+        var num31 = 1;
+        num31 ++;
+        console.log(num31);
+        var num32 = 45;
+        num32 --;
+        console.log(num32);
+
+        // + 在两边都为数字类型时，做算术运算；否则作字符串连接
+        var num33 = 3+5;
+        console.log(num33);// 两边为数字，作算术运算 ，num=8
+        var num34 = '3' + 3 +4;
+        console.log(num34,typeof(num34));//一边字符，一边数字，作字符串拼接，num34=334
+        var num35 = 2 + 4 + 'hello';
+        console.log(num35,typeof(num35));//一边字符，一边数字，整体作字符串拼接，先进行算术算术，在拼接字符串 ，num35=6hello
+
+
+        // === 表示全等，在进行比较时，除了值相等，类型也必须相同
+        var num36 = 2 == '2';
+        console.log(num36);//true ，系统自动帮我们转了转换
+        var num37 = 3 ==='3';
+        console.log(num37);//false ,类型不同，值为假
+
+        // 三元运算符 使用 ？ ：形式来表示。其中？前面是判断条件，真区间：假区间
+        // 如果判断条件为真，输出 ：号前面内容；
+        // 如果判断条件为假，输出 ：号后面内容
+        var num38 = 1 <0?'判断条件为真输出内容':'判断条件为假输出内容';
+        console.log(num38);
+    </script>
+</body>
+</html>
