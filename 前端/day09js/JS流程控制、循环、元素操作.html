@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS流程控制、循环、元素操作等练习</title>
+</head>
+<body>
+    一、JS流程控制
+    <script>
+        // if 判断语句
+        /*
+        if(判断条件){
+        判断条件为true时，输出内容
+        }else{
+        判断条件为false时，输出内容
+        }
+        */
+        if (2>0){
+        console.log('条件为真，输出2>0')}
+
+        if (10<0){
+            console.log('真区间执行代码')
+        }else{
+            console.log('假区间执行代码，10是大于0的')
+        }
+
+        if (num1=2 == 1){
+            console.log('1==1条件成立')
+        }else if (num1>0){
+            console.log('输出代码内容：1<0 这是错误的')
+        }else{
+            console.log('输出代码内容：以上都是不对的')
+        }
+    </script>
+    <script>
+        // switch() 判断语句，必须配合与case同时使用
+        // 注意 switch当中的参数值进行判断时，使用 === 全等形式，要求值必须相等，类型也必须相同
+        var a=8;
+        switch (a) {
+            case 1:
+                console.log('周一');
+                break;
+            case 2:
+                console.log('周二');
+                break;
+            case 3:
+                console.log('周三');
+                break;
+            case 4:
+                console.log('周四');
+                break;
+            case 5:
+                console.log('周五');
+                break;
+            case 6:
+                console.log('周六');
+                break;
+            case 7:
+                console.log('周七');
+                break;
+            default :
+                // 当所有case条件都不成立时，就执行default区间代码
+                console.log('一周只有七天')
+        }
+    </script>
+    二、JS循环
+    <script>
+        // for 循环
+        /*使用：for(var i=0;i<len;i++){
+            ......
+        }
+        */
+        var d=21;
+        for (d=21;d<25;d++){
+            console.log(d)
+        }
+
+
+        // while 循环，可以使用break 和 continue 语句对循环中的代码执行提供了更严格的控制。
+        /*
+        使用格式：
+        while(判断条件){
+            变量 ++；
+            break;跳出循环，终止循环
+            continue;跳过本次循环，但不终止循环
+        }
+        */
+        var a = 1;
+        while (a<8){
+            a +=2;
+            console.log(a)
+        }
+
+        var b = 1;
+        while (b<10){
+            b ++;
+            if (b==5){
+                break;//跳出本次循环，而且结束整个循环
+            }
+            console.log(b);
+        }
+
+        var c = 11;
+        while (c<15){
+            c ++;
+            if (c==13){
+                continue;//跳出本次等于13的循环，但不结束循环
+            }
+            console.log(c)
+        }
+
+        // for..in..语句 是严格的迭代语句，用于枚举对象的属性
+        obj1 = ['a','b','c'];
+        for (i in obj1){
+            console.log(i,obj1[i]);
+        }
+
+        obj2 ={name:'zhanghsan', age:18, sex:'nan'};
+        for (i in obj2){
+            console.log(i,obj2[i]);
+        }
+    </script>
+    三、元素获取与操作
+    <script>
+    // JS 获取元素 可以使用内置对象的document的getElementById的方法，来获取网页上设置有id元素
+        window.onload=function () {
+            // 获取元素方法
+            var oDiv = document.getElementById('item1');
+            console.log(oDiv);
+
+            // 对元素的操作， 通过使用以 标签对象.style.css（属性名）="值" 形式改变标签对象的样式，l从而实现元素的操作
+            /*
+             1、样式是加在行间的(js添加的样式优先级高)
+             2、注意在设置样式的时候,如果有些属性是双拼词 font-size 要把中横岗去掉  第二个单词首字母大写
+              */
+            oDiv.style.width = '200px';
+            oDiv.style.height = '300px';
+            oDiv.style.backgroundColor = 'red';
+            oDiv.style.fontSize = '40px';
+
+            //通过jss获取元素的样式 只能获取行间样式
+            console.log(oDiv.style.width);
+
+            
+
+        }
+    </script>
+<div id="item1" style="">123</div>
+</body>
+</html>
