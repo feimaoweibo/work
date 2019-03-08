@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS定时器、函数、arguments 练习</title>
+    <style>
+        #item1{
+            width:50px;
+            height:50px;
+            background-color: green;
+        }
+
+    </style>
+</head>
+<body>
+一、JS 定时器
+<script>
+    window.onload=function() {
+        /*
+    单次定时器 setTimeout()
+        1、格式为：setTimeout（回调函数，等待时间（时间单位：毫秒））
+                指定等待时间之后执行的特定功能（也称为代码）
+        2、只执行一次
+        3、清除单次定时器，格式为cleanTimeoutz(要清楚定时器的标识符)
+    */
+
+    // 单次定时器的第一种写法
+    setTimeout(function(){
+        console.log('单次定时器第一种写法启动了')
+    },3000);
+
+    // 单次定时器的第二种写法
+    function demo(){
+        console.log('单次定时器第二种写法启动了')
+    }
+    setTimeout(demo,4000);//只需写函数名即可，不用（）
+
+        /*
+    多次定时器 setInterval()
+        1、格式为：setInterval(回调函数，间隔时间（时间单位：毫秒）)
+                    间隔时间之后执行的特点功能（也成为代码）
+        2、清楚多次定时器，格式为cleanInterval（要清楚定时器的标识符）
+     */
+
+    var t =0;
+    var set=setInterval(function(){
+        console.log('多次定时器启动了');
+        t++;
+    },6000);
+    console.log(set);
+    setTimeout(function(){
+        console.log('为了清除多次定时器，先写一个单次定时器');
+        clearInterval(set);
+    },19000);
+
+        // JS定时器动画效果
+        // 获取元素对象
+        var oDiv = document.getElementById('item1');
+        console.log(oDiv);
+        // 启动一个多次定时器，让元素的宽度和高度逐渐增大
+        var i = 50;
+        var set1 = setInterval(function () {
+            i++;
+            oDiv.style.width = i +'px';
+            oDiv.style.height = i + 'px';
+            if (i == 200) {
+                clearInterval(set1);
+            }
+        }, 100);
+    }
+ </script>
+<div id="item1"></div>
+</body>
+</html>
