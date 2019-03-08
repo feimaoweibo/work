@@ -67,8 +67,75 @@
                 clearInterval(set1);
             }
         }, 100);
-    }
+    };
  </script>
+二、JS 函数
+<script>
+    window.onload=function(){
+        // JS函数定义方法
+            /*
+            1、第一种 格式为：function + 函数名（）{
+                        将要执行的特定代码（也称为方法）}；
+                      调用函数： 函数名（）;
+                      注意：该方法优先级高，在哪里都可以调用;函数不调用不执行
+             */
+            function demo2(){
+                alert('第一种函数方法被调用了');
+            };
+            demo2();
+
+            /*
+            2、第二种 格式为：在表达式中定义函数 变量=function（）{
+                        将要执行的特定代码（也成为方法}；
+                        调用函数：变量();
+                        注意：函数只能在函数体下方才能被调用
+             */
+            var demo22 = function () {
+                alert('第二种函数方法被调用了：表达式形式')
+            };
+            console.log(demo22());
+    };
+</script>
+三、arguments 函数的参数问题
+<script>
+    // 函数的参数问题
+    /*
+    1、函数在被调用的时候，不传实参，函数依然可以执行，形参返回undefined
+    2、多穿实参，多余的参数会不忽略
+    3、在函数内部可以使用arguments 函数来获取传递进来的所有实参，该arguments函数为数组类型
+     */
+    function demo3(a,b){
+        console.log('函数的参数问题打印了');
+        console.log(a,b);//打印a,b的值，结果为1,2；多余的值被忽略
+        console.log(arguments);//通过arguments函数获取所有传递进来的实参
+        for(i in arguments){
+            console.log(arguments[i]);//用for ..in..循环遍历arguments获取到所有实参
+        };
+    };
+    demo3(1,2,3,4);
+</script>
+四、变量作用域
+<script>
+    /*
+    全局变量: 在函数外部使用声明的变量是全局变量
+    局部变量:在函数内部声明的变量是局部变量
+    如果函数内部有同名的局部变量,那么说内部优先使用局部变量的值
+    全局变量的作用域发生了改变,变成了局部变量,局部变量的值发生变化不会影响我们的全局变量
+    在函数内部不使用var声明的变量是全局变量
+     */
+    var bian = 1;
+    function demo4(){
+        bian = 6;//全局变量，不使用var声明的变量，皆是全局变量
+        var bian = 0;
+        bian1 =10;
+        console.log(bian); // 打印结果为0，函数内部有同名的局部变量var bian=0,优先使用局部变量的值，bian=6为全局变量
+    };
+    console.log(bian);//打印结果为1，先执行打印，后调用函数，所以打印的默认bian的值
+    demo4();
+    console.log(bian);//打印结果为1，流程为调用函数后，函数内部的bian 与 var bian为同名变量，但优先使用局部变量var bain的值，因此局部变量的值，不影响声明的全局变量bian=1
+    console.log(bian1);//打印结果为10
+
+</script>
 <div id="item1"></div>
 </body>
 </html>
