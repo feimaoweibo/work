@@ -7,13 +7,13 @@
 <body>
     <script>
         window.onload=function () {
-            // JS对象的三种创建方法
+            // 一、JS对象的三种创建方法
                 // 1、通过系统内置object() 去定义自己的对象
             var obj = new Object();
             obj.name = '张三';
             obj.old = 18;
             obj.say = function () {
-                console.log('创建对象的三种方法之第一种')
+                console.log('创建对象的三种方法之第一种，通过内置object（）定义对象')
             };
                 // 访问成员属性
             console.log(obj.name);
@@ -25,7 +25,7 @@
                 name:'李四',
                 old:25,
                 say:function () {
-                    console.log('创建对象的三种方法之第二种，最为常用');
+                    console.log('创建对象的三种方法之第二种，直接定义对象，最为常用');
                 }
             }
                 // 访问成员属性
@@ -35,8 +35,93 @@
                 // 为对象新增成员属性
             Obj.lendth = '180cm';
             console.log(Obj.lendth);
+
+                // 3、通过构造函数来自定义对象
+            function pen(name,sex){
+                // this 代表当前的对象
+                this.name =name;
+                this.sex = sex;
+                this.say = function(){
+                    console.log('创建对象的三种方法之第三种，通过构造函数，一般不用')
+                }
+            }
+                    // 实例化一个对象
+            var wangwu =new pen('王五','男');
+            console.log(wangwu.name);
+            console.log(wangwu.sex);
+            wangwu.say();
+                    // 实例化一个对象
+            var gouliu = new pen('狗六','非男');
+            console.log(gouliu.name);
+
+                // 遍历对象中的所有属性或者数组中的所有元素，使用for (...in...){}格式
+            for( i in wangwu){
+                console.log(wangwu[i])
+            };
+
+                // 变量.constructor 查看对象的构造函数
+            console.log(wangwu.constructor);
+
+            // 二、JS数组  数组就是一组数据的集合，在JavaScript数组中的数据，可以是不同类型的
+                //1、定义数组的第一种方法：通过对象实例化创建
+            var attr = new Array(1,2,3);
+            console.log(attr);
+                //2、定义数组的第二种方法：直接创建数组
+            var attr1 =[1,2,3,4,5,];
+            console.log(attr1);
+
+                /*
+                获取数组的长度 变量.length ；
+                用下标格式操作数组的某个数据 变量[下标]；
+                在数组的最后位置增加成员或者删除成员 变量.push(成员) 与 变量.pop()；
+                在数组的最前方位置增加成员或者删除成员 变量.unshift(成员) 与 变量shift()；
+                在数组中间位置增加成员操作
+                多为数组
+                 */
+                // 或者数组的长度
+            console.log(attr1.length);
+                // 获取数组的某个数据
+            console.log(attr1[1]); //打印值为2，获取数组中下标索位置为1的元素
+                // 修改数组中下标索引位置的元素
+            attr1[3] = 10;//修改下标位置为3的元素
+            console.log(attr1); //打印值为【1，2，3，10，5】
+                // 给数组最后添加元素
+            attr1.push(6,7); //在数组最后位置添加成员 6，7
+            console.log(attr1);
+                // 删除数组最后位置成员 变量.pop()
+            attr1.pop(7);//在数组最后位置删除成员7
+            console.log(attr1);
+                // 给数组从最前位置添加元素 变量.unshift
+            attr1.unshift(100,98);
+            console.log(attr1);
+                // 给数组从最前位置删除元素 变量.shift()
+            attr1.shift();
+            console.log(attr1);
+                // 增加或者删除数组中的某个元素
+                    /*
+                    如果只有一个参数  那就是从指定下标位置的元素开始删除所有剩下的原素
+                    如果传了两个参数 那就是从指定下标位置的元素开始删除，  第二个参数是指定删除的个数
+                    第三个参数  是用来替换删除之后的元素
+                    第三个参数之后的所有参数都是用来替换删除的元素的
+                     */
+            attr1.splice(4);//只有一个参数
+            console.log(attr1);
+
+            var attr2 = [1,2,3,4,5,6,7];
+            attr2.splice(4,2);//只有2个参数
+            console.log(attr2);
+
+            var attr3 =[1,2,3,4,5,6,7];
+            attr3.splice(4,2,8);//具有3个参数
+            console.log(attr3);
+
+            var attr4 = [1,2,3,4,5,6,7];
+            attr4.splice(4,2,8,9,10);// 具有4个参数
+            console.log(attr4);
+
         }
     </script>
 一、JS对象
+二、JS数组
 </body>
 </html>
