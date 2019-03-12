@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>练习</title>
+</head>
+<body>
+    <script>
+        window.onload=function () {
+            // JS对象的三种创建方法
+                // 1、通过系统内置object() 去定义自己的对象
+            var obj = new Object();
+            obj.name = '张三';
+            obj.old = 18;
+            obj.say = function () {
+                console.log('创建对象的三种方法之第一种')
+            };
+                // 访问成员属性
+            console.log(obj.name);
+                // 访问成员方法
+            obj.say();
+
+                // 2、直接定义对象
+            var Obj={
+                name:'李四',
+                old:25,
+                say:function () {
+                    console.log('创建对象的三种方法之第二种，最为常用');
+                }
+            }
+                // 访问成员属性
+            console.log(Obj.name);
+                // 访问成员方法
+            Obj.say();
+                // 为对象新增成员属性
+            Obj.lendth = '180cm';
+            console.log(Obj.lendth);
+        }
+    </script>
+一、JS对象
+</body>
+</html>
