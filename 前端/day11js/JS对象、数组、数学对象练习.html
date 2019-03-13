@@ -99,29 +99,78 @@
             console.log(attr1);
                 // 增加或者删除数组中的某个元素
                     /*
-                    如果只有一个参数  那就是从指定下标位置的元素开始删除所有剩下的原素
+                    如果只有一个参数  那就是从指定下标位置的元素开始删除所有剩下的元素
                     如果传了两个参数 那就是从指定下标位置的元素开始删除，  第二个参数是指定删除的个数
                     第三个参数  是用来替换删除之后的元素
                     第三个参数之后的所有参数都是用来替换删除的元素的
                      */
             attr1.splice(4);//只有一个参数
-            console.log(attr1);
+            console.log(attr1);//如果只有一个参数  那就是从指定下标位置的元素开始删除所有剩下的元素
 
             var attr2 = [1,2,3,4,5,6,7];
             attr2.splice(4,2);//只有2个参数
-            console.log(attr2);
+            console.log(attr2);//如果传了两个参数 那就是从指定下标位置的元素开始删除，第二个参数是指定删除的个数
 
             var attr3 =[1,2,3,4,5,6,7];
             attr3.splice(4,2,8);//具有3个参数
-            console.log(attr3);
+            console.log(attr3);//如果传了两个参数 那就是从指定下标位置的元素开始删除，第二个参数是指定删除的个数,第三个参数是用来替换删除之后的元素
 
             var attr4 = [1,2,3,4,5,6,7];
             attr4.splice(4,2,8,9,10);// 具有4个参数
-            console.log(attr4);
+            console.log(attr4);////如果传了两个参数 那就是从指定下标位置的元素开始删除，第二个参数是指定删除的个数,第三个参数是用来替换删除之后的元素,第三个参数之后的所有参数都是用来替换删除的元素的
 
+                // 多维数组 是指成员包含有数组的数组
+            var attr5 = [[1,2,3,],4,5,6,['a','b','c']]
+            console.log(attr5[4][2]);// 第一个[]表示下标位置，第二个[]表示数组里面下标位置
+
+
+            // 三、 JS数学对象
+                // 四舍五入
+            var res =Math.round(5.1345);
+            console.log(res);
+                // 获取最大值
+            var res1 =Math.max(10,55,323,745,10000);
+            console.log(res1);
+                // 获取最小值
+            var res2 = Math.min(100,122,87,1000002,4);
+            console.log(res2);
+                // 获取绝对值
+            var res3 = Math.abs(-100);
+            console.log(res3);
+                // 退一取整（向下取整，即只保留整数位）
+            var res4 = Math.floor(7.9);
+            console.log(res4);//值为1
+                // 进一取整（向上取整，即只保留整数位，整数自身+1）
+            var res5 =Math.ceil(1.1);
+            console.log(res5);//值为2
+                // 幂运算 用来获取底数的几次方
+            var res6 =Math.pow(2,3);
+            console.log(res6);// 第一个数字为底数，第二个数字为番数
+                // 开方运算 返回一个数的平方根
+            var res7 = Math.sqrt(10);
+            console.log(res7);
+                // 取随机数 0-1之间，永远去不到数字0
+            var res8 = Math.random();
+            console.log(res8);
+                // 取随机数，0-10之间
+            var res9 = Math.random()*10;
+            console.log(res9);
+                // 取随机整数，0-10之间
+            var res10 = Math.floor(Math.random()*11);
+            console.log(res10);
+                // 取随机整数，0-6之间，再加上5
+            var res11 = Math.floor(Math.random()*6)+5;
+            console.log(res11);
+                // 数学封装函数
+            function deom(m,n) {
+                return Math.floor(Math.random()*(n-m+1)+(n-m))
+            };
+            var res12 = deom(10,20);
+            console.log(res12);
         }
     </script>
 一、JS对象
 二、JS数组
+三、JS数学对象
 </body>
 </html>
