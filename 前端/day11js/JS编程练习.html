@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS编程</title>
+</head>
+<body>
+    <script>
+        window.onload = function () {
+            // 九九乘法表
+            function cfb() {
+                var mathCfb = '';// 自定义乘法结果默认为空字符串
+                // 外层循环 x 等于1开始，然后执行完y由1增大到9之后；再执行x =2，执行y由1增大到9；依次循环.....
+                for (x = 1;x<10;x++) {
+                    // 内存循环，先执行y=1，有此增大到9结束的内层循环
+                    for (y=1;y<10;y++){
+                        // 字符串拼接，默认表达式：乘法结果=默认空字符串 +y +“数学运算符*” +x +“数学运算符=”+ x*y的值 + “空字符串”
+                        mathCfb = mathCfb+ y + '*' + x + '=' + x*y + '   ';
+                    };
+                    // 先执行y由1增加到9，打印完第一行数字9后换行，'\n‘表示强制换行；再执行下外层循环的x由2开始增大；
+                    mathCfb = mathCfb+ '\n';
+
+                };
+                console.log(mathCfb);
+            };
+            cfb();
+        }
+    </script>
+</body>
+</html>
