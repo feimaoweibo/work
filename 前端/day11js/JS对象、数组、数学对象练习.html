@@ -158,10 +158,10 @@
                 // 取随机整数，0-10之间
             var res10 = Math.floor(Math.random()*11);
             console.log(res10);
-                // 取随机整数，0-6之间，再加上5
+                // 取随机整数，5-10之间整数，再加上5
             var res11 = Math.floor(Math.random()*6)+5;
             console.log(res11);
-                // 数学封装函数
+                // 数学封装函数 取指定区间之间的整数，公式为Math.floor(Math.random()*(n-m+1)+(n-m))
             function deom(m,n) {
                 return Math.floor(Math.random()*(n-m+1)+(n-m))
             };
