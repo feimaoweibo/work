@@ -3,6 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>JS编程</title>
+    <style>
+        #out{
+            width: 400px;
+            height: 40px;
+            border: 1px solid rosybrown;
+            margin: 200px auto;
+        }
+        #inn{
+            width: 0px;
+            height: 40px;
+            background-color: yellowgreen;
+            text-align: right;
+            line-height: 40px;
+        }
+    </style>
 </head>
 <body>
     <script>
@@ -14,7 +29,7 @@
                 for (x = 1;x<10;x++) {
                     // 内存循环，先执行y=1，有此增大到9结束的内层循环
                     for (y=1;y<10;y++){
-                        // 字符串拼接，默认表达式：乘法结果=默认空字符串 +y +“数学运算符*” +x +“数学运算符=”+ x*y的值 + “空字符串”
+                        // 字符串拼接，默认表达式：乘法结果=默认空字符串 +y +“数学运算符*” +x +“数学运算符=”+ x*y的值 + “空字符串<用于占空位显示用>”
                         mathCfb = mathCfb+ y + '*' + x + '=' + x*y + '   ';
                     };
                     // 先执行y由1增加到9，打印完第一行数字9后换行，'\n‘表示强制换行；再执行下外层循环的x由2开始增大；
@@ -24,7 +39,32 @@
                 console.log(mathCfb);
             };
             cfb();
+
+            // 百分比进度条
+            var out = document.getElementById('out');//获取外部div层的ID
+            var inn = document.getElementById('inn');//获取内部div层的ID
+            var step=1;//进度条步长，默认增长为1
+            // 多次循环定时器setInterval + 清除定时器clearInterval，每50毫秒增长1，由变量into来表示多次定时器启动的标志
+            var into =setInterval(function () {
+                var inn_width= inn.offsetWidth;// 获取内层DIV的宽度，使用 变量.offsetWidth 格式
+                var out_width= out.offsetWidth;// 获取外层DIV的宽度，使用 变量.offsetWidth 格式
+                // console.log(out_width); 控制台打印外层宽度
+                var new_inn_width= inn_width + step;// 每次内层新DIV宽度= 内层上次宽度+ 每次增长的步长
+                var bai= new_inn_width / out_width; // 显示百分比，由内层除以外层得来
+                inn.innerHTML=Math.floor(bai*100) + '%'; // 操作元素的内容，使用innerHTML方式
+                inn.style.width = new_inn_width + 'px';//重新赋值元素的样式宽度
+                // 消除定时器的条件，内层新宽度大于外层宽度时，结束循环
+                if(new_inn_width>=out_width){
+                    clearInterval(into);
+                };
+                //inn.style.width = new_inn_width + 'px';//重新赋值元素的样式宽度
+            },50);
         }
     </script>
+    <!-- 外层DIV-->
+    <div id="out">
+        <!-内层DIV->
+        <div id="inn"></div>
+    </div>
 </body>
 </html>
