@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>漂浮球</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        #qiu{
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background-color: #990099;
+            position: absolute;
+        }
+        #off{
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+
+</head>
+<body>
+    <script>
+        window.onload=function () {
+            // 漂浮球运动轨迹
+
+            var qiu =document.getElementById('qiu');
+            var stepQiuL = 5;//左边每步位移量为5
+            var stepQiuT = 5;//顶部每步位移量为5
+            var intoQiu;//声明全局变量，用来接受也是多次循环定时器启动的标识
+
+            // 漂浮球运动方法的函数
+            function piaoFuQiu() {
+                // 启动多次循环定时器
+                intoQiu = setInterval(function () {
+                    // 获取球默认的左边、顶部坐标
+                    var qiuL = qiu.offsetLeft;
+                    var qiuT = qiu.offsetTop;
+                    // 球移动后的新左边、顶部的坐标
+                    var newL =qiuL + stepQiuL;
+                    var newT =qiuT + stepQiuT;
+                    // 获取球自身的宽度、高度
+                    var qiuW = qiu.offsetWidth;
+                    var qiuH = qiu.offsetHeight;
+                    // 获取浏览窗口宽度、高度
+                    var viewW =document.documentElement.clientWidth;
+                    var viewH =document.documentElement.clientHeight;
+                    // 获取最大移动范围
+                    var maxW =viewW - qiuW;
+                    var maxH =viewH - qiuH;
+                    /* 判断漂浮球横向移动范围，球移动后：
+                    1、当左边坐标大于横向移动时，向相反方向移动（即位移到浏览器最右边时，向左开始移动）；
+                    2、当左边坐标不在横向移动范围时，向相反方向移动（即位移到浏览器最左边时，向右开始移动）；
+                     */
+                    if (newL>=maxW || newL<=0){
+                        stepQiuL *=-1;
+                    };
+                    /* 判断漂浮球上下移动范围，球移动后：
+                    1、当顶部坐标大于最大高度时，向相反方向移动（即位移到浏览器最底部时，向上开始移动）；
+                    2、当顶部坐标不在上下移动范围时，向相反方向移动（即位移到浏览器最顶部时，向下开始移动）；
+                     */
+                    if (newT >= maxH || newT<=0){
+                        stepQiuT *=-1;
+                    };
+                    // 操作元素自身左、上的坐标；
+                    qiu.style.left = newL + 'px';
+                    qiu.style.top = newT +'px';
+
+                    },100);
+            }
+            // 调用函数，函数才发生作用
+            piaoFuQiu();
+
+            // 鼠标悬停事件，使用 变量.onmouseover =函数(){方法（即使用清除多次循环定时器）}
+            qiu.onmouseover = function () {
+                clearInterval(intoQiu)
+            };
+            // 鼠标移出事件，使用 变量.onmouseout = 函数(){方法（启动多次循环定时器）}
+            qiu.onmouseout = function () {
+                piaoFuQiu()
+            };
+
+            // 通过id 获取元素
+            var off = document.getElementById('off');
+            // 关闭漂浮球事件， 使用 变量.onmousedown = 函数(){方法（操作元素自身样式）}
+            off.onmousedown = function () {
+                //clearInterval(intoQiu);
+                qiu.style.display = 'none';
+            };
+        }
+    </script>
+    <div id="qiu">
+        <span id="off">X</span>
+    </div>
+</body>
+</html>
