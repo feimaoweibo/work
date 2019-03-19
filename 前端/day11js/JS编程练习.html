@@ -4,11 +4,15 @@
     <meta charset="UTF-8">
     <title>JS编程</title>
     <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
         #out{
             width: 400px;
             height: 40px;
             border: 1px solid rosybrown;
-            margin: 200px auto;
+            margin: 50px auto;
         }
         #inn{
             width: 0px;
@@ -16,6 +20,32 @@
             background-color: yellowgreen;
             text-align: right;
             line-height: 40px;
+        }
+        #box{
+            width: 500px;
+            height: 300px;
+            margin: 30px auto;
+            background-color: #EEE9BF;
+        }
+        #name{
+            width: 300px;
+            height: 180px;
+            margin: 30px auto;
+            //padding-top: 30px;
+            background-color: gold;
+            text-align: center;
+            font-size: 30px;
+            line-height: 180px;
+        }
+        #start{
+            width: 80px;
+            height: 40px;
+            margin:0px 110px;
+        }
+        #stop{
+            width: 80px;
+            height: 40px;
+
         }
     </style>
 </head>
@@ -43,9 +73,9 @@
             // 百分比进度条
             var out = document.getElementById('out');//获取外部div层的ID
             var inn = document.getElementById('inn');//获取内部div层的ID
-            var step=1;//进度条步长，默认增长为1
+            var step = 1;//进度条步长，默认增长为1
             // 多次循环定时器setInterval + 清除定时器clearInterval，每50毫秒增长1，由变量into来表示多次定时器启动的标志
-            var into =setInterval(function () {
+            var into = setInterval(function () {
                 var inn_width= inn.offsetWidth;// 获取内层DIV的宽度，使用 变量.offsetWidth 格式
                 var out_width= out.offsetWidth;// 获取外层DIV的宽度，使用 变量.offsetWidth 格式
                 // console.log(out_width); 控制台打印外层宽度
@@ -57,14 +87,59 @@
                 if(new_inn_width>=out_width){
                     clearInterval(into);
                 };
-                //inn.style.width = new_inn_width + 'px';//重新赋值元素的样式宽度
             },50);
+
+            // 球队名抽奖
+            /*
+            分别通过ID获取元素，使用doucment.getElementById的方式，声明为新变量
+            names ；
+            starts ；
+            stops ；
+             */
+            var names = document.getElementById('name');
+            var starts = document.getElementById('start');
+            var stops = document.getElementById('stop');
+            var chouinto;//声明一个变量，用于接收多次循环的标识
+            // 封装的取指定区间之间的一个整数的函数，
+            function getBiao(x,y) {
+                return Math.floor(Math.random()*(y-x)+ x);
+            };
+            // starts按钮点击事件函数
+            starts.onclick = function () {
+                // if 条件判断chouinto标识，如果为Null,则返回，如果不为null,则执行多次循环定时器
+                if(chouinto != null) return;
+                chouinto = setInterval(function () {
+                    // 声明目标数组中的值
+                    var mubiao = ['利物浦','曼联','曼城','切尔西','阿森纳','热刺','皇家马德里','巴塞罗那','马竞','巴黎圣日耳曼','马赛','拜仁','多特蒙德','国际米兰','AC米兰','尤文图斯','罗马'];
+                    // 操作元素的文本赋值，使用 变量.innerHTML格式，要赋值的内容 数组mubiao[],[]中内容为封装的随机整数
+                    names.innerHTML = mubiao[getBiao(0,mubiao.length-1)];
+                    },100);
+            };
+            // stops 停止按钮事件，结束多次循环定时器
+            stops.onclick = function () {
+                clearInterval( chouinto);
+                // 控制多次循环的判断条件，清楚循环定时器启动后，则把接受多次循环的标识的值为空，用于多次循环启动与否判断条件
+                chouinto = null;
+            };
+
+
+
         }
     </script>
+
+
     <!-- 外层DIV-->
     <div id="out">
-        <!-内层DIV->
+        <!--内层DIV-->
         <div id="inn"></div>
+    </div>
+
+
+    <!-- 球队名抽奖-->
+    <div id="box">
+        <div id="name"></div>
+        <button id="start">START</button>
+        <button id="stop">STOP</button>
     </div>
 </body>
 </html>
