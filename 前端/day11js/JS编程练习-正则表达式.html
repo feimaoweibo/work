@@ -10,7 +10,7 @@
             margin: 200px auto;
         }
         #ts{
-            color: orangered;
+            color: #990099;
             font-size: 12px;
         }
     </style>
@@ -47,18 +47,36 @@
             var re13 = /^[]+/; // 匹配指定以某字符开头额
             var re14 = /\w+b$/; // 匹配以某指定某字符结尾
 
-            function funcReg(obj) {
-                var name =obj.name;
-                console.log(name);
-            };
+
         }
     </script>
 
     <div class="box">
         <form action="">
-            用户名：<input type="text" name="username" id="name" onblur="funcReg(this)"> <span id="ts">请输入邮箱格式的用户名</span> <br>
+            用户名：<input type="text" name="username" id="nameid" onblur="funcReg(this)"> <span id="ts">请输入邮箱格式的用户名</span> <br>
             密  码：<input type="password" name="userpd">
         </form>
     </div>
+    <script>
+        function funcReg(obj) {
+            // 获取默认的自身值
+            var name =obj.value;
+            // 打印获取的值
+            console.log(name);
+            var ts = document.getElementById('ts');
+            // 正则表达式 使用了 ‘\w’+ ‘@’+‘\w’+‘\.’+ ‘()’
+            var reg = /\w+@+\w+\.(com|cn)/;
+            // 判断 如果条件不符合正则表达式则输出‘邮箱不符合规则’；反之，则输出‘可以注册用户名’
+            if (!reg.test(name)){
+                ts.innerHTML = '你输入的邮箱不符合规则';
+                ts.style.color = 'red';
+                obj.style.color = 'red';
+            }else{
+                ts.innerHTML = '可以注册用户名';
+                ts.style.color = 'yellow';
+                obj.style.color = 'yellow';
+            }
+        };
+    </script>
 </body>
 </html>
