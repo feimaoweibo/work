@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算机</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        #box{
+            width: 290px;
+            height: 355px;
+            background-color: orange;
+            margin-left: 200px;
+            margin-top: 100px;
+        }
+        .kuang{
+            margin: 2% auto;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        .btn{
+            width: 58px;
+            height: 50px;
+            margin: 5% auto;
+        }
+        #display{
+            height: 50px;
+            margin-top: 5px;
+            text-align: right;
+            font-size: 20px;
+            padding-right: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <form class="kuang">
+            <input type="text" id="display"><br>
+            <input type="button" class="btn" value="7" onclick="get(this.value)">
+            <input type="button" class="btn" value="8" onclick="get(this.value)">
+            <input type="button" class="btn" value="9" onclick="get(this.value)">
+            <input type="button" class="btn" value="C" onclick="qing()"><br>
+
+            <input type="button" class="btn" value="4" onclick="get(this.value)">
+            <input type="button" class="btn" value="5" onclick="get(this.value)">
+            <input type="button" class="btn" value="6" onclick="get(this.value)">
+            <input type="button" class="btn" value="+" onclick="get(this.value)"><br>
+
+            <input type="button" class="btn" value="1" onclick="get(this.value)">
+            <input type="button" class="btn" value="2" onclick="get(this.value)">
+            <input type="button" class="btn" value="3" onclick="get(this.value)">
+            <input type="button" class="btn" value="-" onclick="get(this.value)"><br>
+
+            <input type="button" class="btn" value="0" onclick="get(this.value)">
+            <input type="button" class="btn" value="*" onclick="get(this.value)">
+            <input type="button" class="btn" value="/" onclick="get(this.value)">
+            <input type="button" class="btn" value="=" onclick="conut()"><br>
+        </form>
+    </div>
+    <script>
+        var txt = document.getElementById('display');
+        // 添加数值方法 函数
+        function get(value) {
+            console.log(value);
+            txt.value = txt.value + value;
+        };
+        // 清空数值方法 函数
+        function qing() {
+            txt.value = '';
+        };
+        // 计算结果方法 函数
+        function conut() {
+            // 系统自带 求和公式：eval()
+            txt.value = eval(txt.value);
+        }
+
+    </script>
+</body>
+</html>
