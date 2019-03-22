@@ -54,6 +54,12 @@
         // 手机号失去焦点事件方法 函数
         function phone(obj) {
             var phone = obj.value;
+            /* 正则表达式 针对手机11位数，默认第一位为数字1开头，
+               第二位目前允许有数字3、5、7、8，
+               第三位到第11位为数字 0-9，
+               因此表达式要以制定数字开始，使用符号“^[1]”形式，再以符号“[3、5、7、8]”匹配形式，
+               接着需要匹配第三位到第11位数字，使用符号“[0-9]”同时需要匹配的个数为9次，及{9}
+             */
             var reg = /^[1][3,5,7,8][0-9]{9}/;
             if (phone !=''){
                 if (!reg.test(phone)) {
@@ -63,7 +69,7 @@
                 }else{
                     obj.style.color = 'green';
                     obj.style.border ='1px solid #ccc';
-                    nub = true;
+                    nub = true;// 用于勾选同意协议的前提条件之一:手机号码已经填写正确
                 }
             }else{
                 alert('手机号码不能为空');
@@ -92,16 +98,19 @@
             } else{
                 obj.style.color ='green';
                 pwd.style.color ='green';
-                pw = true;
+                pw = true; // 用于勾选同意协议的前提条件之二一:两次密码核对已经填写正确
             }
         };
         // 注册协议事件方法 函数
         function qian(obj) {
             var pu = document.getElementById('push');
+            // 判断如果手机号码与密码都是正确的，则执行移除元素默认禁用的属性
             if (nub&&pw) {
+                // 使用 变量.removeAttribute 函数来删除元素的属性
                 pu.removeAttribute('disabled')
             }else{
                 alert('请勾选同意协议');
+                // 默认选择没有勾选
                 obj.checked = false;
             }
         }
