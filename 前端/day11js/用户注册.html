@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户注册</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        #box{
+            width: 100%;
+            height: 100%;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.3);
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            overflow: auto;
+            display: none;
+        }
+        #zhuce{
+            background-color: white;
+            width: 25%;
+            margin: 5% auto 15% auto;
+            border: 1px solid salmon;
+            display: inline-block;
+            box-sizing: border-box;
+        }
+
+    </style>
+</head>
+<body>
+    <button onclick="tan()">用户注册</button>
+    <div id="box">
+        <form id="zhuce">
+            手机号：<input type="text" name="" id="num" onblur="phone(this)"><br>
+            密码：<input type="password" name="" id="pw" onblur="pwd(this)"><br>
+            确认密码：<input type="password" name=""  onblur="pwds(this)"><br>
+            <input type="checkbox" name="" onclick="qian(this)">同意<a href="">注册协议</a><br>
+            <input type="submit" name="" value="提交" disabled="true" id="push">
+            <input type="submit" name="" value="重置" onclick="clear()">
+        </form>
+
+    </div>
+    <script>
+        // 弹出注册框按钮方法 函数
+        var box = document.getElementById('box');
+        function tan() {
+            console.log('弹出注册框');
+            box.style.display = 'block';
+        };
+        // 手机号失去焦点事件方法 函数
+        function phone(obj) {
+            var phone = obj.value;
+            var reg = /^[1][3,5,7,8][0-9]{9}/;
+            if (phone !=''){
+                if (!reg.test(phone)) {
+                    alert('请输出正确的手机号码');
+                    obj.style.color = 'red';
+                    obj.style.bordeer = '2px solid red';
+                }else{
+                    obj.style.color = 'green';
+                    obj.style.border ='1px solid #ccc';
+                    nub = true;
+                }
+            }else{
+                alert('手机号码不能为空');
+                obj.style.color = 'red';
+                obj.style.border = '2px solid red';
+            }
+        };
+        // 密码框失去焦点事件方法 函数
+        function pwd(obj) {
+            if (obj.value == ''){
+                alert('密码不能为空');
+                obj.style.border = '2px solid red';
+            } else{
+                obj.style.border ='1px solid #ccc';
+            }
+        };
+        // 确认密码事件
+        function pwds(obj) {
+            var pwd = document.getElementById('pw');
+            console.log(pwd.value);
+            console.log(obj.value);
+            if (pwd.value != obj.value){
+                alert('密码不一致，请重新输入密码');
+                obj.style.color ='red';
+                pwd.style.color ='red';
+            } else{
+                obj.style.color ='green';
+                pwd.style.color ='green';
+                pw = true;
+            }
+        };
+        // 注册协议事件方法 函数
+        function qian(obj) {
+            var pu = document.getElementById('push');
+            if (nub&&pw) {
+                pu.removeAttribute('disabled')
+            }else{
+                alert('请勾选同意协议');
+                obj.checked = false;
+            }
+        }
+        // 重置事件方法 函数
+        function clear() {
+            var dx = document.getElementById('form');
+            dx.reset();
+        }
+
+    </script>
+</body>
+</html>
