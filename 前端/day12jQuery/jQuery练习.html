@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery练习</title>
+    <script src="./day12jQuery/jquery-1.8.3.min.js"></script>
+</head>
+<body>
+    <div id="box" class="item">
+        <ul>
+            <li class="item1">第一层</li>
+            <li class="item2">第二层</li>
+            <li class="item3">第三层</li>
+        </ul>
+    </div>
+
+    <script>
+        /*jQuery 基础选择器*/
+            // console.log($);测试调用jQuery库成功与否
+            // 通过ID 获取元素对象  原生格式为：document.getElementById('id')
+            console.log($('#box'));
+            // 通过标签 获取元素对象
+            console.log($('#div'));
+            // 通过类 获取元素对象
+            console.log($('.item'));
+
+        /*jQuery 过滤获取器*/
+            // 获取页面中的第一个元素
+            console.log($('li:first'));
+            // 获取页面中的最后一个元素
+            console.log($('li:last'));
+            // 获取页面中指定的元素 eq(索引值) ，索引值从0开始
+            console.log($('li:eq(1)'));
+            // 通过元素的文本内容来查找元素
+            console.log($('li:contains(二)'));
+            // 通过指定元素的指定属性来查找元素
+            console.log($('li[class=item3]'));
+
+        /*jQuery 通过父子关系获取器*/
+            // 通过父元素获取子元素    格式为：$('').children() 获取指定元素里的所有子元素，返回的数组
+            console.log($('#box').children());
+            // 获取指定的第一个子元素
+            console.log($('#box li:first-child'));
+            // 获取指定的最后一个子元素
+            console.log($('#box li:last-child'));
+            // 通过元素的个数，获取指定父级元素下的某个元素 格式为 $('类（父级） 类（子级）：nth-child(个数) '),排序从0开始
+            console.log($('#box li:nth-child(2)'));
+            // 查找当前元素指定下的子元素，如果不指定子元素，则获取不到该子元素 ，必须指定子元素
+            console.log($('.item').find('.item3'));
+
+            // 获取同级元素的上一个元素
+            console.log($('.item2').prev());
+            // 获取同级元素的下一个元素
+            console.log($('.item2').next());
+            // 获取所有的同级元素，不包括子级
+            console.log($('.item3').siblings());
+
+            // 通过子元素来获取父元素
+            console.log($('.item3').parent());
+            // 通过指定元素获取先辈级父元素，如果不指定找哪个父辈元素，则返回所有先辈级元素
+            console.log($('.item3').parents('.item'));
+            //
+
+    </script>
+</body>
+</html>
