@@ -42,6 +42,8 @@
 
         <div>第七层</div>
         <div class="item8">第八层</div>
+        <img src="" alt="大图">
+        <img class="item9" src="" alt="datu1">
 
     </div>
 
@@ -96,7 +98,7 @@
             // javascript 中操作元素的样式的方法
             var javabox = document.getElementById('box');
             javabox.style.width = '300px';
-            javabox.style.height = '900px';
+            javabox.style.height = '1500px';
             javabox.style.backgroundColor = 'yellow';
             // jQuery 中操作元素的样式的方法
             $('.item1').css('font-size','30px');
@@ -115,6 +117,29 @@
             // 类名的切换操作，.toggleClass ，如果类名存在，就删除，不存在就添加
             $('div').toggleClass('item7'); // 类名不存在，添加类名
             $('div').toggleClass('item8'); // 类名存在，就删除类名
+
+        /* jQuery 文本的操作*/
+            // .html 操作文本内容，会覆盖原始文本的内容，同时可以解析html 标签，如<h1> <br>等
+            $('.item1').html('新增文本内容');
+            // .text 获取文本内容，不能解析html 标签
+            console.log($('.item1').text());
+
+        /* jQuery 属性操作*/
+            // attr 属性操作
+            $('img').attr('src','./day12jQuery/images/56fcd25dbb4a8.jpg');
+            $('img').css({width:'250px',height:'180px'}); //操作元素样式
+            // attr 一次添加多个属性
+            $('.item9').attr({src:'./day12jQuery/images/2018-03-16_214501.gif',title:'第二张图片',width:'250px',height:'180px'});
+            // 获取属性
+            console.log($('.item9').attr('title'));
+            // 删除属性 .removeAttr  必须指定要删除的属性名称，不然不会操作
+            $('.item9').removeAttr('title');
+
+        /*  .addClass() 与 .attr() 区分
+            1、addClass() 是添加类名，addClass是对class属性值得操作，同时可以追加类名
+            2、attr() 是添加类，      attr    是对class属性  的操作，    不能追加类名，会把原来的class属性覆盖
+         */
+
 
 
     </script>
