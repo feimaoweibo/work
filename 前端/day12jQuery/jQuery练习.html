@@ -4,6 +4,29 @@
     <meta charset="UTF-8">
     <title>jQuery练习</title>
     <script src="./day12jQuery/jquery-1.8.3.min.js"></script>
+    <style>
+        .item5{
+            width: 190px;
+            height: 80px;
+            font-size: 50px;
+            color: #990099;
+        }
+        .item6{
+            color: #2b669a;
+            font-size: 20px;
+
+        }
+        .item7{
+            color: #2b542c;
+            font-size: 80px;
+            font-family: "Droid Serif", "DejaVu Serif", "STIX", serif;
+        }
+        .item8{
+            color: #761c19;
+            font-size: 30px;
+            padding-left: 40px;
+        }
+    </style>
 </head>
 <body>
     <div id="box" class="item">
@@ -11,7 +34,15 @@
             <li class="item1">第一层</li>
             <li class="item2">第二层</li>
             <li class="item3">第三层</li>
+            <li class="item4">第四层</li>
         </ul>
+
+        <ol> 第五层</ol>
+        <ol class="item6">第六层</ol>
+
+        <div>第七层</div>
+        <div class="item8">第八层</div>
+
     </div>
 
     <script>
@@ -60,6 +91,31 @@
             // 通过指定元素获取先辈级父元素，如果不指定找哪个父辈元素，则返回所有先辈级元素
             console.log($('.item3').parents('.item'));
             //
+
+        /* jQuery 操作元素的样式*/
+            // javascript 中操作元素的样式的方法
+            var javabox = document.getElementById('box');
+            javabox.style.width = '300px';
+            javabox.style.height = '900px';
+            javabox.style.backgroundColor = 'yellow';
+            // jQuery 中操作元素的样式的方法
+            $('.item1').css('font-size','30px');
+            $('.item2').css('background','white');
+            $('.item3').css('border','2px solid red');
+            // 一次设置多个样式,使用{}，样式中有-，需要省略同时紧跟第一个字母需要大写
+            $('.item4').css({width:'200px',background:'blue',border:'3px solid red',fontSize:'50px'});
+            // 获取元素的样式，返回的值为单位的字符串
+            console.log($('.item4').css('width'));
+
+        /* jQuery 类名的操作*/
+            // 添加class 属性 .addClass
+            $('ol').addClass('item5');
+            // 删除class 属性 .removeClass 如果不指定要删除的类名，则会自动删除所有的类名
+            $('ol').removeClass('item6');
+            // 类名的切换操作，.toggleClass ，如果类名存在，就删除，不存在就添加
+            $('div').toggleClass('item7'); // 类名不存在，添加类名
+            $('div').toggleClass('item8'); // 类名存在，就删除类名
+
 
     </script>
 </body>
