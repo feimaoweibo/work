@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery事件触发</title>
+    <script src="./day14jQuery/jquery-1.8.3.min.js"></script>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        .item{
+            width: 200px;
+            height: 200px;
+            background: #000;
+        }
+        .item1{
+            width: 300px;
+            height: 300px;
+            background: #990099;
+        }
+        .item2{
+            width: 200px;
+            height: 200px;
+            background: #2b669a;
+        }
+        .item3{
+            width: 100px;
+            height: 100px;
+            background: #8a6d3b;
+        }
+        .item5{
+            width: 200px;
+            height: 200px;
+            background: pink;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="item"></div>
+    <div class="item1">
+        <div class="item2">
+            <div class="item3"></div>
+        </div>
+    </div>
+    <div class="item5">event事件</div>
+    <a href="http://www.baidu.com">a 标签自身具有跳转行为</a>
+    <script>
+        // 1、单击事件、双击事件
+        // 2、事件触发  .trigger()自动触发指定的事件 ,必须传递触发的事件类型
+            /*
+            $('.item').click(function () {
+                console.log('自动触发指定事件开始')
+            });
+            $('.item').trigger('click');
+            */
+        // 3、鼠标事件
+            // 鼠标按下事件 .mousedown() 鼠标按下时发生
+            $('.item').mousedown(function () {
+                console.log('鼠标被按下了')
+            });
+            // 鼠标抬起事件 .mouseup() 鼠标抬起时发生
+            $('.item').mouseup(function () {
+                console.log("鼠标抬起了")
+            });
+            // 鼠标移入事件 .mouseover() 鼠标移入时发生
+            $('.item').mouseover(function () {
+                console.log("鼠标移入了")
+            });
+            // 鼠标移出事件 .mouseout 鼠标移出时发生
+            $('.item').mouseout(function () {
+                console.log("鼠标移出了")
+            });
+            // 鼠标移动事件 .mousemove 鼠标移动时发生
+            $('.item').mousemove(function () {
+                console.log("鼠标在移动")
+            });
+        // 4、事件冒泡  阻止事件冒泡的发生，则需要在事件触发的函数最后一行添加 return false
+            $('.item1').click(function () {
+                $('.item1').css('background','green');
+                return false;
+            });
+            $('.item2').click(function () {
+                $('.item2').css('background','green');
+                return false;
+            });
+            $('.item3').click(function () {
+                $('.item3').css('background','green');
+                return false;
+            });
+
+        // 5、元素的默认行为 ，例如 a href=“” 自身默认带有跳转行为，因此添加在触发函数最后一行添加 return false来阻止
+            $('a').click(function () {
+                alert("阻止自身默认跳转行为，添加return false 来阻止");
+                return false;
+            });
+
+        // 6、event 事件对象 ，通过此对象可以获取事件的位置参数，必须传入参数
+            $('.item5').click(function (event) {
+                console.log('绑定单击事件触发了');
+                // 获取单击该元素时，鼠标所点击点相对于窗口的位置
+                console.log(event.clientX,event.clientY);
+            });
+               // 获取鼠标在元素上移动的时时位置相对于浏览器窗口
+            $('.item5').mousemove(function (event) {
+
+                console.log(event.clientX,event.clientY);
+            });
+                // 获取鼠标在窗口上移动的时时位置相对于浏览器窗口
+            $(window).mousemove(function (event) {
+                console.log(event.clientX,event.clientY);
+            });
+
+
+
+
+
+    </script>
+</body>
+</html>
