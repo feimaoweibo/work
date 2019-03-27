@@ -21,16 +21,21 @@
             width: 200px;
             height: 200px;
             background: red;
-            position: absolute;
+            position: relative;
             left: 20px;
             top: 20px;
+            display: block;
         }
         .item3{
 
             background: #990099;
-            float: right;
+            float: left;
+            position: relative;
+            left: 20px;
+            top: 20px;
             border-radius: 20px;
             padding: 20px;
+            display: block;
         }
     </style>
 </head>
@@ -87,13 +92,37 @@
             // 1、基本绑定  ，在原生JavaScript中使用方式为： 元素对象.onclick = functhon(){} 格式
                 // 给.item2 绑定事件
                 $('.item2').click(function(){
-                    alert('给.item2 绑定事件了');
+                    console.log(('给.item2 绑定事件了'));
+                });
+                // 双击事件
+                $('.item2').dblclick(function () {
+                    console.log('双击事件绑定启动了')
                 });
 
             // 2、方法绑定 bind on
                 $('.item3').on('click',function () {
                     alert('on绑定事件开始');
                 });
+
+            // 5、动态绑定事件
+                $('.item3').live('click',function () {
+                    console.log('动态绑定事件开始')
+                });
+                    // 在页面中，使用jQuery添加新元素
+                var nBtn = $('<button class=".item3">这是新添加BUTTON按钮</button>');
+                    // 将元素添加回页面指定位置
+                $('.item3').append(nBtn);
+
+            // 3、解除事件绑定  如果传递解除事件名称，否则解除所有绑定事件，例子传递解除 ‘双击事件’
+                $('.item2').unbind('dblclick');
+
+            // 4、加载完毕事件 ，因此该script代码可以放在div前面位置前面
+                /*
+                $(document).ready(function(){
+                    加载完成之后的代码
+                    })
+                 */
+
 
 
     </script>
