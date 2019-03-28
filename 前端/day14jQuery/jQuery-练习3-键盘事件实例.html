@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>键盘事件实例</title>
+    <script src="./day14jQuery/jquery-1.8.3.min.js"></script>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        .item6{
+            width: 50px;
+            height: 50px;
+            background: #245269;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="item6">键盘事件实例</div>
+    <script>
+        var L = 0;
+        var T = 0;
+            $(window).keydown(function (event) {
+                console.log(event.keyCode); //分别获取字母ascll码值为 a：65 、s：83、d：68、 w：87
+                var move = event.keyCode;
+                if (move == 65) {
+                    L -= 5;
+                    $('.item6').css('left', L+'px' );
+                } else if (move == 68) {
+                    L = L + 5;
+                    $('.item6').css('left', L+'px' );
+                } else if (move == 83) {
+                    T = T + 5;
+                    $('.item6').css('top', T+'px');
+                } else if (move == 87) {
+                    T = T - 5;
+                    $('.item6').css('top', T+'px');
+                };
+            });
+
+    </script>
+</body>
+</html>
