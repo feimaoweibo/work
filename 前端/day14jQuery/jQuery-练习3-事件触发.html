@@ -13,6 +13,7 @@
             width: 200px;
             height: 200px;
             background: #000;
+            color: #ffffff;
         }
         .item1{
             width: 300px;
@@ -34,18 +35,28 @@
             height: 200px;
             background: pink;
         }
+        .item6{
+            width: 50px;
+            height: 50px;
+            background: #5cb85c;
+
+            position: absolute;
+            top: 0px;
+            right: 0px;
+        }
     </style>
 
 </head>
 <body>
-    <div class="item"></div>
+    <div class="item">鼠标事件</div>
     <div class="item1">
         <div class="item2">
-            <div class="item3"></div>
+            <div class="item3">事件冒泡</div>
         </div>
     </div>
     <div class="item5">event事件</div>
     <a href="http://www.baidu.com">a 标签自身具有跳转行为</a>
+    <div class="item6">键盘事件实例</div>
     <script>
         // 1、单击事件、双击事件
         // 2、事件触发  .trigger()自动触发指定的事件 ,必须传递触发的事件类型
@@ -111,6 +122,39 @@
             $(window).mousemove(function (event) {
                 console.log(event.clientX,event.clientY);
             });
+
+        // 7、键盘事件  键盘按键按下时发生的事件.keydown(function(event){})
+            $(window).keydown(function (event) {
+                // alert('在键盘按下了一个键');
+                // 通过event形参，获取当前按下键盘的按键的ASCll值
+                // console.log(event.keyCode);
+            });
+
+            // 键盘事件实例 使用按键A\S\D\W 分别控制元素的左、下、右、上移动
+            var L = 0;//定义元素左边起始位置为0
+            var T = 0;//定义元素顶部起始位置为0
+            $(window).keydown(function (event) {
+                console.log(event.keyCode); //分别获取字母ascll码值为 a：65 、s：83、d：68、 w：87
+                var move =event.keyCode;//用变量来接收按下字母的值
+                if (move ==65){
+                    L=L-5;// 按下字母a键，设置每次向左移动5步
+                    $('.item6').css('left',L+"px" );//操作元素获取新的左偏移的位置，需要附上单位
+                }else if (move == 68){
+                    L=L+5;// 按下字母d键，设置每次向右移动5步
+                    $('.item6').css('left',L+"px" );//操作元素获取新的右偏移的位置，需要附上单位
+                }else if (move == 83 ){
+                    T=T+5;//按下字母s键，设置每次向下移动5步
+                    $('.item6').css('top',T+"px");//操作元素获取新的下偏移的位置，需要附上单位
+                }else if (move ==87){
+                    T=T-5;//按下字母w键，设置每次向右移动5步
+                    $('.item6').css('top',T+"px" );//操作元素获取新的上偏移的位置，需要附上单位
+                }
+
+
+            })
+
+
+
 
 
 
