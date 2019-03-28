@@ -25,6 +25,8 @@
 <body>
     <button>在元素内部的尾部插入元素</button>
     <button>在元素内部的前面插入元素</button>
+    <button>在元素外部的后面插入元素</button>
+    <button>在元素外部的前面插入元素</button>
     <div class="wrap"></div>
     <script>
         // 1、jQuery 创建节点
@@ -35,42 +37,72 @@
 
 
         // 2、jQuery 节点操作实例
-            var odiv=null;
+            var odiv=null; //odiv为全局变量
             // 背景色随机数函数
             function rand(m,n) {
-                return Math.floor(Math.random()*(n-m+1))+m;
+                return Math.floor(Math.random()*(n-m+1))+m;//取在某两个值之间的随机整数公式
             };
-
+            // 创建节点以及修改元素样式的函数
             function creatJd() {
                 // 创建节点
                 odiv =$('<div class="item2"></div>');
                 // 操作创建节点的样式
                 odiv.css('background','rgb('+rand(0,255)+','+rand(0,255)+','+rand(0,255)+')');
+
             };
-
-
+        // 一、在元素内部的尾部插入元素 .append() 与 .appendTo() 方法
             // 绑定单击事件
             $('button').eq(0).click(function () {
                 console.log('111');
-                /* 封装成函数
+                /*
+                   方法一、直接创建节点及修改节点样式
                 // 创建节点
                 var odiv =$('<div class="item2"></div>');
-                // 操作创建节点的样式
+                // 操作创建节点的样式.使用 变量名.css()是因为避免新添加的元素颜色，会覆盖上次元素本身的颜色，导致所有插入节点的元素颜色全部一致。而不是使用 $(#类名).css()方法
                 odiv.css('background','rgb('+rand(0,255)+','+rand(0,255)+','+rand(0,255)+')');
                 */
-                // 调用创建节点的方法 函数
+                // 方法二、调用封装成 创建节点的方法 函数
                 creatJd();
-                // 插入创建的节点
+                // 1、插入创建的节点 ，使用.append()方法函数，来在元素内部的尾部位置开始插入元素。
                 $('.wrap').append(odiv);
+                // 2、插入创建的节点 ，使用.appendTo()方法函数，来在元素内部的尾部位置开始插入元素。
+                // odiv.appendTo($('.wrap'));
             });
-            /*
-            function creatJd() {
-                // 创建节点
-                var odiv =$('<div class="item2"></div>');
-                // 操作创建节点的样式
-                odiv.css('background','rgb('+rand(0,255)+','+rand(0,255)+','+rand(0,255)+')');
-            };
-            */
+
+        // 二、在元素内部的前面插入元素 .prepend() 与 .prenendTo() 方法
+            // 绑定单击事件
+            $('button').eq(1).click(function () {
+                // 方法二、调用封装成 创建节点的方法 函数
+                creatJd();
+                // 1、插入创建的节点 ，使用.append()方法函数，来在元素内部的前面位置开始插入元素。
+                $('.wrap').prepend(odiv);
+                // 2、插入创建的节点 ，使用.appendTo()方法函数，来在元素内部的前面位置开始插入元素。
+                //odiv.prependTo($('.wrap'));
+            });
+
+        // 三、在元素外部的前面插入元素 .after() 与 .insertAfter() 方法
+            // 绑定单击事件
+            $('button').eq(2).click(function () {
+                console.log('222')
+                // 方法二、调用封装成 创建节点的方法 函数
+                creatJd();
+                // 1、插入创建的节点 ，使用.after()方法函数，来在元素外部的后面位置开始插入元素。
+                $('.wrap').after(odiv);
+                // 2、插入创建的节点 ，使用.insertAfter()方法函数，来在元素外部的后面位置开始插入元素。
+                //odiv.insertAfter($('.wrap'));
+            });
+
+        // 四、在元素外部的前面插入元素 .before() 与 .insertBefore() 方法
+            // 绑定单击事件
+            $('button').eq(3).click(function () {
+                console.log('333')
+                // 方法二、调用封装成 创建节点的方法 函数
+                creatJd();
+                // 1、插入创建的节点 ，使用.after()方法函数，来在元素外部的前面位置开始插入元素。
+                $('.wrap').before(odiv);
+                // 2、插入创建的节点 ，使用.insertAfter()方法函数，来在元素外部的前面位置开始插入元素。
+                //odiv.insertBefore($('.wrap'));
+            });
 
 
 
