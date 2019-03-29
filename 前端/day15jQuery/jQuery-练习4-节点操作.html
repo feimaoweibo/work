@@ -27,6 +27,10 @@
     <button>在元素内部的前面插入元素</button>
     <button>在元素外部的后面插入元素</button>
     <button>在元素外部的前面插入元素</button>
+    <button>删除节点</button>
+    <button>清空元素</button>
+    <button>克隆元素</button>
+    <button>注意</button>
     <div class="wrap"></div>
     <script>
         // 1、jQuery 创建节点
@@ -104,7 +108,33 @@
                 //odiv.insertBefore($('.wrap'));
             });
 
+        // 五、删除节点（能删除自身）.remove() 方法
+            $('button').eq(4).click(function () {
+                $('.wrap').remove();
+            })
 
+        // 六、清空元素 只清空指定元素内部的元素节点，不删除自身 .empty() 方法
+            $('button').eq(5).click(function () {
+                $('.wrap').empty();
+            })
+
+        // 七、克隆元素 .clone() 方法
+            $('button').eq(6).click(function (){
+                var newBtn = $('button').eq(6).clone();
+                $('.wrap').before(newBtn);
+                /* 注意事项
+                1、如果只为了单纯克隆元素，则不需要传递参数
+                2、在克隆元素的同时需要克隆绑定的事件，则需要在方法 .clone(true) 里，传递值：true
+                */
+            });
+
+        // 八、节点操作注意事项---插入的是元素自身同类型元素时，原同类型元素会被拿掉
+            $('button').eq(7).click(function () {
+                // 将第一个按钮添加到.wrap 元素内部，从尾部插入
+                // $('.wrap').append($('button').eq(0));
+                // 所以需要先克隆再插入
+                $('.wrap').append($('button').eq(0).clone());
+            })
 
 
 
