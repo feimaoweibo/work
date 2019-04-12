@@ -95,4 +95,30 @@
             - 此种方法不执行 __init__.py 的内容
                 from pkg01 import p02
                 p02.sayHello()
+            - 案例 P05、pkg01、p02
+        - from packpkg import *
+            - 导入当前包 __init__.py 文件中的所有的函数和类
+            - 使用方法 没有前缀名
+                function（）
+                class_name.function_name()
+                class_name.var
+            - 案例 
+                from pkg01 import *
+                inInit()
+                stu = Student('学生名',55)  // 该类则不会被执行  
+        - from packpkg.module import *
+            - 导入包中指定的模块的所有内容
+            - 使用方法
+                function_name()
+                class_name.function_name()
+        - 在开发环境中经常会使用其他模块，可以在当前包中直接导入其他模块中的内容
+            - 直接使用 import module
+        - __all__ 的用法
+            - 在使用from packpkg import * 的时候，*可以导入内容
+            - __init__.py 中如果文件内容为空，或者没哟 __all__,那么只可以把__init__.py中内容导入
+            - __init__.py中如果设置了__all__ 的值，那么则按照 __all__ 指定的子包或者模块进行加载
+              因而不会导入其他内容
+            - __all__ = ['module1','module2','module3',.........]
+            - 案例 P06 、pkg02、 p04
+            
 '''
