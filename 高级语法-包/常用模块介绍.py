@@ -170,5 +170,69 @@ print(t4)
 %z  用 +HHMM 或 -HHMM 表示距离格林威治的时区偏移（H 代表十进制的小时数，M 代表十进制的分钟数）      
 %%  %号本身
 '''
-dayT= time.strftime("(%Y{y}%m{m}%d{d} %H:%M).format(y='年',m='月',d='日')",t)
+dayT = time.strftime('%Y.%m.%d %H:%M',t)
+dayT1 = time.strftime("%Y{y}%m{m}%d{d} %H:%M").format(y='年',m='月',d='日') #涉及到使用中文字符的解析，用 .format()格式，不需要使用 时间结构t字符
+dayT2 = time.strftime('%Y{y}%m{m}%d{d} %H{h}%M{f}%S{s}').format(y='年', m='月', d='日', h='时', f='分', s='秒')
 print(dayT)
+print(dayT1)
+print(dayT2)
+print('-----2----time模块'*5)
+
+    # 3、datetime模块 提供日期和时间的运算和表示
+import datetime
+'''
+- datetime 常见属性
+    datetime.date: 一个理想和的日期，提供year，month，day 属性
+'''
+dt = datetime.date(2019,4,29)
+print(dt)
+print(dt.year)
+print(dt.month)
+print(dt.day)
+
+'''
+- datetime.datetime:提供日期跟时间的组合
+    常用类方法：
+        - today
+        - now
+        - utcnow
+        - fromtimestamp:从时间戳中返回本地时间
+'''
+from datetime import datetime
+dt1 = datetime(2019,4,28)
+print(dt1.today)
+print(dt1.now())
+print(dt1.fromtimestamp(time.time()))
+
+'''
+- datetime.timedelta: 提供一个时间差，时间长度
+'''
+from datetime import datetime,timedelta
+dt2 = datetime.now()
+print(dt2.strftime('%Y-%m-%d %H:%M:%S'))
+tl = timedelta(hours=1) # tl 表示以小时的时间长度
+print((dt2+tl).strftime('%Y-%m-%d %H:%M:%S')) #当前时间加上时间间隔，把得到的一个小时后的时间格式化输出
+
+'''
+timeit :时间测量工具
+'''
+def p():
+    time.sleep(3.6)
+dt3 = time.time()
+p()
+print(dt3)
+print(time.time() - dt3)
+
+import timeit
+# 生成2个列表方法用时的比较，单纯比较生成列表的时间，可能很难实现
+c = '''
+sum = []
+for i in range(1000):
+    sum.append(i)
+'''
+# 利用timeit调用代码，执行100000次，查看运行时间
+dt4 = timeit.timeit(stmt='[i for i in range(1000)]',number = 100000)
+# 测量代码C执行100000次运行所需时间
+dt5 = timeit.timeit(stmt=c,number=100000)
+print(dt4)
+print(dt5)
