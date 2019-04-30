@@ -213,9 +213,10 @@ print(dt2.strftime('%Y-%m-%d %H:%M:%S'))
 tl = timedelta(hours=1) # tl 表示以小时的时间长度
 print((dt2+tl).strftime('%Y-%m-%d %H:%M:%S')) #当前时间加上时间间隔，把得到的一个小时后的时间格式化输出
 
-'''
-timeit :时间测量工具
-'''
+print('-----4-----datetime'*5)
+
+    # 4、timeit模块 时间测量工具
+
 def p():
     time.sleep(3.6)
 dt3 = time.time()
@@ -224,7 +225,7 @@ print(dt3)
 print(time.time() - dt3)
 
 import timeit
-# 生成2个列表方法用时的比较，单纯比较生成列表的时间，可能很难实现
+    # 生成2个列表方法用时的比较，单纯比较生成列表的时间，可能很难实现
 c = '''
 sum = []
 for i in range(1000):
@@ -236,3 +237,31 @@ dt4 = timeit.timeit(stmt='[i for i in range(1000)]',number = 100000)
 dt5 = timeit.timeit(stmt=c,number=100000)
 print(dt4)
 print(dt5)
+
+    # timeit 可以执行一个函数，来测量一个函数的执行时间
+''' 例子1
+def doIt():
+    num = 3
+    for i in range(num):
+        print('Repeat for {0}'.format(i))
+# 执行函数，重复10次
+dt6 = timeit.timeit(stmt=doIt,number=10)
+print(dt6)
+'''
+# 例子2
+s ='''
+def doIt1(num):
+    for i in range(num):
+        print('Repeat for {0}'.format(i))
+'''
+# 执行doIt1(num)
+# setup负责把环境变量准备好
+# 实际相当于给timeit创造了一个环境，在该环境中代码执行的顺序大概是，如下：
+'''
+def doIt1(num)
+    ....
+num =3 
+doIt1(num)
+'''
+dt7 = timeit.timeit('doIt1(num)',setup=s + 'num=3',number=10)
+print(dt7)
