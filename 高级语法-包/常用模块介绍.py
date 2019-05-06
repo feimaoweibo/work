@@ -239,7 +239,8 @@ print(dt4)
 print(dt5)
 
     # timeit 可以执行一个函数，来测量一个函数的执行时间
-''' 例子1
+'''
+    例子1
 def doIt():
     num = 3
     for i in range(num):
@@ -265,6 +266,7 @@ doIt1(num)
 '''
 dt7 = timeit.timeit('doIt1(num)',setup=s + 'num=3',number=10)
 print(dt7)
+
 print('-----5-----timeit模块'*5)
 
     # 6、datetime.datetime 模块
@@ -353,3 +355,127 @@ print(mydir)
 '''
 ld = os.listdir()
 print(ld)
+
+    # -makedirs()递归创建文件夹
+'''
+格式：os.makedirs(递归路径)
+返回值：无 None
+递归路径：多个文件夹层层包含的路径就是递归路径 例如 a/b/c...
+
+ld1 = os.makedirs('dana')
+print(ld1)
+'''
+    # -system()运行系统shell命令
+'''
+格式：os.system(系统命令)
+返回值：打开一个shell或者终端界面
+一般推荐使用subprocess代替
+
+# ls 是列出当前文件和文件夹的系统命令
+ld2 = os.system('ls')
+print(ld2)
+
+# 在当前目录下创建一个hahah 的文件
+ld3 = os.system('touch hahah')
+print(ld3)
+'''
+
+    # -getenv() 获取指定的系统环境变量值
+'''
+相应的还有putenv
+格式：os.getenv('环境变量名')
+返回值：指定环境变量名对应的值
+'''
+ld4 = os.getenv('PATH')
+print(ld4)
+
+    # exit() 退出当前程序
+'''
+格式：exit（）
+返回值：无 
+'''
+
+    # 值部分
+'''
+os.curdir: curretn dir,当前目录
+os.pardir: parent dir， 父亲目录
+os.sep: 当前系统的路径分隔符
+    windows: "\"
+    linux: "/"
+os.linesep: 当前系统的换行符号
+    windows: "\r\n"
+    unix,linux,macos: "\n"
+os.name： 当前系统名称
+    windows： nt
+    mac，unix，linux： posix
+'''
+print(os.curdir)
+print(os.pardir)
+print(os.sep)
+print(os.linesep)
+print(os.name)
+# 在路径相关的操作中，不要手动拼写地址，因为手动拼写的路径可能不具有移植性
+path1  = '/home/tlxy' + '/' + 'dnna'
+print(path1)
+print('-----7-----OS 模块'*5)
+
+    # 8、os.path 模块，跟路径相关的模块
+import os.path as op
+    # -abspath() 将路径转化为绝对路径
+'''
+abselute 绝对
+格式:os.path.abspath('路径')
+返回值：路径的绝对路径形式
+
+-linux中
+. 点号，代表当前目录
+.. 双点，代表父目录
+'''
+abspath = op.abspath('.')
+print(abspath)
+
+    # -basename()获取路径中的文件名部分
+'''
+格式:os.path.basename(路径)
+返回值：文件名字符串
+'''
+bn = op.basename('/home/tlxy/dnna')
+print(bn)
+bn1 = op.basename('/work/高级语法-包/P01.py')
+print(bn1)
+
+    # -join() 将多个路径拼合成一个路径
+'''
+格式：os.path.join(路径1，路径2....)
+返回值：组合之后的新路径字符串
+'''
+bd ='/work/高级语法-包/dana/'
+fn ='pinjielujin'
+pjlj = op.join(bd,fn)
+print(pjlj)
+
+    # -split() 将路径切割为文件夹部分和当前文件部分
+'''
+格式:os.path.split（路径）
+返回值：路径和文件名组成的元组
+'''
+sp = op.split('/work/高级语法-包/dana/pinjielujin')
+print(sp)
+sp1,sp2 =op.split('/work/高级语法-包/dana/pinjielujin')
+print(sp1,sp2)
+
+    # -isdir() 检测是否是目录
+'''
+格式：os.path.isdir(路径)
+返回值：布尔值
+'''
+rst = op.isdir('/work/高级语法-包/dana/pinjielujin')
+print(rst)
+
+    # -exists() 检测文件或者目录是否存在
+'''
+格式：os.path.exists(路径)
+返回值:布尔值
+'''
+ex = op.exists('/work/高级语法-包/dana/pinjielujin')
+print(ex)
