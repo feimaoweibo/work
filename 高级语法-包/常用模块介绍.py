@@ -479,3 +479,81 @@ print(rst)
 '''
 ex = op.exists('/work/高级语法-包/dana/pinjielujin')
 print(ex)
+print('-----8-----os.path模块'*5)
+
+    # 9、stutil 模块
+import shutil
+
+    # -copy()复制文件
+'''
+格式：shutil.copy(来源路径，目标路径)
+返回值：返回目标路径
+拷贝的同时，可以给文件重命名
+'''
+shu = shutil.copy('./dana/pinjielujin.html','./dana/newname.html')
+print(shu)
+
+    # -copy2()复制文件，保留元数据（文件信息）
+'''
+格式：shutil.copy2(来源路径，目标路径)
+返回值：返回目标路径
+注意：copy和copy2的唯一区别在于copy2复制文件时尽量保留元数据
+'''
+
+    # -copyfile()将一个文件复制到另外一个文件夹当中
+'''
+格式：shutil.copyfile（'源路径','目标路径')
+返回值：返回目标路径
+'''
+shu1 = shutil.copyfile('P01.py','./dana/P01.py')
+print(shu1)
+
+    # -move()移动文件/文件夹
+'''
+格式：shutil.move(源路径，目标路径)
+返回值：目标路径！
+'''
+shu2 = shutil.move('./dana/newname.html','newname.html')
+print(shu2)
+
+    # -make_archive() 归档和压缩操作
+'''
+归档： 把多个文件或者文件夹合并到一个文件当中
+压缩： 用算法把多个文件或者文件夹无损或者有损合并到一个文件当中
+格式:shutil.make_archive('归档之后的目录和文件名','后缀','需要归档的文件夹')
+返回值：归档之后的地址
+'''
+# shu3 是想得到一个叫做guidang.zip的归档文件，./dana/guidang是归档之后的目录与文件名，.zip是文件后缀名，./dana是需要归档的文件夹
+shu3 = shutil.make_archive('./dana/guidang','zip','./dana')
+print(shu3)
+
+    # -unpack_archive() 解包操作
+'''
+unpack_archive() 解包操作
+格式：shutil.unpack_archive('归档文件地址','解包之后的地址')
+返回值：None
+'''
+'''
+生成一个新文件夹，路径是当前文件的同级
+rst1 = os.makedirs('./jiebao')
+print(rst1)
+'''
+shu4 = shutil.unpack_archive('./dana/guidang.zip','./jiebao/')
+print(shu4)
+print('-----9-----shutil模块'*5)
+
+    # 10、zip 压缩包模块
+import zipfile
+
+    # -zipfile.ZipFile(file[, mode[, compression[, allowZip64]]])
+'''
+创建一个ZipFile对象，表示一个zip文件。
+参数file表示文件的路径或类文件对象(file-like object)；
+参数mode指示打开zip文件的模式，默认值为’r’，表示读已经存在的zip文件，也可以为’w’或’a’，
+    - ’w’表示新建一个zip文档或覆盖一个已经存在的zip文档，
+    - ’a’表示将数据附加到一个现存的zip文档中。
+参数compression表示在写zip文档时使用的压缩方法，它的值可以是zipfile. ZIP_STORED 或zipfile. ZIP_DEFLATED。
+如果要操作的zip文件大小超过2G，应该将allowZip64设置为True。
+'''
+zf = zipfile.ZipFile('./jiebao/zipfile.zip','w')
+print(zf)
