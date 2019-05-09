@@ -555,5 +555,28 @@ import zipfile
 参数compression表示在写zip文档时使用的压缩方法，它的值可以是zipfile. ZIP_STORED 或zipfile. ZIP_DEFLATED。
 如果要操作的zip文件大小超过2G，应该将allowZip64设置为True。
 '''
-zf = zipfile.ZipFile('./jiebao/zipfile.zip','w')
+zf = zipfile.ZipFile('./jiebao/new1.zip','r',zipfile.ZIP_DEFLATED)
 print(zf)
+
+    # -ZipFile.getinfo(file.name)
+'''
+格式：zf.getinfo(name)  说明：zf继承自压缩文档时的变量 = zipfile.ZipFile
+获取zip文档内指定文件的信息。返回一个zipfile.ZipInfo对象，它包括文件的详细信息。将在下面 具体介绍该对象。
+'''
+zf1 = zf.getinfo('p022.py')
+print(zf1)
+
+    # -ZipFile.namelist()
+'''
+获取zip文档内所有文件的列表
+'''
+n1 = zf.namelist()
+print(n1)
+
+    # -ZipFile.extractall([path[, members[, pwd]]])
+'''
+解压zip文档中的所有文件到当前目录。参数members的默认值为zip文档内的所有文件名称列表，也可以自己设置，选择要解压的文件名称
+返回值：None
+'''
+nal =zf.extractall('./dana') #解压到dana文件夹下面，没有解压到默认目录
+print(nal)
