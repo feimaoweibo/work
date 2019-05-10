@@ -213,7 +213,7 @@ print(dt2.strftime('%Y-%m-%d %H:%M:%S'))
 tl = timedelta(hours=1) # tl 表示以小时的时间长度
 print((dt2+tl).strftime('%Y-%m-%d %H:%M:%S')) #当前时间加上时间间隔，把得到的一个小时后的时间格式化输出
 
-print('-----4-----datetime'*5)
+print('-----3-----datetime'*5)
 
     # 4、timeit模块 时间测量工具
 
@@ -267,7 +267,8 @@ doIt1(num)
 dt7 = timeit.timeit('doIt1(num)',setup=s + 'num=3',number=10)
 print(dt7)
 
-print('-----5-----timeit模块'*5)
+print('-----4-----timeit模块'*5)
+
 
     # 6、datetime.datetime 模块
 '''
@@ -560,7 +561,7 @@ print(zf)
 
     # -ZipFile.getinfo(file.name)
 '''
-格式：zf.getinfo(name)  说明：zf继承自压缩文档时的变量 = zipfile.ZipFile
+格式：zf.getinfo(name)  说明：zf继承自压缩文档时的 变量 = zipfile.ZipFile
 获取zip文档内指定文件的信息。返回一个zipfile.ZipInfo对象，它包括文件的详细信息。将在下面 具体介绍该对象。
 '''
 zf1 = zf.getinfo('p022.py')
@@ -580,3 +581,42 @@ print(n1)
 '''
 nal =zf.extractall('./dana') #解压到dana文件夹下面，没有解压到默认目录
 print(nal)
+print('-----10-----ZipFile模块'*5)
+
+    # 11、random模块 随机数模块
+import random
+
+    # -random() 获取0-1之间的随机小数
+'''
+格式：random.random()
+返回值：随机0-1之间的小数
+'''
+print(random.random())
+
+    # -random.randint(a，b) 返回一个 a 到 b 之间的随机整数，包含 a 与 b
+'''
+格式：random.randint(起始数，结束数)
+返回值：起始数 与结束数 之间的整数
+'''
+print(random.randint(0,100))
+
+    # -choice() 随机返回序列中的某个值
+'''
+格式：random.choice(序列)
+返回值：序列中的某个值
+'''
+l1 = [str(i) + '拼接字符串' for i in range(10)]
+print(l1)
+l2 = random.choice(l1)
+print(l2)
+
+    # -shuffle() 随机打乱列表
+'''
+格式：random.shuffle(列表)
+返回值：打乱顺序之后的列表
+'''
+l3 = [i for i in range(10)]
+print(l3)
+random.shuffle(l3)
+print(l3)
+print('-----11-----random模块'*5)
