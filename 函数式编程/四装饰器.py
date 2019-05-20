@@ -7,7 +7,7 @@ f()
 print(id(f))
 print(id(hello))
 
-# 装饰器(Decrator)
+    # 装饰器(Decrator)
 '''
 -在不改动函数代码的基础上无限制扩展函数功能的一种机制，
     本质上讲，装饰器是一个返回函数的高阶函数
@@ -57,3 +57,17 @@ def hello2():
     print('装饰器提供了可变参数*args')
     print('装饰器提供了关键字参数**kwargs')
 hello2()
+
+    # 装饰器案例 3、手动执行装饰器
+'''
+上面对函数的装饰使用了系统定义的语法糖
+下面开始手动执行下装饰器
+'''
+def hello3():
+    print('我是手动执行的')
+hello3()
+hello3 = printTime(hello3) #把hello3函数作为参数传入printTime（），执行函数wraper（）,输出结果为2个，第一结果：print当前时间；第二结果为返回函数hello3，因此printTime()最终结果为返回函数wraper(),再赋值给hello3
+hello3() #新的hello3调用函数，输出结果：1、当前时间：     2、我是手动执行的
+print('-----分割线下'*5)
+f = printTime(hello3)
+f()
