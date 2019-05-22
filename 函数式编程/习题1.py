@@ -16,10 +16,16 @@ print(l2)
 l3 = ["ADMAm","LISA","JACk"]
 l4 = map(standstrs,l3)
 print([e for e in l4]) # 直接打印列表生成式的内容
+# 方案3、使用匿名函数 lambda表达式
+l5 = map(lambda x: x.lower().capitalize(), l3)
+print(l5)
+print(list(l5))
 print('----- map()映射函数'*5)
+
 
 # 2、请利用filter()函数
 # 回数：从左向右和从右向左读都是一样的数，例如 12321，999，
+# 方案1
 def equal(a,b): # 声明一个值相等的函数
     return a==b
 def isPan(n): # 声明判断角标上值是否相等的过滤函数
@@ -34,27 +40,37 @@ def isPan(n): # 声明判断角标上值是否相等的过滤函数
             return False
     # isPan函数返回值为真
     return True
-
 num = filter(isPan,range(1,10000)) # 使用filter()函数过滤数据，返回满足条件而返回的布尔值
 num1 = [i for i in num] # 使用列表生成式来接受返回的布尔值列表
 print('1-10000回数集合：',num1)
+# 方案2、使用匿名函数 lanbda()表达式
+lne = range(1000)
+lnee   = filter(lambda x: str(x)[0] == str(x)[len(str(x))-1], lne)# 此表达式只能展示999以内的回数,str(x)[0]表示首位数字，str(x)[len(str(x))-1]表示末尾数字
+print(list(lnee))
 print('-----filter()过滤函数'*5)
 
 # 3、请利用sorted()函数排序
 # 假设，我们用一组tuple来表示学生的名字和成绩，L = [("Bob",75),("Adam",92),("Bart",66),("List",88)]
 L = [("Bob",75),("Adam",92),("Bart",66),("List",88)]
-    # 使用姓名排序
+    # 使用字母排序 ，a-->z
+# 方案1、
 def byName(t):
     t = sorted(t[0],key=str.lower) # t[0] 表示元组第一个值，str.lower表示字符串小写
     return t
 name = sorted(L,key=byName)
 print(name)
+# 方案2、使用匿名函数 lambdaz()表达式
+nameL = sorted(L, key=lambda x: x[0], reverse=False)
+print(list(nameL))
 
     # 使用分数高低排序
+# 方案1、
 def byScore(t):
     t = sorted(range(t[1]),key=abs)
     return t
 name1 = sorted(L,key=byScore,reverse=True)
 print(name1)
-
+# 方案2、使用匿名函数 lambda()表达式
+name1L = sorted(L, key=lambda x:x[1],reverse=True)
+print(list(name1L))
 
