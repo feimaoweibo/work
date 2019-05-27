@@ -43,13 +43,13 @@ with open(r'test02.txt','r') as f:
     while strline:
         print(strline)
         strline = f.readline()
-print('--------------'*5)
+print('-------2.1-------'*5)
 with open(r'test03.txt', 'r') as f:
     strline1 = f.readline()
     while strline1:
         print(strline1)
         strline1 = f.readline()
-print('-------------'*3)
+print('------2.2-------'*3)
 
     # 案例3、list（）参数
 # list能用打开的文件作为参数，把文件内每一行内容作为一个元素
@@ -58,7 +58,7 @@ with open(r'test02.txt', 'r') as f:
     l = list(f)
     for i in l:
         print(i)
-print('--------'*5)
+print('--------2.3'*5)
 
     # 案例4、 read（）参数
 '''
@@ -77,3 +77,58 @@ with open(r'test02.txt', 'r') as f:
     while sr:
         print(sr)
         break
+print('-------2.4'*6)
+
+# 三、seek（offset，from）函数
+'''
+- 移动文件的读取位置，也叫读取指针
+- from 取值范围：
+    0 ：从文件头开始偏移
+    1 ：从文件当前位置开始偏移
+    2 ：从文件末尾开始偏移
+- offset：移动的单位是字节（byte）
+- 一个汉字由诺干个字节构成
+- 返回文件只针对 当前位置
+'''
+    # seek（） 案例1、
+'''
+-打开文件后，从第五个字节处开始读取
+-打开文件时读写指针在0处，即文件的开头
+'''
+with open(r'test02.txt', 'r') as f:
+    f.seek(6, 0) # offset=6，表示移动6个字节；from=0表示从文件头开始偏移
+    strChar1 = f.read()
+    print(strChar1)
+
+with open(r'test03.txt', 'r') as f:
+    f.seek(0, 2) # offset=0,表示移动0个字节；from=2表示从文末开始偏移，返回值为空
+    strChar2 = f.read()
+    print(strChar2)
+print('-------3.1'*6)
+
+    # seek() 案例2、
+'''
+-打开文件，三个字符一组读出内容，然后显示在屏幕上
+-每读一次，休息一秒钟
+-需要导入time模块的sleep函数
+'''
+import time
+with open(r'test02.txt', 'r') as f:
+    strChar3 = f.read(3)
+    while strChar3:
+        print(strChar3)
+        time.sleep(1)
+        strChar3 = f.read(3)
+print('-------3.2案例'*6)
+    # tell（）函数 案例3、
+'''
+-tell() 函数，用来显示文件读写指针的当前位置
+'''
+with open(r'test02.txt', 'r') as f:
+    strChar4 = f.read(3)
+    pos = f.tell()
+    while strChar4:
+        print(pos)
+        print(strChar4)
+        strChar4 = f.read(3)
+        pos = f.tell()
