@@ -114,10 +114,10 @@ print('-------3.1'*6)
 '''
 import time
 with open(r'test02.txt', 'r') as f:
-    strChar3 = f.read(3)
+    strChar3 = f.read(3) # read() 函数读取字符
     while strChar3:
         print(strChar3)
-        time.sleep(1)
+        #time.sleep(1)
         strChar3 = f.read(3)
 print('-------3.2案例'*6)
     # tell（）函数 案例3、
@@ -132,3 +132,30 @@ with open(r'test02.txt', 'r') as f:
         print(strChar4)
         strChar4 = f.read(3)
         pos = f.tell()
+print('-------3.3案例'*6)
+
+# 四、文件的写操作 write（）函数
+'''
+- write(str) ：把字符串写入文件
+- writelines（str）: 把字符串按行写入
+- 区别：
+    - write（）函数参数只能是字符串
+    - writeline() 函数参数可以是字符串，也可以是字符序列
+'''
+    # write（）案例1、
+with open(r'test03.txt', 'a') as f:
+    f.write('生活不仅有眼前的苟且，\n 还有远方的苟且')
+    f.write('花非花雾非雾，化肥会挥发')
+    f.write('\n换行打印一句诗，排在第一位')
+
+    # writelines() 案例2、
+with open(r'test03.txt', 'a') as f:
+    f.writelines('追加“a”的形式添加writelines格式内容，看看这句话的内容会不会换行显示呢')
+    f.writelines('据说writelines格式可以添加很多行内容')
+
+    # writelines（）案例3、
+'''
+L1 = ['“writelines”添加','字符序列','格式的文件']
+with open(r'text04.txt', 'x') as f: # 'x'表示新建形式添加
+    f.writelines(L1)
+'''
