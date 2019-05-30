@@ -38,16 +38,6 @@ file2 = input('请输入需要比较的第二个文件名： ')
 def fileComare(file1, file2):
     count = 1
     differ = []
-
-    with open(file1, 'r') as f:
-        f1 = f.readline()
-    with open(file2, 'r') as f:
-        f2 = f.readline()
-    for line1 in f1:
-          if line1 != f2:
-              differ.append(count)
-          count +=1
-    '''
     f1 = open(file1)
     f2 = open(file2)
     for line1 in f1:
@@ -57,7 +47,7 @@ def fileComare(file1, file2):
         count += 1
     f1.close()
     f2.close()
-    '''
+
     return differ
 differ = fileComare(file1,file2)
 
