@@ -10,12 +10,21 @@ all_files = os.listdir(os.curdir)#接收当前路径下的所有文件
 fname = input("请输入文件名： ")
 start_dir = input("请输入查询路径： ")
 def searchFile(fname, start_dir):
+    # 切换到用户输入的路径
     os.chdir(start_dir)
     for each_file in all_files:
         if each_file == fname:
+            # os.getcwd()返回当前工作目录；os.sep跨平台解决文件的路径分隔符\ 与 /书写问题；
+            print(os.getcwd() + os.sep + each_file)
+        '''
+        - 对上述题目加一些需求，模糊匹配，判断我们的fname是否包含在某一个文件中
+        - 使用if...in...判断fname这个字符串是否在文件名字中
+        '''
+        if fname in each_file:
             print(os.getcwd() + os.sep + each_file)
         if os.path.isdir(each_file):
             searchFile(fname, start_dir)
-            os.chdir(os.pardir)
+            os.chdir(os.pardir)#os.pardir获取当前目录的父目录字符串，
 searchFile(fname, start_dir)
+
 
