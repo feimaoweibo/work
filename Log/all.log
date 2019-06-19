@@ -1,0 +1,5 @@
+2019-06-19 17:36:53,523----DEBUG-----案例2----debug message
+2019-06-19 17:36:53,523----INFO-----案例2----info message
+2019-06-19 17:36:53,523----WARNING-----案例2----warning message
+2019-06-19 17:36:53,523----ERROR-----案例2----error message
+2019-06-19 17:36:53,524----CRITICAL-----案例2----critical message
