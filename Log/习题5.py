@@ -24,13 +24,14 @@ logger.addHandler(er_handler)
 logger.warning('案例2----warning message')
 logger.error('案例2----error message')
 '''
+# 单一日志需求，使用装饰器来功能搭配
 def log(func):
     def wrapper(*arg, **kwargs):
         logger.debug("这是习题5结合装饰器记录debug级别的日志")
         logger.error("这是习题5结合装饰器记录error级别的日志")
         return func(*arg, **kwargs)
     return wrapper
-
+# 根据日志记录对象不同要求，使用装饰器功能搭配
 def loghigher(text):
     def dec(func):
         def wrapper(*args, **kwargs):
@@ -39,12 +40,12 @@ def loghigher(text):
             return func(*args, **kwargs)
         return wrapper
     return dec
-
+# 单一日志需求
 @log
 def doFunc():
     print("这是习题5装饰器日志使用方法")
 doFunc()
-
+# 按照函数的不同需求，可以在日志中记录不同需求
 @loghigher("带参数的debug级别日志")
 def warn():
     print("debug级别日志信息")
@@ -53,3 +54,10 @@ def err():
     print("error级别日志信息")
 warn()
 err()
+
+# 总结：
+'''
+一般情况我们在实际的工作当中，我们经常把logging封装成一个装饰器，按照
+我自己的习惯，我是习惯新建一个loggerTools的文件，在需要保存日志的地方，
+把loggerTools给引进进来。
+'''
