@@ -1,7 +1,7 @@
 # 变量共享问题-锁 lock
 import threading
 sum = 0
-loopSum = 0
+loopSum = 100000
 lock = threading.Lock()
 def myAdd():
     global sum, loopSum
