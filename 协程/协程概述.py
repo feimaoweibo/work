@@ -142,6 +142,7 @@ for i in f1:
     调用协程为了得到返回值，协程必须正常终止
     生成器正常终止会发出StopIteration异常，异常对象的vlaue属性保存返回值
     yield from从内部捕获StopIteration异常，并且把StopIteration异常value属性值作为yield from表达式的返回值
+    案例v03
     委派生成器
         包含yield from表达式的生成器函数
         委派生成器在yield from表达式处暂停，调用方可以直接把数据发给自生成器
