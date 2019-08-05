@@ -150,3 +150,39 @@ for i in f1:
         自生成器在最后，解释器会抛出StopIteration，并且把返回值赋加到异常对象上
         案例v04
 '''
+# 四.1 协程 asyncio 包
+'''
+python3.4开始引入的标准库,内置了对异步i/o的支持
+asyncio本身是一个消息循环,
+步骤
+    创建消息循环
+    把协程导入
+    关闭
+案例v05
+案例v06-两个tasks
+案例v07-得到多个网站
+'''
+
+# 四.2 协程 asynci and await 包
+'''
+为了更好的表示异步i/o
+python3.5 开始引入
+让coroutine代码更简洁
+使用上,可以简单进行替换
+    可以把 @asyncio.coroutine 替换成async
+    yield from 替换成await
+案例v08, 把案例06直接替换
+'''
+
+# 四.3 协程 aiohttp包
+'''
+介绍
+    asyncio实现单线程并发IO,在客户端用处不大
+    在服务器端可以asyncio+coroutine配合,因为http是io操作
+    asyncio实现了TCP,UIDP,SSL等协议
+    aiohttp是给予asyncio实现的HTTP框架
+    pip install aiohttp
+    案例09  缺少安装模块
+'''
+
+# 四.4 协程concurrent.futures 包
