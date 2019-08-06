@@ -182,7 +182,35 @@ python3.5 开始引入
     asyncio实现了TCP,UIDP,SSL等协议
     aiohttp是给予asyncio实现的HTTP框架
     pip install aiohttp
-    案例09  缺少安装模块
+    案例v09  缺少安装模块
 '''
 
 # 四.4 协程concurrent.futures 包
+'''
+python3新增的库
+类似其他语言的线程池的概念
+此模块利用multiprocessiong实现真正的平行计算
+核心原理是：concurrent.futures会以子进程的形式，平行的运行多个python解释器，
+    从而令python程序可以利用多核CPU来提升执行速度。 由于子进程与主解释器相分离，
+    所以他们的全局解释器锁也是相互独立的。每个子进程都能够完整的使用一个CPU内核。
+concurrent.futures.Executor
+    ThreadPoolExecutor
+    ProcessPoolExecutor
+submit(fn, args, kwargs)
+    fn:异步执行的函数
+    args,kwargs:参数
+        # 官方死锁案例
+              import time
+              def wait_on_b():
+                  time.sleep(5)
+                  print(b.result())  #b不会完成，他一直在等待a的return结果
+                  return 5          
+              def wait_on_a():
+                  time.sleep(5)
+                  print(a.result())  #同理a也不会完成，他也是在等待b的结果
+                  return 6           
+              executor = ThreadPoolExecutor(max_workers=2)
+              a = executor.submit(wait_on_b)
+              b = executor.submit(wait_on_a)
+    案例v10
+'''
