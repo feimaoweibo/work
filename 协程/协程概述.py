@@ -193,7 +193,7 @@ python3新增的库
 核心原理是：concurrent.futures会以子进程的形式，平行的运行多个python解释器，
     从而令python程序可以利用多核CPU来提升执行速度。 由于子进程与主解释器相分离，
     所以他们的全局解释器锁也是相互独立的。每个子进程都能够完整的使用一个CPU内核。
-concurrent.futures.Executor
+concurrent.futures.Executor:
     ThreadPoolExecutor
     ProcessPoolExecutor
 submit(fn, args, kwargs)
@@ -213,4 +213,17 @@ submit(fn, args, kwargs)
               a = executor.submit(wait_on_b)
               b = executor.submit(wait_on_a)
     案例v10
+map(fn, *iterables, timeout=None)
+    跟map函数类似
+    函数需要异步执行
+    timeout: 超时时间
+    案例 v11
+    案例 v12
+submit 与 map根据需要选一个即可
+案例v13
+Future
+    未来需要完成的任务
+    future 实例由Excutor.submit创建
+    案例v14
+    
 '''
