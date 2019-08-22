@@ -64,5 +64,24 @@ xml与json
         > ：&gt;
         ' ：&apos;
         " ：&quot;
+5、XML标签的命名规则
+    Pascal命名法
+    用英语单词表示，第一个字母大写
+    大小写严格区分
+    配对的标签必须一对
+6、命名空间
+    以下代码则会发生命名冲突
+        <Student>
+            <name>liuying</name>
+            <age>18</age>
+            <name>2014</name>
+            <location>1-23-1</location>
+        </Student> 
+    因此避免上述命名冲突的发生，需要给可能发生冲突的元素添加命名空间即 xmlns: xml name space的缩写
+        <Schooler xmlns:student="http://my_student" xmlns:room="http://my_room">
+            <student:name>liuying</student:name>
+            <age>18</age>
+            
         
+        </Schooler>   
 '''
