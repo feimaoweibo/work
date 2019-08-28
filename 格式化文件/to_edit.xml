@@ -1,0 +1,21 @@
+<School>
+    <Teacher>
+        <Name>Liuying</Name>
+        <Age detail="Age for your 2010">18</Age>
+        <Mobile>1320001234</Mobile>
+    </Teacher>
+    <Student>
+        <Name Other="&#20182;&#26159;&#29677;&#38271;" test="ZhangSanZhangSan">ZhangSan</Name>
+        <Age Detail="The yongest boy in class">14</Age>
+    <ADDer a="b">&#25105;&#21152;&#30340;</ADDer><ADDer a="b">&#25105;&#21152;&#30340;</ADDer><ADDer a="b">&#25105;&#21152;&#30340;</ADDer></Student>
+    <Student>
+        <Name test="luodayouluodayou">luodayou</Name>
+        <Age>59</Age>
+        <Mobile>13888881234</Mobile>
+    </Student>
+    <Student>
+        <Name test="lisilisi">lisi</Name>
+        <Age>19</Age>
+        <Mobile>13299991111</Mobile>
+    </Student>
+</School>

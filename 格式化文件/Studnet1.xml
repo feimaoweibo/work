@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<School>
+    <Teacher desc="PythonTeacher" score="good">
+        <Name>Liudana</Name>
+        <Age_1 Detail=" Age for year 2010">18</Age_1>
+        <Mobile>13260446055</Mobile>
+    </Teacher>
+    <Student>
+        <Name Other="他是班长">Zhangsan</Name>
+        <Age Detail="The yongest boy in class">14</Age>
+    </Student>
+    <Student>
+        <Name>Lisi</Name>
+        <Age>19</Age>
+        <Mobile>15588883333</Mobile>
+    </Student>
+    <!-- 这是注释的写法，双短横线格式写法 -->
+</School>
