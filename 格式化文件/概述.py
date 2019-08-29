@@ -127,6 +127,7 @@ xml与json
             ele.remove:移除元素
             案例v03
         生成创建
-            SubElement,案例v04
-            
+            SubElement 创建，案例v04
+            minidom 创建，案例v05
+            etree 创建，案例v06
 '''
