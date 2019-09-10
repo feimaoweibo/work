@@ -28,9 +28,10 @@ def getHttpHeader(skt):
         else:
             r = line.split(r' ')
             rst['method'] = r[0]
-            rst['url'] = r[1]
+            rst['uri'] = r[1]
             rst['version'] = r[2]
         line = getLine(skt)
+
     return rst
 
 # 获取行内容函数
@@ -50,9 +51,10 @@ def getLine(skt):
     b1 = skt.recv(1)
     b2 = 0
     # data用来存放读取的的行的内容
-    data = b' '
+    data = b''
     # 当确定还没有到读到一行最后，即回车换行符号的时候，需要循环
     while b2 != b'\r' and b1 !=b'\n':
+        b2 = b1
         b1 = skt.recv(1)
         data += bytes(b2)
     # decode(编码)，默认编码为utf-8
@@ -71,8 +73,8 @@ print("已经开始监听")
 skt, addr = sock.accept()
 print("已经接收到传入的socket:{0}".format(skt))
 # 实际处理请求的内容
-http_info = getHttpHeader(skt)
-print(http_info)
+#http_info = getHttpHeader(skt)
+print(getHttpHeader(skt))
 
 # 对对方一个反馈
 msg = "我已经收到，现在反馈信息给你++++++++"
