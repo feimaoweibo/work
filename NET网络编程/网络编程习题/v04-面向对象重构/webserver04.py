@@ -16,12 +16,16 @@ class SocketHandler:
         2、返回return内容
         :return:
         '''
-        self.handHandler()
+        self.headHandler()
         self.sendRsp()
         return None
 
     def headHandler(self):
-        # 两个下划线开头的函数意思
+        # 两个下划线开头的函数：用于对象的数据封装，以此命名的属性或者方法为类的私有属性或者私有方法。
+        '''
+        "单下划线" 开始的成员变量叫做保护变量，意思是只有类对象和子类对象自己能访问到这些变量；
+        "双下划线" 开始的是私有成员，意思是只有类对象自己能访问，连子类对象也不能访问到这个数据。
+        '''
         self.headInfo = self.__getAllLine()
         print(self.headInfo)
         return None
@@ -70,7 +74,7 @@ class WebServer():
         self.ip = ip
         self.port = port
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.sock.bind(self.ip, self.port)
+        self.sock.bind((self.ip, self.port))
         self.sock.listen(1)
         print("WebServer is started ------------------")
     def start(self):
@@ -83,8 +87,8 @@ class WebServer():
             if skt:
                 print("Received a socket {0} from {1}......".format(skt.getpeername(), addr))
                 # sokHeadler负责具体通信
-                sockHeadler = SocketHandler(skt)
-                thr = threading.Thread(target=sockHandler.startHandler , args=( ))
+                sockHandler = SocketHandler(skt)
+                thr = threading.Thread(target=sockHandler.startHandler, args=( ))
                 thr.setDaemon(True)
                 thr.start()
                 thr.join()
