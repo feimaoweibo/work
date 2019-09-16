@@ -1,4 +1,17 @@
-# v04-面向对象重构HTTP协议案例
+# 服务器端配置文件
+class ServerContent:
+    ip = '127.0.0.1'
+    port = 9999
+    head_protocal = 'HTTP/1.1'
+    head_code_200 = '200'
+    head_status_OK = 'OK'
+
+    head_content_length = 'Content-Length:'
+    head_content_type = 'Content-type:'
+    content_type_html = 'text/html'
+
+    blank_line = ''
+
 import socket
 import threading
 
@@ -76,7 +89,7 @@ class SocketHandler:
 # 接受传入请求socket
 class WebServer():
     # 初始化对象
-    def __init__(self, ip='127.0.0.1', port=7854):
+    def __init__(self, ip=ServerContent.ip, port=ServerContent.port):
         self.ip = ip
         self.port = port
         # 通信采用tcp协议，IP4地址
