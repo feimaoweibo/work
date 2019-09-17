@@ -1,7 +1,7 @@
 # 服务器端配置文件
 class ServerContent:
     ip = '127.0.0.1'
-    port = 9999
+    port = 9876
     head_protocal = 'HTTP/1.1'
     head_code_200 = '200'
     head_status_OK = 'OK'
@@ -32,19 +32,49 @@ class SocketHandler:
         self.headHandler() # 处理请求http协议
         self.sendRsp() # 发送反馈信息
         return None
+    # 指定路由功能的函数
+    def reRoute(self):
+        uri = self.headInfo.get('uri') # 获取URI资源名
+        # 如果uri 是b'/'
+        if uri == b'/':
+            self.sendRsp(r'./webapp/hello.html')
+            return None
+        # 如果uri 是b'/favicon.ico'图标
+        if uri == b'/favicon.ico':
+            self.sendStaticTco(r'./static/fav.jfif')
+            return None
+        # 不然请求访问的资源名不存在
+        self.sendRsp(r'./webapp/404.html')
+    # 发送页面图标函数
+    def sendStaticTco(self, fp):
+        with open(fp, mode='rb') as f:
+            ico = f.read()
+            self.__sendRspALL(ico)
+
     # 处理请求的http协议函数
     def headHandler(self):
+        self.headInfo = dict() # headInfo内容是个字典格式的http协议
         # 两个下划线开头的函数：用于对象的数据封装，以此命名的属性或者方法为类的私有属性或者私有方法。
         '''
         "单下划线" 开始的成员变量叫做保护变量，意思是只有类对象和子类对象自己能访问到这些变量；
         "双下划线" 开始的是私有成员，意思是只有类对象自己能访问，连子类对象也不能访问到这个数据。
         '''
-        self.headInfo = self.__getAllLine() # 获取所有行的内容，赋值给headInfo
-        print(self.headInfo)
-        return None
+        tmpHead = self.__getAllLine() # 获取所有行的内容，赋值给tmpHead
+        for line in tmpHead:
+            if b':' in line: # 如果b':'格式的分号，在所有行里面，则该行为http协议的首部行
+                # str.split(b':')函数指定符号进行分割，放入Dick字典
+                infos = line.split(b':')
+                # 采用Dick字典键值对格式赋值
+                self.headInfo[infos[0]] = infos[1]
+            else:
+                # 则按str.split(b' ')格式的空格，分割放入dick字典
+                infos = line.split(b' ')
+                # 自定义http协议的请求行的三部分内容，分别为method方法、URI资源名、protocal版本
+                self.headInfo['protocal'] = infos[2]
+                self.headInfo['method'] = infos[0]
+                self.headInfo['uri'] = infos[1]
     # 发送反馈信息函数
     def sendRsp(self):
-        data = "HELLO WORLD"
         '''
         想返回一个静态页面，可以考虑把静态页面文件读入，作为str类型，然后作为一个长字符串返回
         '''
