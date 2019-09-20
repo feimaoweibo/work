@@ -15,14 +15,14 @@
             Linux：source activate env_name
             Win：activate env_name
         pip install django=1.8
-# 创建第一个django程序
+# 一、创建第一个django程序
     - 命令行启动
         django-admin startproject tulingxueyuan
         cd tulingxueyuan
         python manage.py runserver
     - pycharm启动
         - 需要配置
-# 路由系统-urls
+### 1、路由系统-urls
     - 创建app
         app：负责一个具体业务或者一类具体业务的模块
         python manage.py startapp teacher
@@ -47,7 +47,7 @@
             /oo/one/two/three/oo/ 不配对 r'three/$"
             开头不需要有反斜杠
         如果从上向下都没有找到合适的匹配内容，则报错
-# 2、正常映射
+### 2、正常映射
     把某一个符合RE的URL映射到事物处理函数中去
         举例如下:
             from showeast import views as sv
@@ -56,12 +56,12 @@
                 url(r'^admin/', admin.site.urls),
                 url(r'^normalmap/', sv.normalmap),
             ]
-# 3、URL中带参数映射
+### 3、URL中带参数映射
     在事件处理代码中需要由URL传入参数,形如 /myurl/param中的param
     参数都是字符串形式,如果需要整数等形式需要自行转换
     通常的形式如下:
           /search/page/432 中的 432需要经常性变换，所以设置成参数比较合适
-# 4、URL在app中处理
+### 4、URL在app中处理
     如果所有应用URL都集中tulingxueyuan/urls.py中,可能导致文件的臃肿
     可以把urls具体功能逐渐分散到每个app中
         从django.conf.urls 导入 include
@@ -73,3 +73,39 @@
         3写子路由
         4编写views函数
     同样可以使用参数
+### 5、URL中嵌套参数
+    捕获某个参数的一部分
+    例如URL/index/page-3,需要捕获数字3作为参数
+        url(r'index_1/(page-(\d+)/)?$', sv.myindex_1), #不太好
+        url(r'index_2/(?:page-(?P<page_number>\d+)/)?$', sv.myindex_2), #好
+    上述例子会得到两个参数，但?:表明忽略此参数
+### 6、传递额外参数
+    参数不仅仅来之以URL，还可能是我们自己定义的内容
+        url(r'extrem/$', tv.extremParam, {'name':"liuying"}),
+    附加参数同样适用于include语句,此时对include内所有都添加
+### 7、URL的反向解析
+    防止硬编码
+    本质上是对每一个URL进行命名
+    以后在编码代码中使用URL的值，原则上都应该使用反向解析    
+    
+# 二、视图views
+### 1、视图概述
+    视图即视图函数，接受web请求并返回web响应的事物处理函数
+    相应指符合http协议要求的任何内容，包括json,string,html等
+    本章忽略事物处理，重点在如何返回处理结果上
+### 2、其他简单视图
+    django.http给我们提供了很多和HttpResponse类似简单视图，通过查django.http代码查询
+    此类视图使用方法基本类似，可以通过return语句，直接反馈返回结果给客户端浏览器
+    Http404为Exception子类，所以需要raise使用
+### 3、HttpResponse详解
+    方法：
+        init ：使用页内容实例化HttpResponse对象
+        write(content)：以文件的方式写
+        flush()：以文件的方式输出缓存区
+        set_cookie(key, value='', max_age=None, expires=None)：设置Cookie
+            key,value都是字符串类型
+            max_age是一个整数，表示在指定秒数后过期
+            expires是一个datetime或timedelta对象，会话将在这个指定的日期/时间过期，注意datetime和timedelta值只有在使用PickleSerializer时才可序列化
+            max_age与expires二选一
+            如果不指定过期时间，则两个星期后过期
+        delete_cookie(key)：删除指定的key的Cookie，如果key不存在则什么也不发生

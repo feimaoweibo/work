@@ -18,5 +18,10 @@ urlpatterns = [
     # 尖括号后表示正则，[0-9]表示内容仅能是有0-9的数字构成，
     # 后面大括号{}表示出现的次数，此处4表示只能出现四个0-9的数字
     url(r'^withparam/(?P<year>[0-9]{4})/(?P<month>[0,1][0-9])', tv.withparam), # 3、URL中带参数映射
-    url(r'^teacher/', include(teacher_url)),
+    # 比如约定，凡是由teacher模块处理的视图的url都以teacher开头
+    url(r'^teacher/', include(teacher_url)), # 4、URL在app中处理
+    # 得到两个参数,但 ?: 表明忽略此参数
+    url(r'^book/(?:page-(?P<pn>\d+))$', tv.do_param2), # 5、URL中的嵌套参数
+    url(r'^yourname/$', tv.extremParam, {"name": "liudana"}), # 6、传递额外参数
+    url(r'^tellmename/$', tv.revParse, name="askname"), # 7、URL的反向解析
 ]
