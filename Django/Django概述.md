@@ -14,7 +14,7 @@
         激活conda的虚拟环境
             Linux：source activate env_name
             Win：activate env_name
-        pip install django=1.8
+        pip install django==1.8
 # 一、创建第一个django程序
     - 命令行启动
         django-admin startproject tulingxueyuan
@@ -240,4 +240,52 @@
             通过PermissionDenied触发
         400 (bad request) 视图       
             defaults.bad_request(request, template_name='400.html')
-            DEBUG=False        
+            DEBUG=False 
+### 6、基于类的视图
+    - 和基于函数的视图的优势和区别:
+        - HTTP方法的methode可以有各自的方法,不需要使用条件分支来解决
+        - 可以使用OOP技术(例如Mixin) 
+    - 概述
+        - 核心是允许使用不同的实例方法来相应不同的HTTP请求方法,而避开条件分支实现
+        - as_view函数作为类的可调用入库,该方法创建一个实例并调用dispatch方法,按照
+          请求方法对请求进行分发,如果该方法没有定义,则引发HttpResponseNotAllowed
+    - 类属性使用
+        - 在类定义时直接覆盖
+        - 在调用as_view的时候直接作为参数使用,例如:
+            urlpatterns = [
+                url(r'^about/', GreetingView.as_view(greeting="G'day")),
+                ]
+    -对基于类的视图的扩充大致有三种方法: Mixin, 装饰as_view, 装饰dispatch
+    -使用Mixin
+        -多继承的一种形式,来自弗雷的行为和属性组合在一起
+        -解决多继承问题
+        -View的子类只能单继承,多继承会导致不可期问题
+        -多继承带来的问题:
+            结构复杂
+            优先顺序模糊
+            功能冲突
+        -解决方法
+            规格继承 - java interface
+            实现继承 - python,ruby
+    -在URLconf中装饰
+        from django.contrib.auth.decorators import login_required, permission_required
+        from django.views.generic import TemplateView       
+        from .views import VoteView       
+        urlpatterns = [
+            url(r'^about/', login_required(TemplateView.as_view(template_name="secret.html"))),
+            url(r'^vote/', permission_required('polls.can_vote')(VoteView.as_view())),
+        ]
+    -装饰类
+        -类的方法和独立方法不同,不能直接运用装饰器,需要用methode_decorator进行装饰
+            from django.contrib.auth.decorators import login_required
+            from django.utils.decorators import method_decorator
+            from django.views.generic import TemplateView
+            
+            class ProtectedView(TemplateView):
+                template_name = 'secret.html'
+            
+                @method_decorator(login_required)
+                def dispatch(self, *args, **kwargs):
+                    return super(ProtectedView, self).dispatch(*args, *
+
+# 三、models类的使用
