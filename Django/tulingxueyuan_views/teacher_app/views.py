@@ -25,7 +25,7 @@ def v8_get(request):
         rst += ","
     return HttpResponse("Get value of Request is {0}".format(rst))
 
-def v9_get(requset):
+def v9_get(request):
     # 渲染模版并返回
     return render_to_response('for_post.html')
 def v9_post(request):
@@ -34,3 +34,33 @@ def v9_post(request):
         rst += k + "---->" + v
         rst += "，"
     return HttpResponse("Post value of POST is {0}".format(rst))
+
+def render_test(request):
+    rsp = render(request, "render.html")
+    return rsp
+def render2_test(request):
+    # 环境变量
+    c = dict()
+    c["name"] = "LiuDana"
+    c["name2"] = "LiuErna"
+    c["name3"] = "LiuSanna"
+    rsp = render(request, "render2.html", context=c )
+    return rsp
+def render3_test(request):
+    from django.template import loader
+    # 得到模版
+    t = loader.get_template("render2.html")
+    print(type(t))
+    r = t.render({"name": "LIUDANA"})
+    print(type(r))
+    return HttpResponse(r)
+def render_to_request(request):
+    # 反馈回渲染模版render2.html
+    rsp = render_to_response("render2.html", context={"name": "WangDaMei"})
+    return rsp
+
+def get404(request):
+    # 系统内建视图，可以直接使用，
+    # 例子default.page_not_found(request, template_name='404.html')
+    from django.views import defaults
+    return defaults.page_not_found(request, template_name="render.html")

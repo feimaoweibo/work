@@ -205,3 +205,39 @@
                     'django.contrib.messages.middleware.MessageMiddleware',
                     'django.middleware.clickjacking.XFrameOptionsMiddleware',
                 ]
+    手动编写视图
+        实验目的：
+            利用django快捷函数手动编写视图处理函数
+            编写过程中理解视图函数运行原理
+        分析：
+            django把所有请求信息封装入request
+            django通过urls模块把相应的请求根事件处理函数链接起来，并把request作为参数传入
+            在相应的处理函数中，我们需要完成两部分
+                处理业务
+                把结果封装并返回，我们可以使用简单HttpResponse，同样也可以自己处理此功能，例如本例子
+            本例子不介绍业务处理，把目光集中在如何渲染结果并返回
+        render(request, template_name[, context][, context_instance][, content_type][, status][, current_app][, dirs][, using])
+            使用模版和一个给定的上下文环境，返回一个渲染和HttpResponse对象
+            request:django的传入请求
+            template_name:模版名称
+            content_instance:上下文环境
+            案例参看代码 teacher_app/views/render_test
+        render_to_response
+            根据给定的上下文字典渲染给定模版，返回渲染后的HttpResponse    
+    系统内建视图
+        系统内建视图，可以直接使用        
+        404       
+            default.page_not_found(request, template_name='404.html')
+            系统引发Http404时出发
+            默认船体request_path变量给模板,即导致错误的URL
+            DEBUG=True则不会调用404, 取而代之是调试信息
+            404视图会被传递一个RequestContext对象并且可以访问模板上下文处理器提供的变量(MEDIA_URL等)
+        500(server error)      
+            defaults.server_error(request, template_name='500.html')
+            需要DEBUG=False,否则不调用
+        403 (HTTP Forbidden) 视图       
+            defaults.permission_denied(request, template_name='403.html')
+            通过PermissionDenied触发
+        400 (bad request) 视图       
+            defaults.bad_request(request, template_name='400.html')
+            DEBUG=False        
