@@ -276,7 +276,7 @@
             url(r'^vote/', permission_required('polls.can_vote')(VoteView.as_view())),
         ]
     -装饰类
-        -类的方法和独立方法不同,不能直接运用装饰器,需要用methode_decorator进行装饰
+        -类的方法和独立方法不同,不能直接运用装饰器,需要用method_decorator进行装饰
             from django.contrib.auth.decorators import login_required
             from django.utils.decorators import method_decorator
             from django.views.generic import TemplateView
@@ -288,4 +288,56 @@
                 def dispatch(self, *args, **kwargs):
                     return super(ProtectedView, self).dispatch(*args, *
 
-# 三、models类的使用
+# 三、models模型
+    -ORM
+        ObjectRelationMap : 把面向对象思想转换成关系数据库思想.操作上把类等价于表格
+        类对应表格
+        类中的属性对应表中的字段
+        在应用中的models.py文件中定义class
+        所有需要使用ORM的class都必须是 models.Model 的子类
+        class中的所有属性对应表格中的字段
+        字段的类型都必须使用 models.xxx 不能使用python中的类型
+        在django种，Models负责跟数据库交互
+    -django链接数据库
+        自带默认数据库Sqllite3
+            关系型数据库
+            轻量级
+        建议开发用sqlite3， 部署用mysql之类数据库
+            切换数据库在settings中进行设置
+            django 连接 mysql
+                DATABASES = [ 'default' = { 'ENGINE' : 'django.db.backends.mysql', 'NAME' : '数据库名',
+                 'PASSWORD': '数据库密码', 'HOST': '127.0.0.1', 'PORT': '3306', } ]
+            需要在项目文件下的__init__文件中导入pymysql包               
+                  ```
+                  # 在主项目的__init__文件中               
+                  import pymysql
+                  pymysql.install_as_MySQLdb()
+                  ```
+### 1、models类的使用
+    -定义和数据库表映射的类     
+        在应用中的models.py文件中定义class
+        所有需要使用ORM的class都必须是 models.Model 的子类
+        class中的所有属性对应表格中的字段
+        字段的类型都必须使用 modles.xxx 不能使用python中的类型
+    -字段常用参数
+        max_length : 规定数值的最大长度
+        blank : 是否允许字段为空,默认不允许
+        null : 在DB中控制是否保存为null, 默认为false
+        default : 默认值
+        unique : 唯一
+        verbose_name : 假名
+    -数据库的迁移
+        在命令行中,生成数据迁移的语句(生成sql语句)       
+             ```
+             python3 manage.py makemigrations
+        在命令行中,输入数据迁移的指令
+             ```
+             python3 manage.py migrate
+             ```          
+             ps : 如果迁移中出现没有变化或者报错,可以尝试强制迁移           
+             ```
+             # 强制迁移命令
+             python3 manage.py makemigrations 应用名
+             python3 manage.py migrate 应用名
+        对于默认数据库， 为了避免出现混乱，如果数据库中没有数据，每次迁移前可以
+            把系统自带的sqlite3数据库删除
