@@ -337,7 +337,27 @@
              ps : 如果迁移中出现没有变化或者报错,可以尝试强制迁移           
              ```
              # 强制迁移命令
-             python3 manage.py makemigrations 应用名
-             python3 manage.py migrate 应用名
+             python manage.py makemigrations 应用名
+             python manage.py migrate 应用名
         对于默认数据库， 为了避免出现混乱，如果数据库中没有数据，每次迁移前可以
             把系统自带的sqlite3数据库删除
+    -查看数据库中的数据
+        1. 启动命令行 : python3 manage.py shell
+        ps: 注意点: 对orm的操作分为静态函数和非静态函数两种.静态是指在内存中只有一份内容存在,调用的时候使用 类名. 的方式.如果修改了那么所有使用的人都会受影响.
+        2. 在命令行中导入对应的映射类
+            from 应用.models import 类名
+        3. 使用 objects 属性操作数据库. objects 是 模型中实际和数据库进行交互的 Manager 类的实例化对象.
+        4. 查询命令
+            - 类名.objects.all() 查询数据库表中的所有内容. 返回的结果是一个QuerySet类型,实际上是类列表中装这个一个一个数据对象.
+            - 类名.objects.filter(条件) 
+        5.案例代码：
+            # from 应用名.models import 类名
+            from myapp.models import Student           
+            # 查询Student表中的所有数据,得到的是一个QuerySet类型
+            Student.objects.all()          
+            # 如果要取出所有QuerySet类型中的所有数据对象,需要遍历取出所有的对象,再用对象.属性来查看值
+            s = Student.object.all()
+            for each in s:
+                print(each.name , each.age , each.address , each.phone)           
+            # 如果要进行过滤筛选,使用filter()方法
+            Student.objects.filter(age=18)
