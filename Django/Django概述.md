@@ -392,4 +392,24 @@
             iexact: 不区分大小写
             contains: 包含
             startwith: 以..开头
-            endwith: 以…结尾 
+            endwith: 以…结尾
+### 2、数据库表关系
+    多表联查：利用多个表联合查找某一项信息或者多项信息
+    1:1 OneToOne
+        建立关系：在模型任意一边即可，使用OneToOneField
+        add:
+            添加没有关系的一边，直接实例化保存就可以           
+                s = School() 
+                s.school_id = 2 
+                s.school_name = "nanjingtulingxueyuan" 
+                s.save()           
+            添加有关系的一边，使用create方法,或者使用实例化然后save         
+                方法1：
+                    m = Manager() 
+                    m.manager_id = 10 
+                    m.manager_name = "dana" 
+                    m.my_school = s 
+                    m.save()          
+                方法2：
+                    m = Manager.objects.create(manager_id=20, manager_name="erna", my_school=ss[0])
+    
