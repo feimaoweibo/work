@@ -411,5 +411,29 @@
                     m.my_school = s 
                     m.save()          
                 方法2：
+                    ss = School.objects.all()
                     m = Manager.objects.create(manager_id=20, manager_name="erna", my_school=ss[0])
-    
+        query:
+            由子表（绑定关系的为子表）查母表： 由子表的属性直接提取信息
+                >>> m = Manager.objects.get(manager_name="刘大娜")
+                >>> m
+                <Manager: 刘大娜>
+                >>> m.my_school
+                <School: shanghaitulingxueyuan>
+                >>> m.my_school.school_name
+                'shanghaitulingxueyuan'
+                或者等同于：
+                Manager.objects.get(manager_name="刘大娜").my_school.school_name
+            由母表查子表：使用双下划线
+                >>> s =  School.objects.get(manager__manager_name="刘大娜")
+                >>> s.school_name
+                'shanghaitulingxueyuan'
+        change:
+            单个修改使用save
+                >>> s.school_name = "上海图灵学院"
+                >>> s.save()
+            批量修改使用update
+                >>> ss.School.objects.all()
+                >>> ss.update(school_name="图灵学院")
+            无论对子表还是对母表的修改
+                    
