@@ -436,4 +436,59 @@
                 >>> ss.School.objects.all()
                 >>> ss.update(school_name="图灵学院")
             无论对子表还是对母表的修改
-                    
+        delete： 直接使用delete还是删除
+    1:N OneToMany
+        一个表格的一个数据项/对象等，可以有很多个另一个表格的数据项
+        比如：一个学校可以有很多个老师，但一个老师只能在一个学校里上班
+        使用上
+            使用ForengnKey
+            在多的那一边，比如上边的例子就是在Teacher的表格里进行定义
+        Add: - 跟一对一方法类似，通过create和new来添加 
+             - create: 把属性都填满，然后不需要手动保存 
+                ss = School()
+                t1 = Teachers()
+                t1 = Teachers.objects.create(teachers_name="王宇", my_schools=ss[0])
+             - new: 可以属性或者参数为空，必须用save保存
+                ss = School()
+                >>> t1 = Teachers()
+                >>> t1.teachers_name = "刘英"
+                >>> t1.my_schools = ss[0]
+                >>> t1.save()
+        Query: - 以学校和老师的例子为准
+             - 如果知道老师，查学校 ，则通过增加的关系属性，直接使用 
+                例如，查找t1老师是哪个学校的
+                >>> t1.teachers_name
+                '王宇'
+                >>> t1.my_schools
+                <School: BJxueyuan>
+             - 反查 
+                - 有学校，我想查下这个学校所有老师，则系统自动在**~~~~*老师模型名称*~~~~**的小写下直接加_set， 用来表示
+                    >>> s1 = ss[0]
+                    >>> s1
+                    <School: BJxueyuan>
+                    >>> s1.teachers_set.all() #子类名变小写
+                    [<Teachers: 刘英>, <Teachers: 王宇>]
+    N:N ManyToMany
+        表示任意一个表的数据可以拥有对方表格多项数据，反之亦然
+        比如典型例子就是老师和学生的关系
+        使用上，在任意一方，使用ManyToMany定义，只需要定义一边
+        Add:
+            步骤一：实例化
+            >>> s1 = Students()
+            >>> s1.students_name = "学生2"
+            >>> s1.save()
+            步骤二：添加老师，则在student.teachers.add()
+            >>> t1 = Teachers.objects.all()[0]
+            >>> t1
+            <Teachers: 刘英>
+            >>> s1.teachers.add(t1)
+            >>> s1.save()
+            # 查询学生对应的老师
+            >>> s1.teachers.all()
+            [<Teachers: 刘英>]
+        Query:
+            由子表查母表：跟一对多类似，直接使用属性
+            由母表查子表：使用_set查询
+                >>> t1.students_set.all() #子类名变小写 
+                [<Students: 学生2>]
+
