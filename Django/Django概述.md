@@ -492,3 +492,40 @@
                 >>> t1.students_set.all() #子类名变小写 
                 [<Students: 学生2>]
 
+# 四、模版系统
+    模板：一组相同或者相似的页面，在需要个性化的地方进行留白，需要的时候只是用数据填充就可以使用
+    步骤：
+        - 在settings中进行设置：TEMPLATES
+        - 创建templates文件夹
+        - 在templates文件夹下编写模并调用
+## 4.1、模版-变量
+        - 变量的表示方法： {{var_name}}
+        - 在系统调用模板的时候，会用相应的数据查找相应的变量名称，如果能找到，则填充，或者叫渲染，否则，跳过
+        - 案例two.html
+## 4.2、模版-标签
+### 4.2.1- for标签：{% for .. in .. %}
+        - 用法：
+            {% for .. in .. %}
+                循环语句
+            {% endfor %}
+        - 案例three，显示班级成绩
+        
+### 4.2.2- if标签：用来判断条件
+        -用法：
+            {% if 条件 %}
+                 条件成立执行语句
+            {% elif 条件 %}}
+                 条件成立执行语句
+            {% else %}
+                 以上条件都不成立执行语句
+            {% endif %}} 
+        - 案例four
+### 4.2.2-csrf标签：跨站请求伪造
+        - 在提交表单的时候，表单页面需要加上 {% csrf_token %},
+                <form action="/five_post/" method="post">{% csrf_token %}
+                    用户名：<input type="text" placeholder="请输入用户名" name="username"><br>
+                    密码：<input type="password" name="password"><br>
+                    <input type="submit" value="登录">
+                </form>
+        - 案例five_get,five_post        
+        

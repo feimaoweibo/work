@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>第四个templates模版页面</title>
+</head>
+<body>
+    {% if name == "王小静" %}
+        {{name}} ,你好，一别十年，各自安好
+    {% elif name == "李晓静" %}
+        {{name}}, 你还记得大明湖畔的豆腐脑店么
+    {% else %}
+        <h1>
+        {{name}}, 你走开，赶紧走开，我们不约.
+        </h1>
+    {% endif %}
+</body>
+</html>
