@@ -529,3 +529,44 @@
                 </form>
         - 案例five_get,five_post        
         
+# 五、session
+        - 为了应对HTTP协议的无状态性
+        - 用来保存用户比较敏感的信息
+        - 属于request的一个属性
+        - 常用操作：
+            request.session.get(key, defaultValue)
+            request.session.clear():清除全部
+            request.session[key] = value :赋值
+            request.session.flush(): 删除当前回话切清除回话的cookie
+            del request.session[key]
+# 六、分页
+    django提供现成的分页器用来对结果进行分页
+    代码实例：    
+        from django.core.paginator import Paginator
+        def student(request):
+        '''请求所有学生的详情列表
+        :param request:
+        :return:
+        '''
+        # 大约有10000名学生
+        stus = Student.objects.all()
+        # 两个参数
+        # 1. 数据来源，也即从数据库中查询出的结果
+        # 2. 单页返回数据量
+        p = Paginator(stus, 40)
+        # 对Paginator进行设置或者对变量属性使用
+        print(p.count) # p里面有多少数据
+        print(p.num_pages) # 页面总数
+        print(p.page_range) # 页码列表，从1开始
+        # 取得第三页的内容
+        # 如果页码不存在，报异常InvalidPage
+        p.page(3)
+        return  stus
+
+# 七、基于类的视图
+    可以针对http协议不同的方法创建不同的函数
+    可以使用Mixin等oop技术
+    Mixin
+        把来自父类的行为或者属性组合在一起
+        解决多重继承问题
+    ListView
