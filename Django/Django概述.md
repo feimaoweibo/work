@@ -569,4 +569,57 @@
     Mixin
         把来自父类的行为或者属性组合在一起
         解决多重继承问题
-    ListView
+    ListView代码示例
+        # 基于类的视图导入模块
+        from django.views.generic import ListView
+        class StudListView(ListView):
+            '''
+            需要设置两个主要内容：
+            1、querset:数据来源集合
+            2、template_name:模版名称
+            '''
+            queryset = Stud.objects.all()
+            template_name = "Stud_list.html"
+    
+# 八、admin
+    1. 创建Admin
+        settings中填入app`
+        打开urls.py
+        创建超级用户
+            python manage.py createsuperuser
+            Email address: myadmin@admin.com
+            Password:
+            Password (again):
+            Superuser created successfully.
+
+        配置settings文件
+    2. 绑定管理模型（在APP/admin.py文件中添加绑定管理模型）
+        from myadmin.models import Student, Teacher, ClassRoom
+               
+        admin.register(Student)
+        admin.register(Teacher)
+        admin.register(ClassRoom)
+    3. 设置admin管理类
+        实现方式    
+            ModelAdmin
+            装饰器
+        修改页面显示数量：list_per_page
+        操作选项： actions_on_top/button        
+        控制列表中显示的内容：list_display=[]     
+        将方法作为列显示      
+            函数必须返回值
+            设置short_description作为显示内容
+            排序使用admin_order_field
+        关联对象       
+            使用方法
+                def getRoomName(self):
+                    return self.room.name
+                getRoomName.short_description = "上课教室"
+        右侧过滤器      
+        搜索框
+            search_fields = ['name']    
+        分组显示
+            fieldsets = (
+                ("基本信息", {"fields":["name",]}),
+                ("其他信息", {"fields":["room","course"]}),
+            )
