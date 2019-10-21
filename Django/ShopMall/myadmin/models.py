@@ -14,3 +14,6 @@ class Users(models.Model):
     # http://blog.sina.com.cn/s/blog_9e2e84050101iltd.html
     update_time = models.DateTimeField(auto_created=True, auto_now=True)
     create_time = models.DateTimeField(auto_created=True, auto_now=True)
+
+    def __str__(self):
+        return self.name
