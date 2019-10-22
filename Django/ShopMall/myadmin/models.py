@@ -7,7 +7,7 @@ class Users(models.Model):
     password = models.CharField(max_length=30)
     gender = models.IntegerField(default=1)
     address = models.CharField(max_length=30)
-    phone = models.IntegerField(max_length=11)
+    phone = models.CharField(max_length=16)
     email = models.CharField(max_length=30)
     state = models.IntegerField(default=1)
     # 需要留意 auto_now, auto_now_add的区别
