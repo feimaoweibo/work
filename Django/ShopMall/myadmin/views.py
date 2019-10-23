@@ -1,17 +1,17 @@
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from django.http.response import HttpResponse
-from django.shortcuts import render_to_response
+#from django.shortcuts import render_to_response
 from django.core.paginator import Paginator
 
 # Create your views here.
 from myadmin.models import Users
 import time
-def t(request):
-    return HttpResponse("Hello world Myadmin")
+#def t(request):
+    #return HttpResponse("Hello world Myadmin")
 
-def t3(request):
-    return render_to_response("./myadmin/test.html")
+#def t3(request):
+    #return render_to_response("./myadmin/test.html")
 # 执行分页操作
 def users(request, pIndex=1):
     # 获取会员信息
@@ -111,7 +111,7 @@ def usersupdate(request,uid):
 # ====================后台管理员操作====================
 # 会员登录表单
 def login(request):
-    return render(request, 'myamdin/login.html')
+    return render(request, "myadmin/login.html")
 # 会员执行登录
 def dologin(request):
     # 校验验证码
@@ -139,7 +139,7 @@ def dologin(request):
             context = {'info': '此用户非后台管理用户'}
     except:
         context = {'info': '登录帐号错误'}
-    return render(request, "myamin/login.html", context)
+    return render(request, "myadmin/login.html", context)
 # 会员退出
 def logout(request):
     # 清除登录的session信息
@@ -178,7 +178,7 @@ def verify(request):
     # 构造字体颜色
     for i in range(0, 4):
         # 构造字体颜色
-        fontcolor = (random.randrange(0, 255),random.randrange(0, 255), random.randrange(0, 255))
+        fontcolor = (random.randrange(0, 255), random.randrange(0, 255), random.randrange(0, 255))
         # 绘制4个字
         draw.text((5+i*24, -4), rand_str[i], font=font, fill=fontcolor)
     # 释放画笔
