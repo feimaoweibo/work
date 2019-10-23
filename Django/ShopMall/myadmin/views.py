@@ -147,7 +147,7 @@ def logout(request):
     # 跳转登录页面（URL地址改变）
     return redirect(reverse('myadmin_login'))
 
-# 会员登陆表单
+# 会员登陆验证码生成函数
 def verify(request):
     # 引入随机函数模块
     import random
