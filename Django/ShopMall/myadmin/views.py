@@ -1,17 +1,18 @@
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from django.http.response import HttpResponse
-#from django.shortcuts import render_to_response
+# from django.shortcuts import render_to_response
 from django.core.paginator import Paginator
 
 # Create your views here.
 from myadmin.models import Users
 import time
-#def t(request):
-    #return HttpResponse("Hello world Myadmin")
-
-#def t3(request):
-    #return render_to_response("./myadmin/test.html")
+'''
+def t(request):
+    return HttpResponse("Hello world Myadmin")
+def t3(request):
+    return render_to_response("./myadmin/test.html")
+'''
 # 执行分页操作
 def users(request, pIndex=1):
     # 获取会员信息
