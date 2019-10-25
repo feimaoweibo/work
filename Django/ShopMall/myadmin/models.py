@@ -17,3 +17,14 @@ class Users(models.Model):
 
     def __str__(self):
         return self.name
+
+# 创建类型
+class Types(models.Model):
+    name = models.CharField(max_length=30)
+    pid = models.IntegerField(default=0)
+    path = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+

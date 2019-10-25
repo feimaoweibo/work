@@ -17,7 +17,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 #from .views import *
-from . import views
+from . import views, viewsgoods
 urlpatterns = [
     # url(r'^/', t),
     # url(r'^t3/', t3),
@@ -45,6 +45,12 @@ urlpatterns = [
     url(r'^logout$', views.logout, name="myadmin_logout"),
     # 验证码登陆的路由
     url(r'^verify$', views.verify, name="myadmin_verify"),
+
+    # 后台商品类别信息管理
+    url(r'^type$', viewsgoods.typeindex, name="myadmin_typeindex"),
+    url(r'^typeadd/(?P<tid>[0-9]+)$', viewsgoods.typeadd, name="myadmin_typeadd"),
+    url(r'^typeinsert$', viewsgoods.typeinsert, name="myadmin_typeinsert"),
+
 
 
 
