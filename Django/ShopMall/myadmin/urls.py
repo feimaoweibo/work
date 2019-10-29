@@ -50,7 +50,12 @@ urlpatterns = [
     url(r'^type$', viewsgoods.typeindex, name="myadmin_typeindex"),
     url(r'^typeadd/(?P<tid>[0-9]+)$', viewsgoods.typeadd, name="myadmin_typeadd"),
     url(r'^typeinsert$', viewsgoods.typeinsert, name="myadmin_typeinsert"),
+    url(r'^typedel/(?P<tid>[0-9]+)$', viewsgoods.typedel, name="myadmin_typedel"),
+    url(r'^typeedit/(?P<tid>[0-9]+)$', viewsgoods.typeedit, name="myadmin_typeedit"),
+    url(r'^typeupdate/(?P<tid>[0-9]+)$', viewsgoods.typeupdate, name="myadmin_typeupdate"),
 
+    # 商品信息管理
+    url(r'^goods(?P<pIndex>[0-9]+)$', viewsgoods.goodsindex, name="myadmin_goodsindex"),
 
 
 

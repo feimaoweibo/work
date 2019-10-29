@@ -27,4 +27,21 @@ class Types(models.Model):
     def __str__(self):
         return self.name
 
+# 商品信息数据表
+class Goods(models.Model):
+    typeid = models.IntegerField()
+    goods = models.CharField(max_length=32)
+    company = models.CharField(max_length=50)
+    descr = models.TextField()
+    price = models.FloatField()
+    picname = models.CharField(max_length=255)
+    state = models.IntegerField(default=1)
+    store = models.IntegerField(default=0)
+    num = models.IntegerField(default=0)
+    clicknum = models.IntegerField(default=0)
+    addtime = models.IntegerField()
+
+    def __str__(self):
+        return self.goods
+
 
