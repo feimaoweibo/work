@@ -56,6 +56,12 @@ urlpatterns = [
 
     # 商品信息管理
     url(r'^goods(?P<pIndex>[0-9]+)$', viewsgoods.goodsindex, name="myadmin_goodsindex"),
+    url(r'^goodsadd$', viewsgoods.goodsadd, name="myadmin_goodsadd"),
+    url(r'^goodsinsert$', viewsgoods.goodsinsert, name="myadmin_goodsinsert"),
+    url(r'^goodsdel/(?P<gid>[0-9]+)$', viewsgoods.goodsdel, name="myadmin_goodsdel"),
+    url(r'^goodsedit/(?P<gid>[0-9]+)$', viewsgoods.goodsedit, name="myadmin_goodsedit"),
+    url(r'^goodsupdate/(?P<gid>[0-9]+)$', viewsgoods.goodsupdate, name="myadmin_goodsupdate"),
+
 
 
 
