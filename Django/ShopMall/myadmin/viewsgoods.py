@@ -4,7 +4,7 @@ from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator
 
-from myadmin.models import Types, Goods
+from myadmin.models import Types, Goods, Orders, Users
 from PIL import Image
 import time, os, json
 
@@ -243,5 +243,29 @@ def goodsupdate(request,gid):
             os.remove("./static/goods/s_"+picname) # 执行新图片删除
             os.remove("./static/goods/"+picname) # 执行新图片删除
     return render(request, "myadmin/info.html", context)
+    return render(request, "myadmin/info.html", context)
+
+# -----------------------订单信息-----------------------------
+# 订单信息显示页面
+def ordersindex(request):
+    list1 = Orders.objects.all()
+    context = {'orderslist': list1}
+    return render(request, "myadmin/orders/index.html", context)
+
+# 订单信息编辑页面
+def ordersedit(request,oid):
+    ob = Orders.objects.get(id=oid)
+    context ={'orders': ob}
+    return render(request, "myadmin/orders/edit.html", context)
+
+# 执行订单状态更改表单页面
+def ordersupdate(request,oid):
+    try:
+        ob = Orders.objects.get(id=oid)
+        ob.status = request.POST['status']
+        ob.save()
+        context = {'info': "订单数据修改成功"}
+    except:
+        context = {'info': "订单数据修改失败"}
     return render(request, "myadmin/info.html", context)
 

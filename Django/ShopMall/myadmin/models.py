@@ -44,4 +44,30 @@ class Goods(models.Model):
     def __str__(self):
         return self.goods
 
+# 订单信息数据表
+class Orders(models.Model):
+    uid = models.IntegerField()
+    linkman = models.CharField(max_length=32)
+    address = models.CharField(max_length=255)
+    code = models.CharField(max_length=6)
+    phone = models.CharField(max_length=16)
+    addtime = models.IntegerField()
+    total = models.FloatField()
+    status = models.IntegerField()
+
+    def __str__(self):
+        return self.linkman
+
+# 商品详情页
+class Detail(models.Model):
+    ordersid = models.IntegerField()
+    goodsid = models.IntegerField()
+    name = models.CharField(max_length=32)
+    price = models.FloatField()
+    num = models.IntegerField()
+
+    def __str__(self):
+        return self.name
+
+
 

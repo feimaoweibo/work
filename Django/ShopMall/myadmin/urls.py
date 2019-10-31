@@ -62,6 +62,12 @@ urlpatterns = [
     url(r'^goodsedit/(?P<gid>[0-9]+)$', viewsgoods.goodsedit, name="myadmin_goodsedit"),
     url(r'^goodsupdate/(?P<gid>[0-9]+)$', viewsgoods.goodsupdate, name="myadmin_goodsupdate"),
 
+    # 订单信息管理
+    url(r'^orders$', viewsgoods.ordersindex, name="myadmin_orders"),
+    url(r'^ordersedit/(?P<oid>[0-9]+)$', viewsgoods.ordersedit, name="myadmin_ordersedit"),
+    url(r'^ordersupdate/(?P<oid>[0-9]+)$', viewsgoods.ordersupdate, name="myadmin_ordersupdate"),
+
+
 
 
 
