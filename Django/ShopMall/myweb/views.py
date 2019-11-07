@@ -14,10 +14,40 @@ import time
 
 def t(request):
     return HttpResponse("Hello world Myweb")
-
-
 def t2(request):
     return render_to_response("./myweb/test.html")
+
+
+# 公共信息加载函数
+def loadinfo():
+    context = {}
+    context['type0list'] = Types.objects.filter(pid=0)
+    return context
+
+# 网站首页
+def index(request):
+    context = loadinfo()
+    return render(request, "myweb/index.html", context)
+
+# 商品列表页
+def list(request):
+    context = loadinfo()
+    list = Goods.objects.filter()
+    if request.GET.get('tid', '') != '':
+        tid = str(request.GET.get('tid', ''))
+        list = list.filter(typeid__in=Types.objects.only('id').filter(path__contains=',' + tid + ','))
+    context['goodslist'] = list
+    return render(request, "myweb/list.html", context)
+
+
+# 商品详情页
+def detail(request, gid):
+    context = loadinfo()
+    ob = Goods.objects.get(id=gid)
+    ob.clicknum += 1
+    ob.save()
+    context['goods'] = ob
+    return render(request, "myweb/detail.html", context)
 
 # 会员登录表单
 def login(request):
@@ -55,7 +85,7 @@ def dologin(request):
 
 # 用户退出
 def logout(request):
-    # 1、清楚登录的session信息
+    # 1、清除登录的session信息
     del request.session['user']
     # 2、跳转到登录页面
     return redirect(reverse('index'))
@@ -90,3 +120,4 @@ def doregister(request):
     except:
         context = {'info': "注册失败"}
     return render(request, "myweb/info.html", context)
+

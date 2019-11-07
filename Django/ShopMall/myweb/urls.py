@@ -15,7 +15,7 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
-from . import views
+from . import views, vieworder
 
 urlpatterns = [
     # url(r'^/', t),
@@ -27,7 +27,8 @@ urlpatterns = [
     url(r'^logout$', views.logout, name="logout"),
     url(r'^register$', views.register, name="register"),
     url(r'^doregister$', views.doregister, name="doregister"),
-
+    # 个人中心页面路由
+    url(r'^personal$', vieworder.personal, name="personal")
 
 
 ]
