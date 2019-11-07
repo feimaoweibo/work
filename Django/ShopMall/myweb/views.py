@@ -71,7 +71,7 @@ def dologin(request):
             if user.password == m.hexdigest():
                 # 此处登录成功，将当前登录信息放入到session中并跳转页面
                 # print(json.dumps(user))
-                request.session['user'] = user.dePosit()
+                request.session['user'] = user.name
                 return redirect(reverse('index'))
             else:
                 context = {'info': "登录密码错误"}
@@ -121,3 +121,7 @@ def doregister(request):
         context = {'info': "注册失败"}
     return render(request, "myweb/info.html", context)
 
+def indexrank(request):
+    ob = Goods.objects.all()
+    context = {'context':ob}
+    return render(request,"myweb/index.html", context)

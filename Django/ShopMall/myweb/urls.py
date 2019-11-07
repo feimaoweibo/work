@@ -20,7 +20,11 @@ from . import views, vieworder
 urlpatterns = [
     # url(r'^/', t),
     # url(r'^t2/', t2),
-    # 登录注册页面的路由
+    # 前台页面的路由
+    url(r'^$', views.index, name="index"),
+    url(r'^rankindex$', views.indexrank, name="indexrank"),
+    url(r'^list$', views.list, name="list"),
+    url(r'^detail/(?P<gid>[0-9]+)$', views.detail, name="detail"),
     # 跳转登录页面
     url(r'^login$', views.login, name="login"),
     url(r'^dologin$', views.dologin, name="dologin"),
