@@ -71,7 +71,7 @@ def dologin(request):
             if user.password == m.hexdigest():
                 # 此处登录成功，将当前登录信息放入到session中并跳转页面
                 # print(json.dumps(user))
-                request.session['user'] = user.name
+                request.session['user'] = user.dePosit()
                 return redirect(reverse('index'))
             else:
                 context = {'info': "登录密码错误"}

@@ -32,7 +32,11 @@ urlpatterns = [
     url(r'^register$', views.register, name="register"),
     url(r'^doregister$', views.doregister, name="doregister"),
     # 个人中心页面路由
-    url(r'^personal$', vieworder.personal, name="personal")
+    url(r'^personal$', vieworder.personal, name="personal"),
+    url(r'^peredit$', vieworder.peredit, name="peredit"),
+    url(r'^perupdate$', vieworder.perupdate, name="perupdate"),
+    # 购物车页面
+    url(r'^shopcart$', vieworder.shopcart, name="shopcart"),
 
 
 ]
