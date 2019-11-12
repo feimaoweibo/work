@@ -5,7 +5,7 @@ from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator
 
-from myadmin.models import Types, Goods, Users
+from myweb.models import Types, Goods, Users
 import time
 
 
@@ -20,7 +20,7 @@ def t2(request):
 
 # 公共信息加载函数
 def loadinfo():
-    context = {}
+    context={}
     context['type0list'] = Types.objects.filter(pid=0)
     return context
 

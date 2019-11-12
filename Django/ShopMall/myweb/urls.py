@@ -37,6 +37,13 @@ urlpatterns = [
     url(r'^perupdate$', vieworder.perupdate, name="perupdate"),
     # 购物车页面
     url(r'^shopcart$', vieworder.shopcart, name="shopcart"),
+    url(r'^addshopcart/(?P<sid>[0-9]+)$', vieworder.addshopcart, name="addshopcart"),
+    url(r'^changeshopcart$', vieworder.changeshopcart, name="changeshopcart"),
+    url(r'^delshopcart/(?P<sid>[0-9]+)$', vieworder.delshopcart, name="delshopcart"),
+    url(r'^clearshopcart$', vieworder.clearshopcart, name="clearshopcart"),
+    # 我的订单
+    url(r'^indent$', vieworder.indent, name="indent"),
+
 
 
 ]
