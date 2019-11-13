@@ -18,6 +18,10 @@ class Users(models.Model):
     def __str__(self):
         return self.name
 
+    def dePosit(self):
+        return {'id': self.id, 'username': self.username, 'name': self.name, 'address': self.address,
+                'phone': self.phone, 'code': self.code}
+
 # 创建类型
 class Types(models.Model):
     name = models.CharField(max_length=30)
@@ -43,6 +47,10 @@ class Goods(models.Model):
 
     def __str__(self):
         return self.goods
+
+    def dePosit(self):
+        return {'id': self.id, 'goods': self.goods, 'picname': self.picname, 'price': self.price, 'descr': self.descr,
+                'store': self.store, 'm': 1}
 
 # 订单信息数据表
 class Orders(models.Model):

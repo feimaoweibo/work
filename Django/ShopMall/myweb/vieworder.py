@@ -4,7 +4,7 @@ from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator
 
-from myweb.models import Types, Goods, Users, Orders, Detail
+from myadmin.models import Types, Goods, Users, Orders, Detail
 import time
 
 # 公共信息加载函数
