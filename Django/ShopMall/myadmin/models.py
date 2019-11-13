@@ -18,6 +18,9 @@ class Users(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        db_table = "users"  # 更改表名
+
     def dePosit(self):
         return {'id': self.id, 'username': self.username, 'name': self.name, 'address': self.address,
                 'phone': self.phone, 'code': self.code}
