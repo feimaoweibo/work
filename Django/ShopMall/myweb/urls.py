@@ -41,6 +41,9 @@ urlpatterns = [
     url(r'^changeshopcart$', vieworder.changeshopcart, name="changeshopcart"),
     url(r'^delshopcart/(?P<sid>[0-9]+)$', vieworder.delshopcart, name="delshopcart"),
     url(r'^clearshopcart$', vieworder.clearshopcart, name="clearshopcart"),
+    # 订单表单页
+    url(r'^myorder$', vieworder.myorder, name="myorder"),
+
     # 我的订单
     url(r'^indent$', vieworder.indent, name="indent"),
 

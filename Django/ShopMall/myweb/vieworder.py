@@ -4,7 +4,7 @@ from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator
 
-from myadmin.models import Types, Goods, Users, Orders, Detail
+from myweb.models import Types, Goods, Users, Orders, Detail
 import time
 
 # 公共信息加载函数
@@ -118,3 +118,22 @@ def indent(request):
     context['orders'] = orders
     context['dlist'] = dlist
     return render(request, "myweb/indent.html", context)
+
+# 我的订单
+def myorder(request):
+    # 获取要结账的商品信息
+    ids = request.GET['gids']
+    if ids == '':
+        return HttpResponse("请选择要结账的信息")
+    gids = ids.split(',')
+    # 获取购车中的商品信息
+    shoplist = request.session['shoplist']
+    # 封装要结账的商品及累计总金额
+    orderlist = {}
+    total = 0
+    for sid in gids:
+        orderlist[sid] = shoplist[sid]
+        total += shoplist[sid]['price'] * shoplist[sid]['m']
+    request.session['orderlist'] = orderlist
+    request.session['total'] = total
+    return render(request, "myweb/myoreder.html")
