@@ -4,7 +4,7 @@ from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator
 
-from myweb.models import Types, Goods, Users, Orders, Detail
+from myadmin.models import Types, Goods, Users, Orders, Detail
 import time
 
 # 公共信息加载函数
@@ -136,4 +136,4 @@ def myorder(request):
         total += shoplist[sid]['price'] * shoplist[sid]['m']
     request.session['orderlist'] = orderlist
     request.session['total'] = total
-    return render(request, "myweb/myoreder.html")
+    return render(request, "myweb/myorder.html")
