@@ -15,8 +15,6 @@ class Users(models.Model):
     state = models.IntegerField(default=1)
     addtime = models.IntegerField()
 
-    class Meta:
-        db_table = "users"  # 更改表名
 
     def dePosit(self):
         return {'id': self.id, 'username': self.username, 'name': self.name, 'address': self.address,

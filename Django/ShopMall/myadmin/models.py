@@ -7,6 +7,7 @@ class Users(models.Model):
     password = models.CharField(max_length=30)
     gender = models.IntegerField(default=1)
     address = models.CharField(max_length=30)
+    code = models.CharField(max_length=6)
     phone = models.CharField(max_length=16)
     email = models.CharField(max_length=30)
     state = models.IntegerField(default=1)
