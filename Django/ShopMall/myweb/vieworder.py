@@ -101,24 +101,6 @@ def clearshopcart(request):
     request.session['shoplist'] = {}
     return redirect(reverse('shopcart'))
 
-
-# 订单信息显示页面
-def indent(request):
-    context = loadinfo()
-    # 从session中获取登录者的id号，并且从订单表order中获取当前用户的所有订单
-    orders = Orders.objects.filter(uid=request.session['user']['id'])
-    # 遍历当前用户的所有订单属性，并获得对应的订单详情信息
-    for order in orders:
-        dlist = Detail.objects.filter(orderid=order.id)
-        order.dedail_list = dlist
-        # 追加1图片信息
-        for detail in dlist:
-            goods = Goods.objects.get(id=detail.goodsid)
-            detail.picname = goods.picname
-    context['orders'] = orders
-    context['dlist'] = dlist
-    return render(request, "myweb/indent.html", context)
-
 # 我的订单
 def myorder(request):
     # 获取要结账的商品信息
@@ -137,3 +119,68 @@ def myorder(request):
     request.session['orderlist'] = orderlist
     request.session['total'] = total
     return render(request, "myweb/myorder.html")
+
+# 订单确认页
+def myorderaffirm(request):
+    request.session['user']['ordername'] = request.POST['name']
+    request.session['user']['phone'] = request.POST['phone']
+    request.session['user']['code'] = request.POST['code']
+    request.session['user']['address'] = request.POST['address']
+    return render(request, "myweb/myorderaffirm.html")
+
+# 执行订单添加
+def myorderadd(request):
+    # 封装订单信息， 并执行添加
+    orders = Orders()
+    orders.uid = request.session['user']['id']
+    orders.linkman = request.POST['linkman']
+    orders.address = request.POST['address']
+    orders.code = request.POST['code']
+    orders.phone = request.POST['phone']
+    orders.addtime = time.time()
+    orders.total = request.session['total']
+    orders.status = 0
+    orders.save()
+    # 获取订单详情
+    orderlist = request.session['orderlist']
+    shoplist = request.session['shoplist']
+    # 遍历订单信息，添加订单信息
+    for shop in orderlist.values():
+        del shoplist[str(shop['id'])]
+        detail = Detail()
+        detail.orderid = orders.id
+        detail.goodsid = shop['id']
+        detail.name = shop['goods']
+        detail.price = shop['price']
+        detail.num = shop['m']
+        detail.save()
+    # 删除用户存在session中的值
+    del request.session['orderlist']
+    del request.session['total']
+    request.session['shoplist'] = shoplist
+    # return HttpRsponse("订单成功：订单id号："+str(orders.id))
+    return redirect(reverse('indent'))
+
+# 订单信息显示页面
+def indent(request):
+    context = loadinfo()
+    # 从session中获取登录者的id号，并且从订单表order中获取当前用户的所有订单
+    orders = Orders.objects.filter(uid=request.session['user']['id'])
+    # 遍历当前用户的所有订单属性，并获得对应的订单详情信息
+    for order in orders:
+        dlist = Detail.objects.filter(orderid=order.id)
+        order.dedail_list = dlist
+        # 追加1图片信息
+        for detail in dlist:
+            goods = Goods.objects.get(id=detail.goodsid)
+            detail.picname = goods.picname
+    context['orders'] = orders
+    context['dlist'] = dlist
+    return render(request, "myweb/indent.html", context)
+
+# 取消订单
+def indentdel(request,oid):
+    ob = Orders.objects.get(id=oid)
+    ob.status = request.POST['status']
+    ob.save()
+    return redirect(reverse('indent'))

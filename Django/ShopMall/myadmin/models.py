@@ -69,7 +69,7 @@ class Orders(models.Model):
 
 # 商品详情页
 class Detail(models.Model):
-    ordersid = models.IntegerField()
+    orderid = models.IntegerField()
     goodsid = models.IntegerField()
     name = models.CharField(max_length=32)
     price = models.FloatField()

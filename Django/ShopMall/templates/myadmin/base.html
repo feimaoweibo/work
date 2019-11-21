@@ -51,8 +51,8 @@
                             <li>
                                 <a href="{% url 'myadmin_index' %}"><i class="icon-info-sign"></i> 帮助</a>
                             </li>
-                            <li class="nav-header">
-                                订单管理
+                            <li {% if request.path == '/myadmin/orders' %} class="active" {% endif %}>
+                            <a href="{% url 'myadmin_orders' %}">订单管理</a>
                             </li>
                         </ul>
                     </div><!-- 侧边导航结束 -->
