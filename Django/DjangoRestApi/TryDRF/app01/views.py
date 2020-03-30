@@ -40,10 +40,10 @@ def publisher_list(request):
     data = serializers.serialize("json",queryset)
     import json
     return HttpResponse(data, content_type="application/json")
-    '''
 
+    '''
     # 方法四
     from app01 import serializers
-    serializer = serializers.PublisherSerializer(queryset, many=True)
+    serializer = serializers.PublisherSerializer(queryset, many=True) #queryset表示所有数据，many=True表示有多个
     import json
-    return HttpResponse(json.dumps(serializer.data), content_type="appliction/json")
+    return HttpResponse(json.dumps(serializer.data), content_type="application/json")
