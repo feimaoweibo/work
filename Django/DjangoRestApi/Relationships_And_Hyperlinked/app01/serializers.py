@@ -30,7 +30,7 @@ class PublisherSerializer(serializers.ModelSerializer):
             "operator"
         )
 
-class BookSerializer(serializers.HyperlinkedModelSerializer):
+class BookSerializer(serializers.HyperlinkedModelSerializer): # HyperlinkedModelsSerializer超链接
     # 重写publiser字段，反向查找出publisher名字
     #publisher = serializers.StringRelatedField(source="publisher.name")
     class Meta:

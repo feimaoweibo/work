@@ -13,19 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf.urls import include, url
+from django.conf.urls import url, include
 from django.contrib import admin
-#from django.urls import path
-from app01 import views
-from rest_framework.urlpatterns import format_suffix_patterns
-urlpatterns = {
-    # path('admin/', admin.site.urls),
-    url(r'^publishers/$', views.PublisherList.as_view(), name="publisher-list"),
-    url(r'^publishers/(?P<pk>[0-9]+)$', views.PublisherDetail.as_view(), name="publisher-detail"),
-    url(r'^books/$', views.BookList.as_view(), name="book-list"),
-    url(r'^books/(?P<pk>[0-9]+)$', views.BookDetail.as_view(), name="book-detail"),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^admin/', admin.site.urls),
-}
 
-urlpatterns = format_suffix_patterns(urlpatterns)
+urlpatterns = [
+    url(r'^api/', include("app01.urls")),
+    url(r'^admin/', admin.site.urls),
+
+]

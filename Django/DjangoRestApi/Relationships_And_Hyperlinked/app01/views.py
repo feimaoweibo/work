@@ -9,6 +9,8 @@ from rest_framework import mixins
 from rest_framework import generics
 from rest_framework import permissions
 from app01.permissions import IsOwnerOrReadOnly
+from rest_framework.decorators import api_view
+from rest_framework.reverse import reverse
 # Create your views here.
 
 # 列出所有的出版社或者创建一个新的出版社操作
@@ -108,3 +110,11 @@ class BookDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = serializers.BookSerializer # 使用具体序列化的类
     # 权限认证
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
+
+# 创建根视图模式，进入API后就行导流模式
+@api_view(['GET'])
+def api_root(request, format=None):
+    return Response({
+        'publishers': reverse('publisher-list', request=request, format=format),
+        'books': reverse('book-list', request=request, format=format)
+    })
